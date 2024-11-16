@@ -1,5 +1,6 @@
-import "../styles/main.scss";
+import '../styles/main.scss';
 import { Inter } from 'next/font/google';
+import favicon from '../../public/favicon.ico';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -10,9 +11,7 @@ const inter = Inter({
 export const metadata = {
   title: "Mockups By PV",
   description: "All New Mockup Editors By Dev.",
-  icons: {
-    icon: "/favicon.ico",
-  },
+  icons: favicon
 }
 
 export default function RootLayout({
