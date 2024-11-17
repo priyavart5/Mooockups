@@ -1,4 +1,4 @@
-import '../styles/main.scss';
+import '../styles/globals.scss';
 import { Inter } from 'next/font/google';
 import favicon from '../../public/favicon.ico';
 
@@ -21,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={inter.variable}>
-      <body >
+      <body>
         {children}
       </body>
     </html>

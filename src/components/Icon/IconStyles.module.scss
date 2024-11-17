@@ -1,0 +1,27 @@
+@use '../../styles/variables' as vars;
+
+.icon{
+    padding: 2px;
+    width: auto;
+    height: 100%;
+    border-radius: vars.$border-radius-lg;
+    border: solid 1px vars.$primary-grey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    
+    span{
+        background-color: transparent ;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: auto;
+        padding: 5px;
+        border-radius: vars.$border-radius-md;
+    }
+
+    &:hover span {
+        background-color: vars.$primary-grey;
+    }
+}
