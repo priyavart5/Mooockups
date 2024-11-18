@@ -1,37 +1,43 @@
-'use client'
+// src/components/Import/index.tsx
 
-import { useState } from 'react';
-import {ImageUp, Replace, Minus} from 'lucide-react';
+'use client';
+
+import { ImageUp, Replace, Minus } from 'lucide-react';
 import styles from './ImportStyles.module.scss';
 import Icon from '../Icon';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { setFile, clearFile } from '../../redux/slices/importSlice';
+import { RootState } from '../../redux/store';
 
 const Import = () => {
 
-    // *****************
-    //States - Start
-    // *****************
-
-    const [fileName, setFileName] = useState<string>('Import file');
-    const [filePreview, setFilePreview] = useState<string | null>(null);
-
-    // *****************
-    //States - End
-    // *****************
+    const { file, fileName } = useSelector((state: RootState) => state.import);
+    const dispatch = useDispatch();
 
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const image = e.target.files?.[0];
         if (image) {
-            setFileName(image.name);
-            const reader = new FileReader();
-            
-            reader.onloadend = () => {
-                setFilePreview(reader.result as string);
+        const reader = new FileReader();
+
+        reader.onloadend = () => {
+            const img = new Image();
+            img.onload = () => {
+            const width = img.width;
+            const height = img.height;
+
+            dispatch(setFile({
+                file: reader.result as string,
+                fileName: image.name,
+                width,
+                height,
+            }));
             };
-        
-            if (image) {
-                reader.readAsDataURL(image);
-            }
+            img.src = reader.result as string;
+        };
+
+        if (image) {
+            reader.readAsDataURL(image);
+        }
         }
     };
 
@@ -41,58 +47,57 @@ const Import = () => {
     };
 
     const handleClearImage = () => {
-        setFileName('Import file');
-        setFilePreview(null);
         const ImageInput = document.getElementById('importFile') as HTMLInputElement;
         if (ImageInput) ImageInput.value = '';
+        dispatch(clearFile());
     };
 
     return (
         <div className={styles.import}>
             <div className={styles.import_image}>
-                <Icon 
-                    icon={ImageUp} 
-                    color='#EFEFEF' 
-                    size={20} 
-                    strokeWidth={1} 
-                    tipTitle="Import File"
-                    tipPosition='bottom'
+                <Icon
+                icon={ImageUp}
+                color='#EFEFEF'
+                size={20}
+                strokeWidth={1}
+                tipTitle="Import File"
+                tipPosition='bottom'
                 />
                 <input
-                    style={{ display: 'none' }} 
-                    type="file" 
-                    id="importFile" 
-                    onChange={handleImageChange}
-                    accept='image/*, video/*'
+                style={{ display: 'none' }}
+                type="file"
+                id="importFile"
+                onChange={handleImageChange}
+                accept="image/*, video/*"
                 />
                 <label className={styles.import_label} htmlFor="importFile">{fileName}</label>
             </div>
             {
-                fileName && filePreview && (
+                file && fileName && (
                     <>
-                        <Icon 
-                            icon={Replace} 
-                            color='#EFEFEF' 
-                            size={20} 
-                            strokeWidth={1} 
-                            tipTitle="Replace File"
-                            tipPosition='bottom'
-                            onClick={handleReplaceClick}
+                        <Icon
+                        icon={Replace}
+                        color='#EFEFEF'
+                        size={20}
+                        strokeWidth={1}
+                        tipTitle="Replace File"
+                        tipPosition='bottom'
+                        onClick={handleReplaceClick}
                         />
-                        <Icon 
-                            icon={Minus} 
-                            color='#EFEFEF' 
-                            size={20} 
-                            strokeWidth={1} 
-                            tipTitle="Clear File"
-                            tipPosition='bottom'
-                            onClick={handleClearImage} 
+                        <Icon
+                        icon={Minus}
+                        color='#EFEFEF'
+                        size={20}
+                        strokeWidth={1}
+                        tipTitle="Clear File"
+                        tipPosition='bottom'
+                        onClick={handleClearImage}
                         />
                     </>
                 )
             }
         </div>
-    )
-}
+    );
+};
 
 export default Import;

@@ -1,18 +1,16 @@
+'use client';
+
 import '../styles/globals.scss';
 import { Inter } from 'next/font/google';
-import favicon from '../../public/favicon.ico';
+
+import { Provider } from 'react-redux';
+import { store } from '../redux/store';
 
 const inter = Inter({
   subsets: ['latin'],
   variable: '--inter',
   display: 'swap',
 })
-
-export const metadata = {
-  title: "Mockups By PV",
-  description: "All New Mockup Editors By Dev.",
-  icons: favicon
-}
 
 export default function RootLayout({
   children,
@@ -22,7 +20,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <body>
-        {children}
+        <Provider store={store}>
+          {children}
+        </Provider>
       </body>
     </html>
   );

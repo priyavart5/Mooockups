@@ -1,0 +1,154 @@
+@use '../../styles/variables' as vars;
+
+.export_container {
+    position: relative;
+    width: 100%;
+}
+
+.export{
+    width: 100%;
+    height: 48px;
+    padding: 6px;
+    background-color: vars.$secondary-dark;
+    border-radius: vars.$border-radius-xl;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 6px;
+    overflow: hidden;
+}
+
+.export_button{
+    width: 100%;
+    height: 100%;
+    padding: 2px 2px;
+    background-color: vars.$primary-color;
+    border-radius: vars.$border-radius-lg;
+    border: none;
+    font: 400 clamp(13px, 1.5vw, 13px) var(--inter);
+    color: vars.$off-white;
+    cursor: pointer;
+}
+
+.export_setting_container {
+    position: absolute;
+    width: 100%;
+    top: -164px;
+    left: 0;
+    z-index: 1;
+    pointer-events: none;
+    
+    &.show_settings {
+        z-index: 10;
+        pointer-events: auto;
+        display: block;
+    }
+    
+    &.hide_settings {
+        pointer-events: none;
+        display: none;
+    }
+}
+
+
+.export_setting {
+    width: 100%;
+    height: auto;
+    padding: 8px;
+    background-color: vars.$secondary-dark;
+    border-radius: vars.$border-radius-xl;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow: hidden;
+}
+
+.export_formats{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+
+    .format_button{
+        width: 100%;
+        padding: 12px 0;
+        background-color: vars.$primary-grey;
+        border-radius: vars.$border-radius-lg;
+        border: none;
+        font: 400 clamp(12px, 1.5vw, 12px) var(--inter);
+        color: vars.$off-white;
+        cursor: pointer;
+    }
+
+    .active_button{
+        background-color: vars.$primary-color;
+    }
+}
+
+.export_sizes{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: vars.$primary-grey;
+    border-radius: vars.$border-radius-lg;
+    overflow: hidden;
+
+    .size_wrapper{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .size_button{
+        width: 100%;
+        padding: 12px 0;
+        background-color: vars.$primary-grey;
+        border-radius: vars.$border-radius-lg;
+        border: none;
+        font: 400 clamp(12px, 1.5vw, 12px) var(--inter);
+        color: vars.$off-white;
+        cursor: pointer;
+    }
+
+    .active_button{
+        background-color: vars.$primary-color;
+    }
+    
+    .separator{
+        background-color: vars.$secondary-grey;
+        width:1.5px;
+        height:16px;
+        border-radius: vars.$border-radius-lg;
+    }
+
+    .disabled_separator{
+        display: none;
+    }
+}
+
+.export_overview{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    background-color: vars.$primary-grey;
+    border-radius: vars.$border-radius-lg;
+    overflow: hidden;
+
+    .export_overview_resolution{
+        font: 400 clamp(12px, 1.5vw, 12px) var(--inter);
+        color: vars.$secondary-grey;
+    }
+    
+    .export_overview_size{
+        font: 400 clamp(12px, 1.5vw, 12px) var(--inter);
+        color: vars.$off-white;
+    }
+}
