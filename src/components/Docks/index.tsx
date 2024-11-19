@@ -6,6 +6,7 @@ import Icon from '../Icon';
 import { useDispatch, useSelector } from 'react-redux';
 import { togglePreview } from '../../redux/slices/previewSlice';
 import { RootState } from '../../redux/store';
+import Link from 'next/link';
 
 
 const Docks = () => {
@@ -28,14 +29,16 @@ const Docks = () => {
     return (
         <div className={styles.dock}>
             <div className={styles.dock_back}>
-                <Icon 
-                    icon={ChevronLeft} 
-                    color='#EFEFEF' 
-                    size={20} 
-                    strokeWidth={1} 
-                    tipTitle="Back"
-                    tipPosition='right'
-                />
+                <Link href='/'>
+                    <Icon 
+                        icon={ChevronLeft} 
+                        color='#EFEFEF' 
+                        size={20} 
+                        strokeWidth={1} 
+                        tipTitle="Back"
+                        tipPosition='right'
+                    />
+                </Link>
             </div>
             <div className={styles.dock_other}>
                 {
