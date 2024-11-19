@@ -2,7 +2,7 @@
 
 import '../styles/globals.scss';
 import { Inter } from 'next/font/google';
-
+import { metadata } from './seo';
 import { Provider } from 'react-redux';
 import { store } from '../redux/store';
 
@@ -19,6 +19,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={inter.variable}>
+      <head>
+        <title>{metadata.title}</title>
+        <meta name="description" content={metadata.description} />
+        <link rel="icon" href={metadata.icons.favicon.src} />
+      </head>
       <body>
         <Provider store={store}>
           {children}
