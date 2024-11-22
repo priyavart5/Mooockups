@@ -4,7 +4,7 @@ import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import { setFile } from '../../redux/slices/importSlice';
-import styles from './CanvasStyles.module.scss';
+import styles from './styles.module.scss';
 import Image from 'next/image';
 
 const Canvas = () => {

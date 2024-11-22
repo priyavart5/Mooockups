@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { Files, Settings2 } from 'lucide-react';
-import styles from './ExportStyles.module.scss';
+import styles from './styles.module.scss';
 import Icon from '../Icon';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';

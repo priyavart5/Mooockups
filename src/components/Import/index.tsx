@@ -3,7 +3,7 @@
 'use client';
 
 import { ImageUp, Replace, Minus } from 'lucide-react';
-import styles from './ImportStyles.module.scss';
+import styles from './styles.module.scss';
 import Icon from '../Icon';
 import { useDispatch, useSelector } from 'react-redux';
 import { setFile, clearFile } from '../../redux/slices/importSlice';
