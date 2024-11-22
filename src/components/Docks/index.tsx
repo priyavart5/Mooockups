@@ -1,7 +1,7 @@
 'use client'
 
 import { ChevronLeft, Maximize2, Undo2, Redo2, EqualNot, SquareDashed } from 'lucide-react';
-import styles from './DocksStyles.module.scss';
+import styles from './styles.module.scss';
 import Icon from '../Icon';
 import { useDispatch, useSelector } from 'react-redux';
 import { togglePreview } from '../../redux/slices/previewSlice';

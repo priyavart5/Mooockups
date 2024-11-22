@@ -7,7 +7,7 @@
 
 .export{
     width: 100%;
-    height: 48px;
+    min-height: 48px;
     padding: 6px;
     background-color: vars.$secondary-dark;
     border-radius: vars.$border-radius-xl;
@@ -21,7 +21,7 @@
 .export_button{
     width: 100%;
     height: 100%;
-    padding: 2px 2px;
+    padding: 10px 0;
     background-color: vars.$primary-color;
     border-radius: vars.$border-radius-lg;
     border: none;
