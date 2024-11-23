@@ -6,13 +6,14 @@ import { GalleryHorizontalEnd, Frame, Ellipsis } from 'lucide-react';
 import Image from 'next/image';
 import { mockLabFrame } from '../../utils/defaultData';
 import Slider from '../Slider';
+import InputSlider from '../InputSlider';
 
 const MockLabEditor = () => {
 
     const [editorService, setEditorService] = useState<string>('Frame');
     const [showAllGradient, setShowAllGradient] = useState<boolean>(false);
     const [showAllShadow, setShowAllShadow] = useState<boolean>(false);
-
+    const [selectedSolidColor, setSelectedSolidColor] = useState("#ffffff");
 
   return (
     <>
@@ -91,7 +92,7 @@ const MockLabEditor = () => {
                             min={0}
                             max={100}
                             step={1}
-                            initialValue={98}
+                            initialValue={100}
                             // onValueChange={handleOpacityChange}
                         />
                     </div>
@@ -130,9 +131,78 @@ const MockLabEditor = () => {
                             min={0}
                             max={100}
                             step={1}
-                            initialValue={98}
+                            initialValue={100}
                             // onValueChange={handleOpacityChange}
                         />
+                    </div>
+
+                    {/* Color Tool */}
+                    <div className={styles.EF_panels}>
+                        <p>Solid Color</p>
+                        <div className={styles.EF_panels_solidColor}>
+                            {mockLabFrame.solidColor.map((color, index) => {
+                                return(
+                                    <span key={index} className={styles.EF_panels_solidColor_selective} style={{ backgroundColor: color}}></span>
+                                )
+                            })}
+                            <input
+                                type="color"
+                                value={selectedSolidColor}
+                                onChange={(e) => setSelectedSolidColor(e.target.value)}
+                                className={styles.customColorPicker}
+                            />
+                        </div>
+                        <Slider 
+                            title="Opacity"
+                            min={0}
+                            max={100}
+                            step={1}
+                            initialValue={100}
+                            // onValueChange={handleOpacityChange}
+                        />
+                    </div>
+
+                    {/* Noise Tool */}
+                    <div className={styles.EF_panels}>
+                        <p>Noise</p>
+                        <div>
+                            <InputSlider 
+                                min={0}
+                                max={1}
+                                step={0.1}
+                                initialValue={0.1}
+                                // onValueChange={handleOpacityChange}
+                            />
+                        </div>
+                    </div>
+
+                    {/* Blur Tool */}
+                    <div className={styles.EF_panels}>
+                        <p>Blur</p>
+                        <div>
+                            <InputSlider 
+                                min={0}
+                                max={10}
+                                step={0.1}
+                                initialValue={0}
+                                // onValueChange={handleOpacityChange}
+                            />
+                        </div>
+                    </div>
+
+                    {/* Frame Overview */}
+                    <div className={styles.EF_panels}>
+                        <p>Frame Overview</p>
+                        <div className={styles.EF_panels_FrameOverview}>
+                            <span className={styles.EF_panels_FrameOverview_span}>
+                                <p className={styles.EF_panels_FrameOverview_key}>Frame</p>
+                                <p className={styles.EF_panels_FrameOverview_value}>Behance Project</p>
+                            </span>
+                            <span className={styles.EF_panels_FrameOverview_span}>
+                                <p className={styles.EF_panels_FrameOverview_key}>Frame Pixels</p>
+                                <p className={styles.EF_panels_FrameOverview_value}>1440 x 768</p>
+                            </span>
+                        </div>
                     </div>
 
                 </div>

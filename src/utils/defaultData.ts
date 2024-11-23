@@ -108,5 +108,18 @@ export const mockLabFrame = {
             canvasSrc: ''
         },
 
+    ],
+    solidColor : [
+        '#F8F9FA',
+        '#DDE2E6',
+        '#AAB5BE',
+        '#475058',
+        '#202529',
+        '#151617',
+        '#FF4658',
+        '#FF8B38',
+        '#FFC700',
+        '#C4CA00',
+        '#C4CA00'
     ]
 };

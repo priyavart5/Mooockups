@@ -60,7 +60,7 @@
     background-color: transparent;
     display: flex;
     flex-direction: column;
-    gap: 32px;
+    gap: 42px;
 
     overflow-y: scroll;
     scrollbar-width: none;
@@ -145,6 +145,83 @@
             cursor: pointer;
             height: auto;
         }
-      }
+    }
 
+    .EF_panels_solidColor{
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+
+        .EF_panels_solidColor_selective{
+            flex: 1 1 calc(16.667% - 7px);
+            object-fit: cover;
+            border-radius: vars.$border-radius-lg;
+            max-width: calc(16.667% - 7px);
+            height: 36px;
+            cursor: pointer;
+        }
+
+        .panelsMoreButton {
+            flex: 1 1 calc(16.667% - 4px);
+            max-width: calc(16.667% - 4px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: vars.$primary-grey;
+            border-radius: vars.$border-radius-lg;
+            border: none;
+            cursor: pointer;
+            height: auto;
+        }
+
+        .customColorPicker {
+            flex: 1 1 calc(16.667% - 4px);
+            max-width: calc(16.667% - 4px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: vars.$primary-grey;
+            border-radius: vars.$border-radius-lg;
+            border: none;
+            cursor: pointer;
+            height: auto;
+            
+            &::-webkit-color-swatch-wrapper {
+                padding: 0;
+            }
+            
+            &::-webkit-color-swatch {
+                border-radius: vars.$border-radius-lg;
+            }
+        }
+    }
+
+    .EF_panels_FrameOverview{
+        width: 100%;
+        height: auto;
+        background-color: vars.$primary-grey;
+        padding: 12px;
+        border-radius: vars.$border-radius-lg;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+
+        .EF_panels_FrameOverview_span{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .EF_panels_FrameOverview_key{
+            font: 400 12px var(--inter); 
+            color: vars.$off-white;
+        }
+
+        .EF_panels_FrameOverview_value{
+            font: 400 12px var(--inter); 
+            color: vars.$secondary-grey;
+        }
+    }
 }
