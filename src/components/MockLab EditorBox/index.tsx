@@ -1,19 +1,82 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import styles from './styles.module.scss';
-import { GalleryHorizontalEnd, Frame, Ellipsis } from 'lucide-react';
+import { GalleryHorizontalEnd, Frame, Ellipsis, ChevronDown, ChevronUp } from 'lucide-react';
 import Image from 'next/image';
-import { mockLabFrame } from '../../utils/defaultData';
+import { mockLabFrame, mockLabMockup } from '../../utils/defaultData';
 import Slider from '../Slider';
 import InputSlider from '../InputSlider';
 
+type DeviceCategory = "Phone" | "Tablet";
+
+interface Device {
+    brand: string;
+    model: string;
+    image: string;
+}
+
+
 const MockLabEditor = () => {
 
-    const [editorService, setEditorService] = useState<string>('Frame');
+    // Frame ToolBox
+    const [editorService, setEditorService] = useState<string>('Mockup');
     const [showAllGradient, setShowAllGradient] = useState<boolean>(false);
     const [showAllShadow, setShowAllShadow] = useState<boolean>(false);
     const [selectedSolidColor, setSelectedSolidColor] = useState("#ffffff");
+
+    // Mockup ToolBox
+    const [deviceToogle, setDeviceToogle] = useState<boolean>(false);
+    const [selectedDevice, setSelectedDevice] = useState<Device>({
+        brand: "Samsung",
+        model: "Galaxy S24 Ultra",
+        image: "https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Samsung+Galaxy+S24+Ultra/Shade/Featured+Image/Titanium+Gray.webp",
+    });
+
+
+    const categoryRefs: Record<DeviceCategory, React.RefObject<HTMLDivElement>> = {
+        Phone: useRef<HTMLDivElement>(null),
+        Tablet: useRef<HTMLDivElement>(null),
+    };
+    
+
+    const scrollToCategory = (category: DeviceCategory) => {
+        if (categoryRefs[category]?.current) {
+            categoryRefs[category].current.scrollIntoView({ behavior: "smooth" });
+        }
+    };    
+
+    const renderDevicesByType = (type: DeviceCategory) => {
+        const key = type.toLowerCase() as keyof typeof mockLabMockup; // Explicit cast
+        const devices = Object.values(mockLabMockup[key] || {}) as Device[];
+        return devices.map((device, index) => (
+            <div
+                key={index}
+                className={styles.EM_devices_category_device}
+                onClick={() =>
+                    setSelectedDevice({
+                        brand: device.brand,
+                        model: device.model,
+                        image: device.image,
+                    })
+                }
+            >
+                <Image
+                    src={device.image}
+                    alt={device.model}
+                    className={styles.EM_devices_category_deviceImage}
+                    width={54}
+                    height={68}
+                    loading="lazy"
+                />
+                {/* <p className={styles.EM_devices_category_deviceBrand}>{device.brand}</p> */}
+                <p className={styles.EM_devices_category_deviceModel}>{device.model}</p>
+            </div>
+        ));
+    };
+    
+    
+
 
   return (
     <>
@@ -36,11 +99,63 @@ const MockLabEditor = () => {
             editorService === 'Mockup' && (
                 <>
                 <div className={styles.EditorMockup}>
-                    <p>Mockup Editor</p>
+
+                    {/* Devices Tool */}
+                    <div className={styles.EM_devices}>
+                        <div className={styles.EM_devices_selected} onClick={() => setDeviceToogle(!deviceToogle)} >
+                            <Image
+                                src={selectedDevice.image}
+                                alt={selectedDevice.model}
+                                className={styles.EM_devices_selected_image}
+                                width={28}
+                                height={36}
+                                loading="lazy"
+                            />
+                            <div className={styles.EM_devices_selected_specification}>
+                                <p className={styles.EM_devices_selected_brand}>{selectedDevice.brand}</p>
+                                <p className={styles.EM_devices_selected_model}>{selectedDevice.model}</p>
+                            </div>
+                            {!deviceToogle ? (
+                                <ChevronDown className={styles.EM_devices_selected_icon} color="#EFEFEF" size={20}/>
+                            ) : (
+                                <ChevronUp className={styles.EM_devices_selected_icon} color="#EFEFEF" size={20}/>
+                            )}
+                        </div>
+
+                        {deviceToogle && (
+                            <>
+                                <div className={styles.EM_devices_list_categories}>
+                                    {Object.keys(categoryRefs).map((category, index) => (
+                                        <button key={index} className={styles.categoryButton} onClick={() => scrollToCategory(category as DeviceCategory)} >
+                                            {category}
+                                        </button>
+                                    ))}
+                                </div>
+
+                                <div className={styles.EM_devices_category}>
+                                    {Object.keys(categoryRefs).map((category, index) => (
+                                        <div
+                                            key={index}
+                                            id={`${category.toLowerCase()}-category`}
+                                            ref={categoryRefs[category as keyof typeof categoryRefs]}
+                                            className={styles.EM_devices_category_section}
+                                        >
+                                            <p className={styles.EM_devices_category_name}>{category}</p>
+                                            <div className={styles.EM_devices_category_devices}>
+                                                {renderDevicesByType(category as DeviceCategory)}
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </>
+                        )}
+                    </div>
+
                 </div>
                 </>
             )
         }
+
         {
             editorService === 'Frame' && (
                 <>

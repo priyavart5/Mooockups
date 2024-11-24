@@ -44,16 +44,161 @@
 .EditorMockup{
     width: 100%;
     background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    gap: 42px;
 
     overflow-y: scroll;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE and Edge */
-    /* For Webkit-based browsers (Chrome, Safari, etc.) */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
     &::-webkit-scrollbar {
         display: none;
     }
+}
+
+.EM_devices{
+    width: 100%;
+    height: auto;
+    background-color: vars.$primary-grey;
+    border-radius: vars.$border-radius-lg;
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+    padding: 8px;
+    
+    .EM_devices_selected{
+        width: 100%;
+        min-height: 34px;
+        max-height: 34px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        cursor: pointer;
+        
+        .EM_devices_selected_image{
+            border-radius: vars.$border-radius-sm;
+        }
+
+        .EM_devices_selected_specification{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            height: 100%;
+    
+            .EM_devices_selected_brand{
+                font: 400 clamp(11px, 1.5vw, 11px) var(--inter);
+                color: vars.$secondary-grey;
+            }
+    
+            .EM_devices_selected_model{
+                font: 400 clamp(12px, 1.5vw, 12px) var(--inter);
+                color: vars.$off-white;
+            }
+        }
+
+        .EM_devices_selected_icon {
+            margin-left: auto;
+        }
+    }
+
+    .EM_devices_list_categories{
+        display: flex;
+        gap: 8px;
+        
+        overflow-x: scroll;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        &::-webkit-scrollbar {
+            display: none;
+        }
+        
+        button{
+            padding: 10px 14px;
+            background-color: vars.$secondary-grey;
+            border: none;
+            border-radius: vars.$border-radius-lg;
+            font: 400 clamp(12px, 1.5vw, 12px) var(--inter); 
+            color: vars.$off-white;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+
+    }
+
+    .EM_devices_category{
+        width: 100%;
+        max-height: 350px;
+        background-color: transparent;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        overflow-y: scroll;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        .EM_devices_category_section{
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            .EM_devices_category_name{
+                font: 400 13px var(--inter);
+                color: vars.$off-white;
+            }
+            
+            .EM_devices_category_devices {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+                gap: 12px;
+
+                .EM_devices_category_device{
+                    display: flex;
+                    flex-direction: column;
+                    gap: 4px;
+                    align-items: center;
+                    background-color: vars.$secondary-grey;
+                    padding: 8px 8px;
+                    border-radius: vars.$border-radius-lg;
+                    
+                    .EM_devices_category_deviceImage{
+                        border-radius: vars.$border-radius-lg;
+                        margin-bottom: 8px;
+                        width: 64px;
+                        height:auto;
+                    }
+
+                    .EM_devices_category_deviceBrand{
+                        font: 400 11px var(--inter);
+                        color: vars.$off-white;
+                    }
+                    
+                    .EM_devices_category_deviceModel{
+                        font: 400 12px var(--inter);
+                        color: vars.$off-white;
+                    }
+                }
+            }
+        }
+    }
+
 
 }
+
+
+
+
+
+
+
+
+
+// ****************************
+// Editor Frame 
+// ****************************
 
 .EditorFrame{
     width: 100%;

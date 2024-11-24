@@ -123,3 +123,145 @@ export const mockLabFrame = {
         '#C4CA00'
     ]
 };
+
+export const mockLabMockup = {
+    phone : {
+        iPhone16Pro : {
+            brand : 'Apple',
+            model : 'iPhone 16 Pro',
+            screenPixels : '1206 x 2622',
+            image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Apple+iPhone+16+Pro/Shade/Featured+Image/Desert+Titanium.webp',
+            shade : [
+                {
+                    name: 'Desert Titanium',
+                    featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Apple+iPhone+16+Pro/Shade/Featured+Image/Desert+Titanium.webp',
+                    canvasSrc : ''
+                },
+                {
+                    name: 'Natural Titanium',
+                    featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Apple+iPhone+16+Pro/Shade/Featured+Image/Natural+Titanium.webp',
+                    canvasSrc : ''
+                },
+                {
+                    name: 'White Titanium',
+                    featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Apple+iPhone+16+Pro/Shade/Featured+Image/White+Titanium.webp',
+                    canvasSrc : ''
+                },
+                {
+                    name: 'Black Titanium',
+                    featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Apple+iPhone+16+Pro/Shade/Featured+Image/Black+Titanium.webp',
+                    canvasSrc : ''
+                },
+            ],
+            Layout : []
+        },
+        iPhone15Pro : {
+            brand : 'Apple',
+            model : 'iPhone 15 Pro',
+            screenPixels : '1206 x 2622',
+            image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Apple+iPhone+16+Pro/Shade/Featured+Image/White+Titanium.webp',
+            shade : [
+                {
+                    name: 'Desert Titanium',
+                    featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Apple+iPhone+16+Pro/Shade/Featured+Image/Desert+Titanium.webp',
+                    canvasSrc : ''
+                },
+                {
+                    name: 'Natural Titanium',
+                    featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Apple+iPhone+16+Pro/Shade/Featured+Image/Natural+Titanium.webp',
+                    canvasSrc : ''
+                },
+                {
+                    name: 'White Titanium',
+                    featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Apple+iPhone+16+Pro/Shade/Featured+Image/White+Titanium.webp',
+                    canvasSrc : ''
+                },
+                {
+                    name: 'Black Titanium',
+                    featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Apple+iPhone+16+Pro/Shade/Featured+Image/Black+Titanium.webp',
+                    canvasSrc : ''
+                },
+            ],
+            Layout : []
+        },
+        GalaxyS24Ultra : {
+            brand : 'Samsung',
+            model : 'Galaxy S24 Ultra',
+            screenPixels : '3120 x 1440',
+            image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Samsung+Galaxy+S24+Ultra/Shade/Featured+Image/Titanium+Gray.webp',
+            shade : [
+                {
+                    name: 'Titanium Gray',
+                    featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Samsung+Galaxy+S24+Ultra/Shade/Featured+Image/Titanium+Gray.webp',
+                    canvasSrc : ''
+                },
+                {
+                    name: 'Titanium Black',
+                    featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Samsung+Galaxy+S24+Ultra/Shade/Featured+Image/Titanium+Black.webp',
+                    canvasSrc : ''
+                },
+                {
+                    name: 'Titanium Violet',
+                    featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Samsung+Galaxy+S24+Ultra/Shade/Featured+Image/Titanium+Violet.webp',
+                    canvasSrc : ''
+                },
+                {
+                    name: 'Titanium Yellow',
+                    featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Samsung+Galaxy+S24+Ultra/Shade/Featured+Image/Titanium+Yellow.webp',
+                    canvasSrc : ''
+                },
+            ],
+            Layout : []
+        },
+    },
+    tablet : {
+        iPadPro11 : {
+            brand : 'Apple',
+            model : 'iPad Pro 11"',
+            screenPixels : '1668 x 2388',
+            image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Pro+11%22/Shade/Featured+Image/Space+Black.webp',
+            shade : [
+                {
+                    name: 'Space Black',
+                    featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Pro+11%22/Shade/Featured+Image/Space+Black.webp',
+                    canvasSrc : ''
+                },
+                {
+                    name: 'Silver',
+                    featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Pro+11%22/Shade/Featured+Image/Silver.webp',
+                    canvasSrc : ''
+                },
+            ],
+            Layout : []
+        },
+        iPadMini : {
+            brand : 'Apple',
+            model : 'iPad Mini',
+            screenPixels : '1488 x 2266',
+            image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Shade/Featured+Image/Space+Grey.webp',
+            shade : [
+                {
+                    name: 'Space Grey',
+                    featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Shade/Featured+Image/Space+Grey.webp',
+                    canvasSrc : ''
+                },
+                {
+                    name: 'Blue',
+                    featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Shade/Featured+Image/Blue.webp',
+                    canvasSrc : ''
+                },
+                {
+                    name: 'Purple',
+                    featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Shade/Featured+Image/Purple.webp',
+                    canvasSrc : ''
+                },
+                {
+                    name: 'Starlight',
+                    featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Shade/Featured+Image/Starlight.webp',
+                    canvasSrc : ''
+                },
+            ],
+            Layout : []
+        },
+    }
+} as const;
