@@ -179,6 +179,7 @@
                     .EM_devices_category_deviceModel{
                         font: 400 12px var(--inter);
                         color: vars.$off-white;
+                        text-align: center;
                     }
                 }
             }
@@ -188,6 +189,92 @@
 
 }
 
+.EM_panels{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+     
+    p{
+        font: 400 clamp(12px, 1.5vw, 12px) var(--inter); 
+        color: vars.$off-white;
+    }
+
+    .EM_panels_shade_featuredImage {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+
+        .EM_panels_shade_image_div{
+            padding: 12px;
+            flex: 1 1 calc(33.333% - 8px);
+            max-width: calc(33.333% - 8px);
+            border-radius: vars.$border-radius-lg;
+            cursor: pointer;
+            background-color: vars.$primary-grey;
+            
+            .EM_panels_shade_image {
+                object-fit: cover;
+                height: auto;
+                width: 100%;
+                height:auto;
+                border-radius: vars.$border-radius-lg;
+            }
+        }
+    
+    }
+
+    .EM_panels_shadow_featuredImage {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+            
+        .EM_panels_shadow_image{
+            padding: 4px;
+            flex: 1 1 calc(33.333% - 8px);
+            max-width: calc(33.333% - 8px);
+            cursor: pointer;
+            background-color: vars.$primary-grey;
+            border-radius: vars.$border-radius-xl;
+            object-fit: cover;
+            height: auto;
+            width: 100%;
+            height:auto;
+        }
+    
+    }
+
+    .EM_panels_deviceOverview{
+        width: 100%;
+        height: auto;
+        background-color: vars.$primary-grey;
+        padding: 12px;
+        border-radius: vars.$border-radius-lg;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+
+        .EM_panels_deviceOverview_span{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .EM_panels_deviceOverview_key{
+            font: 400 12px var(--inter); 
+            color: vars.$off-white;
+        }
+
+        .EM_panels_deviceOverview_value{
+            font: 400 12px var(--inter); 
+            color: vars.$secondary-grey;
+        }
+    }
+}
 
 
 

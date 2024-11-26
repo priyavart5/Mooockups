@@ -130,7 +130,7 @@ export const mockLabMockup = {
             brand : 'Apple',
             model : 'iPhone 16 Pro',
             screenPixels : '1206 x 2622',
-            image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Apple+iPhone+16+Pro/Shade/Featured+Image/Desert+Titanium.webp',
+            image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Apple+iPhone+16+Pro/Shade/Featured+Image/Natural+Titanium.webp',
             shade : [
                 {
                     name: 'Desert Titanium',
@@ -188,7 +188,7 @@ export const mockLabMockup = {
             brand : 'Samsung',
             model : 'Galaxy S24 Ultra',
             screenPixels : '3120 x 1440',
-            image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Samsung+Galaxy+S24+Ultra/Shade/Featured+Image/Titanium+Gray.webp',
+            image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Samsung+Galaxy+S24+Ultra/Shade/Featured+Image/Titanium+Violet.webp',
             shade : [
                 {
                     name: 'Titanium Gray',
@@ -265,3 +265,18 @@ export const mockLabMockup = {
         },
     }
 } as const;
+
+export const shadow = [
+    {
+        name: 'Light Shadow',
+        featuredSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Shadow/lightShadow.webp'
+    },
+    {
+        name: 'Medium Shadow',
+        featuredSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Shadow/mediumShadow.webp'
+    },
+    {
+        name: 'Dark Shadow',
+        featuredSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Shadow/darkShadow.webp'
+    },
+];
