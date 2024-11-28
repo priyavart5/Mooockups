@@ -280,3 +280,14 @@ export const shadow = [
         featuredSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Shadow/darkShadow.webp'
     },
 ];
+
+export const predefinedQueries = [
+    "Abstract",
+    "Geometry",
+    "Sand Dune",
+    "Dark Matte",
+    "Gradient",
+    "Nature",
+    "Cityscape",
+    "Ocean",
+  ];

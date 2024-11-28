@@ -1,23 +1,40 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import styles from "./styles.module.scss";
+import { debounce } from "../../lib/debounce";
 
 interface SliderProps {
     title: string;
-    min: number;             
-    max: number;             
+    min: number;
+    max: number;
     step?: number;
-    initialValue?: number;   
-    onValueChange?: (value: number) => void; 
+    initialValue?: number;
+    onValueChange?: (value: number) => void;
+    debounceDelay?: number;
 }
 
-const Slider: React.FC<SliderProps> = ({ title, min, max, step = 1, initialValue = min, onValueChange, }) => {
+const Slider: React.FC<SliderProps> = ({ 
+    title, 
+    min, 
+    max, 
+    step = 1, 
+    initialValue = min, 
+    onValueChange, 
+    debounceDelay = 300,
+}) => {
     const [value, setValue] = useState(initialValue);
+
+    const debouncedValueChange = useMemo(() => {
+        if (onValueChange) {
+            return debounce(onValueChange, debounceDelay);
+        }
+        return undefined;
+    }, [onValueChange, debounceDelay]);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const newValue = parseFloat(e.target.value);
         setValue(newValue);
-        if (onValueChange) {
-        onValueChange(newValue);
+        if (debouncedValueChange) {
+            debouncedValueChange(newValue);
         }
     };
 
@@ -33,7 +50,7 @@ const Slider: React.FC<SliderProps> = ({ title, min, max, step = 1, initialValue
                 onChange={handleInputChange}
                 className={styles.slider}
                 style={{
-                background: `linear-gradient(to right, #5C5C5C 0%, #5C5C5C ${(value / max) * 100}%, #262626 ${(value / max) * 100}%, #262626 100%)`,
+                    background: `linear-gradient(to right, #5C5C5C 0%, #5C5C5C ${(value / max) * 100}%, #262626 ${(value / max) * 100}%, #262626 100%)`,
                 }}
             />
         </div>

@@ -46,8 +46,5 @@ const importSlice = createSlice({
   },
 });
 
-// Export the actions so they can be used in components
 export const { setFile, clearFile } = importSlice.actions;
-
-// Export the reducer to be added to the store
 export default importSlice.reducer;
