@@ -1,12 +1,39 @@
 'use client';
 
 import React, { useState, useRef } from 'react';
+import Image from 'next/image';
 import styles from './styles.module.scss';
 import { GalleryHorizontalEnd, Frame, Ellipsis, ChevronDown, ChevronUp } from 'lucide-react';
-import Image from 'next/image';
 import { mockLabFrame, mockLabMockup, shadow } from '../../utils/defaultData';
 import Slider from '../Slider';
 import InputSlider from '../InputSlider';
+import BackGroundInteraction from "../Background Integrations";
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../redux/store';
+import { 
+    setMockupSelectedDevice,
+    setMockupShade,
+    // setMockupLayout,
+    setMockupShadow,
+    setMockupShadowOpacity,
+    setMockupScale,
+    setMockupRotation,
+    setMockupPositionX,
+    setMockupPositionY,
+    // setFrameBackground,
+    setFrameGradient,
+    setFrameGradientOpacity,
+    setFrameGradientScale,
+    setFrameGradientRotation,
+    setFrameShadow,
+    setFrameShadowOpacity,
+    setFrameShadowScale,
+    setFrameShadowRotation,
+    setFrameSolidColor,
+    setFrameSolidColorOpacity,
+    setFrameNoise,
+    setFrameBlur,
+} from '../../redux/slices/mockLabSlice';
 
 type DeviceCategory = "Phone" | "Tablet";
 
@@ -28,47 +55,23 @@ interface Device {
 
 const MockLabEditor = () => {
 
+    // Redux Dispatch
+    const dispatch = useDispatch();
+
+    
     // Frame ToolBox
-    const [editorService, setEditorService] = useState<string>('Mockup');
+    const [editorService, setEditorService] = useState<string>('Frame');
     const [showAllGradient, setShowAllGradient] = useState<boolean>(false);
     const [showAllShadow, setShowAllShadow] = useState<boolean>(false);
-    const [selectedSolidColor, setSelectedSolidColor] = useState("#ffffff");
-
-
-    const defaultDevice = {
-        brand: 'Samsung',
-        model: 'Galaxy S24 Ultra',
-        screenPixels: '3120 x 1440',
-        image: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Samsung+Galaxy+S24+Ultra/Shade/Featured+Image/Titanium+Violet.webp',
-        shade: [
-            {
-                name: 'Titanium Gray',
-                featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Samsung+Galaxy+S24+Ultra/Shade/Featured+Image/Titanium+Gray.webp',
-                canvasSrc: '',
-            },
-            {
-                name: 'Titanium Black',
-                featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Samsung+Galaxy+S24+Ultra/Shade/Featured+Image/Titanium+Black.webp',
-                canvasSrc: '',
-            },
-            {
-                name: 'Titanium Violet',
-                featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Samsung+Galaxy+S24+Ultra/Shade/Featured+Image/Titanium+Violet.webp',
-                canvasSrc: '',
-            },
-            {
-                name: 'Titanium Yellow',
-                featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Samsung+Galaxy+S24+Ultra/Shade/Featured+Image/Titanium+Yellow.webp',
-                canvasSrc: '',
-            },
-        ],
-        Layout: [],
-    };
+    const [showUnsplash, setShowUnsplash] = useState(false);
+    const [showPixabay, setShowPixabay] = useState(false);
+    const [showPexels, setShowPexels] = useState(false);
 
 
     // Mockup ToolBox
     const [deviceToogle, setDeviceToogle] = useState<boolean>(false);
-    const [selectedDevice, setSelectedDevice] = useState<Device>(defaultDevice);
+    const selectedDevice = useSelector((state: RootState) => state.mockLab.mockupSelectedDevice);
+    const selectedSolidColor = useSelector((state: RootState) => state.mockLab.frameSolidColor);
 
     const categoryRefs: Record<DeviceCategory, React.RefObject<HTMLDivElement>> = {
         Phone: useRef<HTMLDivElement>(null),
@@ -89,7 +92,7 @@ const MockLabEditor = () => {
             <div
                 key={index}
                 className={styles.EM_devices_category_device}
-                onClick={() => setSelectedDevice(device)}
+                onClick={() => handleMockupDevice(device)}
             >
                 <Image
                     src={device.image}
@@ -103,9 +106,95 @@ const MockLabEditor = () => {
             </div>
         ));
     };
-    
-    
 
+    // ************************
+    // Mockup Functions
+    // ************************
+    
+    const handleMockupDevice = (device: Device) => {
+        dispatch(setMockupSelectedDevice(device));
+    };
+
+    const handleMockupShade = (shade: string) => {
+        dispatch(setMockupShade(shade));
+    };
+
+    const handleMockupShadow = (shadow: string) => {
+        dispatch(setMockupShadow(shadow));
+    }
+
+    const handleMockupShadowOpacity = (opacity: number) => {
+        dispatch(setMockupShadowOpacity(opacity));
+    }
+
+    const handleMockupScale = (scale: number) => {
+        dispatch(setMockupScale(scale));
+    }
+
+    const handleMockupRotation = (rotation: number) => {
+        dispatch(setMockupRotation(rotation));
+    }
+
+    const handleMockupPositionX = (x: number) => {
+        dispatch(setMockupPositionX(x));
+    }
+
+    const handleMockupPositionY = (y: number) => {
+        dispatch(setMockupPositionY(y));
+    }
+
+
+    // ************************
+    // Frame Functions
+    // ************************
+
+    const handleFrameGradient = (gradient: string) => {
+        dispatch(setFrameGradient(gradient));
+    }
+
+    const handleFrameGradientOpacity = (opacity: number) => {
+        dispatch(setFrameGradientOpacity(opacity));
+    }
+
+    const handleFrameGradientScale = (scale: number) => {
+        dispatch(setFrameGradientScale(scale));
+    }
+
+    const handleFrameGradientRotation = (rotation: number) => {
+        dispatch(setFrameGradientRotation(rotation));
+    }
+
+    const handleFrameShadow = (shadow: string) => {
+        dispatch(setFrameShadow(shadow));
+    }
+
+    const handleFrameShadowOpacity = (opacity: number) => {
+        dispatch(setFrameShadowOpacity(opacity));
+    }
+
+    const handleFrameShadowScale = (scale: number) => {
+        dispatch(setFrameShadowScale(scale));
+    }
+
+    const handleFrameShadowRotation = (rotation: number) => {
+        dispatch(setFrameShadowRotation(rotation));
+    }
+
+    const handleFrameSolidColor = (color: string) => {
+        dispatch(setFrameSolidColor(color));
+    }
+
+    const handleFrameSolidColorOpacity = (opacity: number) => {
+        dispatch(setFrameSolidColorOpacity(opacity));
+    }
+
+    const handleFrameNoise = (noise: number) => {
+        dispatch(setFrameNoise(noise));
+    }
+
+    const handleFrameBlur = (blur: number) => {
+        dispatch(setFrameBlur(blur));
+    }
 
     return (
         <>
@@ -197,7 +286,7 @@ const MockLabEditor = () => {
                             <p>Shade</p>
                             <div className={styles.EM_panels_shade_featuredImage}>
                                 {selectedDevice.shade.map((shade : Shade, index) => (
-                                    <div key={index} className={styles.EM_panels_shade_image_div}>
+                                    <div key={index} className={styles.EM_panels_shade_image_div} onClick={() => handleMockupShade(shade.featuredSrc)}>
                                         <Image
                                             src={shade.featuredSrc}
                                             alt={shade.name || "Imported image"}
@@ -224,6 +313,7 @@ const MockLabEditor = () => {
                                     width={77}
                                     height={50}
                                     loading="lazy"
+                                    onClick={() => handleMockupShadow(sahdows.featuredSrc)}
                                 />
                                 ))}
                             </div>
@@ -232,8 +322,8 @@ const MockLabEditor = () => {
                                 min={0}
                                 max={100}
                                 step={1}
-                                initialValue={98}
-                                // onValueChange={handleOpacityChange}
+                                initialValue={96}
+                                onValueChange={(opacity) => handleMockupShadowOpacity(opacity)}
                             />
                         </div>
 
@@ -246,12 +336,12 @@ const MockLabEditor = () => {
                                     max={1}
                                     step={0.1}
                                     initialValue={0.1}
-                                    // onValueChange={handleOpacityChange}
+                                    onValueChange={(scale) => handleMockupScale(scale)}
                                 />
                             </div>
                         </div>
 
-                        {/* Rotate Tool */}
+                        {/* Rotation Tool */}
                         <div className={styles.EM_panels}>
                             <p>Rotate</p>
                             <div>
@@ -260,7 +350,7 @@ const MockLabEditor = () => {
                                     max={360}
                                     step={1}
                                     initialValue={180}
-                                    // onValueChange={handleOpacityChange}
+                                    onValueChange={(rotation) => handleMockupRotation(rotation)}
                                 />
                             </div>
                         </div>
@@ -274,7 +364,7 @@ const MockLabEditor = () => {
                                     max={100}
                                     step={1}
                                     initialValue={98}
-                                    // onValueChange={handleOpacityChange}
+                                    onValueChange={(x) => handleMockupPositionX(x)}
                                 />
                                 <Slider 
                                     title="y - Axis"
@@ -282,7 +372,7 @@ const MockLabEditor = () => {
                                     max={100}
                                     step={1}
                                     initialValue={98}
-                                    // onValueChange={handleOpacityChange}
+                                    onValueChange={(y) => handleMockupPositionY(y)}
                                 />
                         </div>
 
@@ -319,10 +409,33 @@ const MockLabEditor = () => {
                             <div className={styles.EF_background_buttons}>
                                 <button>Transparent</button>
                                 <button>Import Image</button>
-                                <button>Unsplash</button>
-                                <button>Pixabay</button>
-                                <button>Pexels</button>
+                                <button onClick={() => {
+                                    setShowUnsplash(true)
+                                    setShowPixabay(false)
+                                    setShowPexels(false)
+                                }}>
+                                    Unsplash
+                                </button>
+                                <button onClick={() => {
+                                    setShowUnsplash(false)
+                                    setShowPixabay(true)
+                                    setShowPexels(false)
+                                }}>
+                                    Pixabay
+                                </button>
+                                {/* <button onClick={() => {
+                                    setShowUnsplash(false)
+                                    setShowPixabay(false)
+                                    setShowPexels(true)
+                                }}>
+                                    Pexels
+                                </button> */}
                             </div>
+
+                            { showUnsplash && <BackGroundInteraction onClose={() => setShowUnsplash(false)} source="unsplash" /> }
+                            { showPixabay && <BackGroundInteraction onClose={() => setShowPixabay(false)} source="pixabay" /> }
+                            { showPexels && <BackGroundInteraction onClose={() => setShowPexels(false)} source="pexels" /> }
+
                         </div>
 
                         {/* Gradient Tool */}
@@ -338,6 +451,7 @@ const MockLabEditor = () => {
                                     width={77}
                                     height={50}
                                     loading="lazy"
+                                    onClick={() => handleFrameGradient(image.featuredSrc)}
                                 />
                                 ))}
                                 { mockLabFrame.gradient.length > 5 && (
@@ -347,20 +461,28 @@ const MockLabEditor = () => {
                                 )}
                             </div>
                             <Slider 
+                                title="Opacity"
+                                min={0}
+                                max={100}
+                                step={1}
+                                initialValue={96}
+                                onValueChange={(opacity) => handleFrameGradientOpacity(opacity)}
+                            />
+                            <Slider 
                                 title="Scale"
                                 min={0}
                                 max={100}
                                 step={1}
                                 initialValue={50}
-                                // onValueChange={handleOpacityChange}
+                                onValueChange={(scale) => handleFrameGradientScale(scale)}
                             />
-                            <Slider 
-                                title="Opacity"
+                             <Slider 
+                                title="Rotation"
                                 min={0}
-                                max={100}
+                                max={360}
                                 step={1}
-                                initialValue={100}
-                                // onValueChange={handleOpacityChange}
+                                initialValue={180}
+                                onValueChange={(rotation) => handleFrameGradientRotation(rotation)}
                             />
                         </div>
 
@@ -377,6 +499,7 @@ const MockLabEditor = () => {
                                     width={77}
                                     height={50}
                                     loading="lazy"
+                                    onClick={() => handleFrameShadow(image.featuredSrc)}
                                 />
                                 ))}
                                 { mockLabFrame.shadow.length > 5 && (
@@ -386,20 +509,28 @@ const MockLabEditor = () => {
                                 )}
                             </div>
                             <Slider 
+                                title="Opacity"
+                                min={0}
+                                max={100}
+                                step={1}
+                                initialValue={96}
+                                onValueChange={(opacity) => handleFrameShadowOpacity(opacity)}
+                            />
+                            <Slider 
                                 title="Scale"
                                 min={0}
                                 max={100}
                                 step={1}
                                 initialValue={50}
-                                // onValueChange={handleOpacityChange}
+                                onValueChange={(scale) => handleFrameShadowScale(scale)}
                             />
                             <Slider 
-                                title="Opacity"
+                                title="Rotation"
                                 min={0}
-                                max={100}
+                                max={360}
                                 step={1}
-                                initialValue={100}
-                                // onValueChange={handleOpacityChange}
+                                initialValue={180}
+                                onValueChange={(rotation) => handleFrameShadowRotation(rotation)}
                             />
                         </div>
 
@@ -409,13 +540,19 @@ const MockLabEditor = () => {
                             <div className={styles.EF_panels_solidColor}>
                                 {mockLabFrame.solidColor.map((color, index) => {
                                     return(
-                                        <span key={index} className={styles.EF_panels_solidColor_selective} style={{ backgroundColor: color}}></span>
+                                        <span 
+                                            key={index} 
+                                            className={styles.EF_panels_solidColor_selective} 
+                                            style={{ backgroundColor: color}}
+                                            onClick={() => handleFrameSolidColor(color)}
+                                            >
+                                        </span>
                                     )
                                 })}
                                 <input
                                     type="color"
-                                    value={selectedSolidColor}
-                                    onChange={(e) => setSelectedSolidColor(e.target.value)}
+                                    value={selectedSolidColor.color}
+                                    onChange={(e) => handleFrameSolidColor(e.target.value)}
                                     className={styles.customColorPicker}
                                 />
                             </div>
@@ -424,8 +561,8 @@ const MockLabEditor = () => {
                                 min={0}
                                 max={100}
                                 step={1}
-                                initialValue={100}
-                                // onValueChange={handleOpacityChange}
+                                initialValue={96}
+                                onValueChange={(opacity) => handleFrameSolidColorOpacity(opacity)}
                             />
                         </div>
 
@@ -438,7 +575,7 @@ const MockLabEditor = () => {
                                     max={1}
                                     step={0.1}
                                     initialValue={0.1}
-                                    // onValueChange={handleOpacityChange}
+                                    onValueChange={(noise) => handleFrameNoise(noise)}
                                 />
                             </div>
                         </div>
@@ -452,7 +589,7 @@ const MockLabEditor = () => {
                                     max={10}
                                     step={0.1}
                                     initialValue={0}
-                                    // onValueChange={handleOpacityChange}
+                                    onValueChange={(blur) => handleFrameBlur(blur)}
                                 />
                             </div>
                         </div>
