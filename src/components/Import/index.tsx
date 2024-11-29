@@ -1,5 +1,3 @@
-// src/components/Import/index.tsx
-
 'use client';
 
 import { ImageUp, Replace, Minus } from 'lucide-react';
