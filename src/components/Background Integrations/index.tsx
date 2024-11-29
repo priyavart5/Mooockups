@@ -1,16 +1,22 @@
-// components/BackGroundInteraction.tsx
+// components/BackGroundIntegrations.tsx
 import React from "react";
+import styles from "./styles.module.scss";
+
 import { Minus, Search, X, Ellipsis } from "lucide-react";
 import { predefinedQueries } from "../../utils/defaultData";
 import { usePhotoFetch } from "../../hooks/usePhotoFetch";
-import styles from "./styles.module.scss";
+
+import { useDispatch } from 'react-redux';
+import { setFrameBackground } from '../../redux/slices/mockLabSlice';
 
 interface BackgroundIntegrationProps {
   onClose: () => void;
   source: string;
 }
 
-const BackGroundInteraction: React.FC<BackgroundIntegrationProps> = ({ onClose, source }) => {
+const BackGroundIntegrations: React.FC<BackgroundIntegrationProps> = ({ onClose, source }) => {
+  const dispatch = useDispatch();
+
   const { photos, loading, searchQuery, setSearchQuery, isSearching, setIsSearching, page, fetchPhotos, setPage, error, setPhotos, setError } = usePhotoFetch(source);
 
   const handleSearch = () => {
@@ -41,9 +47,9 @@ const BackGroundInteraction: React.FC<BackgroundIntegrationProps> = ({ onClose, 
     fetchPhotos(searchQuery, nextPage);
   };
 
-  // const handleImageClick = (imageUrl: string) => {
-  //   dispatch(setSelectedImage(imageUrl));
-  // };
+  const handleImageClick = (imageUrl: string) => {
+    dispatch(setFrameBackground(imageUrl));
+  };
 
   return (
     <div className={styles.backgroundIntegration}>
@@ -52,7 +58,7 @@ const BackGroundInteraction: React.FC<BackgroundIntegrationProps> = ({ onClose, 
           type="text"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          placeholder="Search photos..."
+          placeholder="Search..."
           className={styles.BGI_topBar_searchInput}
           disabled={isSearching}
         />
@@ -104,10 +110,19 @@ const BackGroundInteraction: React.FC<BackgroundIntegrationProps> = ({ onClose, 
           <div className={styles.BGI_FetchContainer_gallery}>
             {photos.map((photo) => {
               return (
-              <div className={styles.BGI_imageWrapper} key={photo.id}>
+              <div 
+                className={styles.BGI_imageWrapper} 
+                key={photo.id}
+                onClick={() =>
+                  handleImageClick(
+                    source === 'unsplash' ? photo.urls.full : photo.largeImageURL
+                  )
+                }
+                >
                 <img
                   src={source === "unsplash" ? photo.urls.small : photo.webformatURL}
                   alt={photo.alt_description || "Photo"}
+                  className={styles.BGI__fetched_image}
                 />
               </div>
               )
@@ -127,4 +142,4 @@ const BackGroundInteraction: React.FC<BackgroundIntegrationProps> = ({ onClose, 
   );
 };
 
-export default BackGroundInteraction;
+export default BackGroundIntegrations;

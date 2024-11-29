@@ -1,12 +1,10 @@
 // src/redux/slices/mockLabSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface Shade {
-    name: string;
-    featuredSrc: string;
-    canvasSrc: string;
-}
 
+// ************************
+// Mockup Interfaces
+// ************************
 interface MockupDeviceState{
     brand: string;
     model: string;
@@ -15,6 +13,13 @@ interface MockupDeviceState{
     shade: Shade[];
     Layout: unknown[];
 }
+
+interface Shade {
+    name: string;
+    featuredSrc: string;
+    canvasSrc: string;
+}
+
 
 interface MockupShadeState {
     shadeSrc: string;
@@ -50,10 +55,13 @@ interface MockupPosition_Y_State{
 
 
 
-// interface FrameBackgroundState {
-//   type: 'transparent' | 'uploaded' | 'unsplash' | 'pexels' | 'pixabay';
-//   src?: string;
-// }
+// ************************
+// Frame Interfaces
+// ************************
+
+interface FrameBackgroundState {
+    backgroundSrc: string;
+}
 
 interface FrameGradientState {
     gradientSrc: string;
@@ -122,7 +130,7 @@ interface MockLabState {
     mockupPositionY: MockupPosition_Y_State;
 
     // Frame
-    //   frameBackground: FrameBackgroundState;
+    frameBackground: FrameBackgroundState;
 
     frameGradient: FrameGradientState;
     frameGradientOpacity: FrameGradientOpacityState;
@@ -143,33 +151,33 @@ interface MockLabState {
 }
 
 const defaultDevice = {
-    brand: 'Samsung',
-    model: 'Galaxy S24 Ultra',
-    screenPixels: '3120 x 1440',
-    image: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Samsung+Galaxy+S24+Ultra/Shade/Featured+Image/Titanium+Violet.webp',
-    shade: [
+    brand : 'Apple',
+    model : 'iPad Mini',
+    screenPixels : '1488 x 2266',
+    image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Shade/Featured+Image/Space+Grey.webp',
+    shade : [
         {
-            name: 'Titanium Gray',
-            featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Samsung+Galaxy+S24+Ultra/Shade/Featured+Image/Titanium+Gray.webp',
-            canvasSrc: '',
+            name: 'Space Grey',
+            featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Shade/Featured+Image/Space+Grey.webp',
+            canvasSrc : ''
         },
         {
-            name: 'Titanium Black',
-            featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Samsung+Galaxy+S24+Ultra/Shade/Featured+Image/Titanium+Black.webp',
-            canvasSrc: '',
+            name: 'Blue',
+            featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Shade/Featured+Image/Blue.webp',
+            canvasSrc : ''
         },
         {
-            name: 'Titanium Violet',
-            featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Samsung+Galaxy+S24+Ultra/Shade/Featured+Image/Titanium+Violet.webp',
-            canvasSrc: '',
+            name: 'Purple',
+            featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Shade/Featured+Image/Purple.webp',
+            canvasSrc : ''
         },
         {
-            name: 'Titanium Yellow',
-            featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Samsung+Galaxy+S24+Ultra/Shade/Featured+Image/Titanium+Yellow.webp',
-            canvasSrc: '',
+            name: 'Starlight',
+            featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Shade/Featured+Image/Starlight.webp',
+            canvasSrc : ''
         },
     ],
-    Layout: [],
+    Layout : []
 };
 
 const initialState: MockLabState = {
@@ -188,7 +196,7 @@ const initialState: MockLabState = {
     mockupPositionX: {position_X_Value: 0},
     mockupPositionY: {position_Y_Value : 0},
 
-    // frameBackground: { type: 'transparent' },
+    frameBackground: { backgroundSrc: '' },
     frameGradient: { gradientSrc: ''},
     frameGradientOpacity: { gradientOpacityValue : 1},
     frameGradientScale: { gradientScaleValue : 1},
@@ -251,12 +259,12 @@ const mockLabSlice = createSlice({
 
     // Frame Reducer
 
-    // setFrameBackground(state, action: PayloadAction<FrameBackgroundState>) {
-    //   state.frameBackground = action.payload;
-    // },
+    setFrameBackground(state, action: PayloadAction<string>) {
+        state.frameBackground.backgroundSrc = action.payload;
+    },
 
     setFrameGradient(state, action: PayloadAction<string>) {
-      state.frameGradient.gradientSrc = action.payload;
+        state.frameGradient.gradientSrc = action.payload;
     },
 
     setFrameGradientOpacity(state, action: PayloadAction<number>) {
@@ -290,7 +298,7 @@ const mockLabSlice = createSlice({
     setFrameSolidColor(state, action: PayloadAction<string>) {
         state.frameSolidColor.color = action.payload;
     },
-
+    
     setFrameSolidColorOpacity(state, action: PayloadAction<number>) {
         state.frameSolidColorOpacity.colorOpacityValue = action.payload;
     },
@@ -315,7 +323,7 @@ export const {
     setMockupRotation,
     setMockupPositionX,
     setMockupPositionY,
-    // setFrameBackground,
+    setFrameBackground,
     setFrameGradient,
     setFrameGradientOpacity,
     setFrameGradientScale,

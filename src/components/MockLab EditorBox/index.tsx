@@ -3,11 +3,11 @@
 import React, { useState, useRef } from 'react';
 import Image from 'next/image';
 import styles from './styles.module.scss';
-import { GalleryHorizontalEnd, Frame, Ellipsis, ChevronDown, ChevronUp } from 'lucide-react';
+import { GalleryHorizontalEnd, Frame, Ellipsis, ChevronDown, ChevronUp, ImageUp, Minus, X } from 'lucide-react';
 import { mockLabFrame, mockLabMockup, shadow } from '../../utils/defaultData';
 import Slider from '../Slider';
 import InputSlider from '../InputSlider';
-import BackGroundInteraction from "../Background Integrations";
+import BackGroundIntegrations from "../Background Integrations";
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import { 
@@ -20,7 +20,7 @@ import {
     setMockupRotation,
     setMockupPositionX,
     setMockupPositionY,
-    // setFrameBackground,
+    setFrameBackground,
     setFrameGradient,
     setFrameGradientOpacity,
     setFrameGradientScale,
@@ -34,6 +34,7 @@ import {
     setFrameNoise,
     setFrameBlur,
 } from '../../redux/slices/mockLabSlice';
+import Icon from '../Icon';
 
 type DeviceCategory = "Phone" | "Tablet";
 
@@ -58,14 +59,14 @@ const MockLabEditor = () => {
     // Redux Dispatch
     const dispatch = useDispatch();
 
-    
     // Frame ToolBox
-    const [editorService, setEditorService] = useState<string>('Frame');
+    const [editorService, setEditorService] = useState<string>('Mockup');
     const [showAllGradient, setShowAllGradient] = useState<boolean>(false);
     const [showAllShadow, setShowAllShadow] = useState<boolean>(false);
+    const [showBGImportImage, setShowBGImportImage] = useState(false);
+    const [showBGImportImageFileName, setShowBGImportImageFileName] = useState('Import image');
     const [showUnsplash, setShowUnsplash] = useState(false);
     const [showPixabay, setShowPixabay] = useState(false);
-    const [showPexels, setShowPexels] = useState(false);
 
 
     // Mockup ToolBox
@@ -105,6 +106,33 @@ const MockLabEditor = () => {
                 <p className={styles.EM_devices_category_deviceModel}>{device.model}</p>
             </div>
         ));
+    };
+
+    const handleBGImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const image = e.target.files?.[0];
+        if (image) {
+            const reader = new FileReader();
+
+            reader.onloadend = () => {
+                if (reader.result) {
+                    const img = new window.Image();
+                    img.src = reader.result as string;
+                    img.onload = () => {
+                        dispatch(setFrameBackground(reader.result as string));
+                        setShowBGImportImageFileName(image.name)
+                    };
+                }
+            };
+
+            reader.readAsDataURL(image);
+        }
+    };
+
+    const handleClearImage = () => {
+        const ImageInput = document.getElementById('importBGFile') as HTMLInputElement;
+        if (ImageInput) ImageInput.value = '';
+        dispatch(setFrameBackground('transparent'));
+        setShowBGImportImageFileName('Import image');
     };
 
     // ************************
@@ -147,6 +175,10 @@ const MockLabEditor = () => {
     // ************************
     // Frame Functions
     // ************************
+
+    const handleFrameBackGround = (background: string) => {
+        dispatch(setFrameBackground(background));
+    }
 
     const handleFrameGradient = (gradient: string) => {
         dispatch(setFrameGradient(gradient));
@@ -322,7 +354,7 @@ const MockLabEditor = () => {
                                 min={0}
                                 max={100}
                                 step={1}
-                                initialValue={96}
+                                initialValue={100}
                                 onValueChange={(opacity) => handleMockupShadowOpacity(opacity)}
                             />
                         </div>
@@ -363,7 +395,7 @@ const MockLabEditor = () => {
                                     min={0}
                                     max={100}
                                     step={1}
-                                    initialValue={98}
+                                    initialValue={50}
                                     onValueChange={(x) => handleMockupPositionX(x)}
                                 />
                                 <Slider 
@@ -371,14 +403,14 @@ const MockLabEditor = () => {
                                     min={0}
                                     max={100}
                                     step={1}
-                                    initialValue={98}
+                                    initialValue={50}
                                     onValueChange={(y) => handleMockupPositionY(y)}
                                 />
                         </div>
 
                         {/* Frame Overview */}
                         <div className={styles.EM_panels}>
-                            <p>Device Overview</p>
+                            <p>Mockup Overview</p>
                             <div className={styles.EM_panels_deviceOverview}>
                                 <span className={styles.EM_panels_deviceOverview_span}>
                                     <p className={styles.EM_panels_deviceOverview_key}>Device</p>
@@ -407,35 +439,74 @@ const MockLabEditor = () => {
                         <div className={styles.EF_background}>
                             <p>Background</p>
                             <div className={styles.EF_background_buttons}>
-                                <button>Transparent</button>
-                                <button>Import Image</button>
+                                <button onClick={() => handleFrameBackGround('transparent')}>Transparent</button>
+                                <button onClick={()=> {
+                                    setShowBGImportImage(true)
+                                    setShowUnsplash(false)
+                                    setShowPixabay(false)
+                                }}>
+                                    Import image
+                                </button>
                                 <button onClick={() => {
+                                    setShowBGImportImage(false)
                                     setShowUnsplash(true)
                                     setShowPixabay(false)
-                                    setShowPexels(false)
                                 }}>
                                     Unsplash
                                 </button>
                                 <button onClick={() => {
+                                    setShowBGImportImage(false)
                                     setShowUnsplash(false)
                                     setShowPixabay(true)
-                                    setShowPexels(false)
                                 }}>
                                     Pixabay
                                 </button>
-                                {/* <button onClick={() => {
-                                    setShowUnsplash(false)
-                                    setShowPixabay(false)
-                                    setShowPexels(true)
-                                }}>
-                                    Pexels
-                                </button> */}
                             </div>
 
-                            { showUnsplash && <BackGroundInteraction onClose={() => setShowUnsplash(false)} source="unsplash" /> }
-                            { showPixabay && <BackGroundInteraction onClose={() => setShowPixabay(false)} source="pixabay" /> }
-                            { showPexels && <BackGroundInteraction onClose={() => setShowPexels(false)} source="pexels" /> }
-
+                            { showBGImportImage && 
+                                <div className={styles.EF_background_imageImport}>
+                                    <div className={styles.EF_background_image}>
+                                        <Icon
+                                        icon={ImageUp}
+                                        color='#EFEFEF'
+                                        size={20}
+                                        strokeWidth={1}
+                                        tipTitle="Import File"
+                                        tipPosition='bottom'
+                                        />
+                                        <input
+                                            style={{ display: 'none' }}
+                                            type="file"
+                                            id="importBGFile"
+                                            onChange={handleBGImageChange}
+                                            accept="image/*, video/*"
+                                        />
+                                        <label className={styles.EF_background_imageLabel} htmlFor="importBGFile">{showBGImportImageFileName}</label>
+                                    </div>
+                                    {  
+                                        <Icon
+                                            icon={Minus}
+                                            color='#EFEFEF'
+                                            size={20}
+                                            strokeWidth={1}
+                                            tipTitle="Clear file"
+                                            tipPosition='bottom'
+                                            onClick={handleClearImage}
+                                        />
+                                    }
+                                    <Icon
+                                        icon={X}
+                                        color='#EFEFEF'
+                                        size={20}
+                                        strokeWidth={1}
+                                        tipTitle="Close"
+                                        tipPosition='bottom'
+                                        onClick={() => setShowBGImportImage(false)}
+                                    />
+                                </div>
+                            }
+                            { showUnsplash && <BackGroundIntegrations onClose={() => setShowUnsplash(false)} source="unsplash" /> }
+                            { showPixabay && <BackGroundIntegrations onClose={() => setShowPixabay(false)} source="pixabay" /> }
                         </div>
 
                         {/* Gradient Tool */}
@@ -465,7 +536,7 @@ const MockLabEditor = () => {
                                 min={0}
                                 max={100}
                                 step={1}
-                                initialValue={96}
+                                initialValue={100}
                                 onValueChange={(opacity) => handleFrameGradientOpacity(opacity)}
                             />
                             <Slider 
@@ -513,7 +584,7 @@ const MockLabEditor = () => {
                                 min={0}
                                 max={100}
                                 step={1}
-                                initialValue={96}
+                                initialValue={100}
                                 onValueChange={(opacity) => handleFrameShadowOpacity(opacity)}
                             />
                             <Slider 
@@ -561,7 +632,7 @@ const MockLabEditor = () => {
                                 min={0}
                                 max={100}
                                 step={1}
-                                initialValue={96}
+                                initialValue={100}
                                 onValueChange={(opacity) => handleFrameSolidColorOpacity(opacity)}
                             />
                         </div>
