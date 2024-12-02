@@ -318,14 +318,15 @@ const MockLabEditor = () => {
                             <p>Shade</p>
                             <div className={styles.EM_panels_shade_featuredImage}>
                                 {selectedDevice.shade.map((shade : Shade, index) => (
-                                    <div key={index} className={styles.EM_panels_shade_image_div} onClick={() => handleMockupShade(shade.featuredSrc)}>
+                                    <div key={index} className={styles.EM_panels_shade_image_div} onClick={() => handleMockupShade(shade.canvasSrc)}>
                                         <Image
                                             src={shade.featuredSrc}
                                             alt={shade.name || "Imported image"}
                                             className={styles.EM_panels_shade_image}
                                             width={77}
                                             height={50}
-                                            loading="lazy"
+                                            // loading="lazy"
+                                            priority
                                         />
                                     </div>
                                 ))}
@@ -408,7 +409,7 @@ const MockLabEditor = () => {
                                 />
                         </div>
 
-                        {/* Frame Overview */}
+                        {/* Mockup Overview */}
                         <div className={styles.EM_panels}>
                             <p>Mockup Overview</p>
                             <div className={styles.EM_panels_deviceOverview}>
@@ -522,7 +523,7 @@ const MockLabEditor = () => {
                                     width={77}
                                     height={50}
                                     loading="lazy"
-                                    onClick={() => handleFrameGradient(image.featuredSrc)}
+                                    onClick={() => handleFrameGradient(image.canvasSrc)}
                                 />
                                 ))}
                                 { mockLabFrame.gradient.length > 5 && (
@@ -570,7 +571,7 @@ const MockLabEditor = () => {
                                     width={77}
                                     height={50}
                                     loading="lazy"
-                                    onClick={() => handleFrameShadow(image.featuredSrc)}
+                                    onClick={() => handleFrameShadow(image.canvasSrc)}
                                 />
                                 ))}
                                 { mockLabFrame.shadow.length > 5 && (
