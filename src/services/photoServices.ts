@@ -34,7 +34,6 @@ export interface Photo {
   
   // Pixabay service
   const PIXABAY_API_KEY = process.env.NEXT_PUBLIC_PIXABAY_API_KEY;
-  console.log(PIXABAY_API_KEY)
   
   const getPixabayPhotos = async (query: string, page: number = 1): Promise<Photo[]> => {
     const response = await fetch(

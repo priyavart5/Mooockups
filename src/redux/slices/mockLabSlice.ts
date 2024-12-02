@@ -159,22 +159,22 @@ const defaultDevice = {
         {
             name: 'Space Grey',
             featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Shade/Featured+Image/Space+Grey.webp',
-            canvasSrc : ''
+            canvasSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Shade/Canvas+Image/Space+Grey.png'
         },
         {
             name: 'Blue',
             featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Shade/Featured+Image/Blue.webp',
-            canvasSrc : ''
+            canvasSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Shade/Canvas+Image/Blue.png'
         },
         {
             name: 'Purple',
             featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Shade/Featured+Image/Purple.webp',
-            canvasSrc : ''
+            canvasSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Shade/Canvas+Image/Purple.png'
         },
         {
             name: 'Starlight',
             featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Shade/Featured+Image/Starlight.webp',
-            canvasSrc : ''
+            canvasSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Shade/Canvas+Image/Starlight.png'
         },
     ],
     Layout : []
@@ -196,7 +196,7 @@ const initialState: MockLabState = {
     mockupPositionX: {position_X_Value: 0},
     mockupPositionY: {position_Y_Value : 0},
 
-    frameBackground: { backgroundSrc: '' },
+    frameBackground: { backgroundSrc: 'transparent' },
     frameGradient: { gradientSrc: ''},
     frameGradientOpacity: { gradientOpacityValue : 1},
     frameGradientScale: { gradientScaleValue : 1},
@@ -264,6 +264,7 @@ const mockLabSlice = createSlice({
     },
 
     setFrameGradient(state, action: PayloadAction<string>) {
+        // console.log(action.payload)
         state.frameGradient.gradientSrc = action.payload;
     },
 

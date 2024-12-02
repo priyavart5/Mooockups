@@ -9,7 +9,14 @@ import Image from 'next/image';
 
 const Canvas = () => {
   const dispatch = useDispatch();
+
   const { file, fileName, width, height } = useSelector((state: RootState) => state.import);
+  // const { gradientSrc } = useSelector((state: RootState) => state.mockLab.frameGradient);
+  // const { shadowSrc } = useSelector((state: RootState) => state.mockLab.frameShadow);
+  // const { shadeSrc } = useSelector((state: RootState) => state.mockLab.mockupShade);
+  // const { backgroundSrc } = useSelector((state: RootState) => state.mockLab.frameBackground);
+  // const { color } = useSelector((state: RootState) => state.mockLab.frameSolidColor);
+
 
   const handleFileUpload = useCallback((file: File) => {
     const reader = new FileReader();
