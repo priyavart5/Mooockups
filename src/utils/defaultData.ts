@@ -53,7 +53,7 @@ export const mockLabFrame = {
         {
             name: 'Galactic Ring - 16',
             featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Gradient/Featured+Image/Galactic+Ring+-+16+1.jpg',
-            canvasSrc: ''
+            canvasSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Gradient/Canvas+Image/Galactic20Ring20-2016.webp'
         },
         {
             name: 'Hero Gradient 34',

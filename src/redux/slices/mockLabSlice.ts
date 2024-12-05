@@ -59,48 +59,26 @@ interface MockupPosition_Y_State{
 // Frame Interfaces
 // ************************
 
-interface FrameBackgroundState {
+interface FrameTransparentState{
+    transparent: boolean;
+}
+
+interface FrameBackgroundState{
+    backgroundType: 'importImage' | 'unsplash' | 'pixabay' | 'gradient' | 'none';
     backgroundSrc: string;
-}
-
-interface FrameGradientState {
-    gradientSrc: string;
-}
-
-interface FrameGradientOpacityState {
-    gradientOpacityValue: number;
-}
-
-interface FrameGradientScaleState {
-    gradientScaleValue: number;
-}
-
-interface FrameGradientRotationState {
-    gradientRotationValue: number;
+    backgroundScale: number,
+    backgroundOpacity: number,
 }
 
 interface FrameShadowState {
     shadowSrc : string;
-}
-
-interface FrameShadowOpacityState {
-    shadowOpacityValue: number;
-}
-
-interface FrameShadowScaleState {
-    shadowScaleValue: number;
-}
-
-interface FrameShadowRotationState {
-    shadowRotationValue: number;
+    shadowScale: number;
+    shadowOpacity: number;
 }
 
 interface FrameSolidColorState{
     color: string;
-}
-
-interface FrameSolidColorOpacityState{
-    colorOpacityValue: number;
+    colorOpacity: number;
 }
 
 interface frameNoiseState{
@@ -130,22 +108,10 @@ interface MockLabState {
     mockupPositionY: MockupPosition_Y_State;
 
     // Frame
+    frameTransparent: FrameTransparentState;
     frameBackground: FrameBackgroundState;
-
-    frameGradient: FrameGradientState;
-    frameGradientOpacity: FrameGradientOpacityState;
-    frameGradientScale: FrameGradientScaleState;
-    frameGradientRotation: FrameGradientRotationState;
-
-
     frameShadow: FrameShadowState;
-    frameShadowOpacity: FrameShadowOpacityState;
-    frameShadowScale: FrameShadowScaleState;
-    frameShadowRotation: FrameShadowRotationState;
-
     frameSolidColor: FrameSolidColorState;
-    frameSolidColorOpacity: FrameSolidColorOpacityState;
-
     frameNoise: frameNoiseState;
     frameBlur: frameBlurState;
 }
@@ -196,22 +162,25 @@ const initialState: MockLabState = {
     mockupPositionX: {position_X_Value: 0},
     mockupPositionY: {position_Y_Value : 0},
 
-    frameBackground: { backgroundSrc: 'transparent' },
-    frameGradient: { gradientSrc: ''},
-    frameGradientOpacity: { gradientOpacityValue : 1},
-    frameGradientScale: { gradientScaleValue : 1},
-    frameGradientRotation: { gradientRotationValue : 1},
 
-    frameShadow: { shadowSrc: ''},
-    frameShadowOpacity: { shadowOpacityValue : 1},
-    frameShadowScale: { shadowScaleValue : 1},
-    frameShadowRotation: { shadowRotationValue : 1},
-
-    frameSolidColor: { color: '#ffffff' },
-    frameSolidColorOpacity: { colorOpacityValue: 1 },
-
-    frameNoise: {noise : 1},
-    frameBlur: {blur : 1},
+    frameTransparent : { transparent: false},
+    frameBackground: { 
+        backgroundType: 'gradient', 
+        backgroundSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Gradient/Canvas+Image/Galactic20Ring20-2016.webp',
+        backgroundScale: 0,
+        backgroundOpacity: 1,
+    },
+    frameShadow: { 
+        shadowSrc: '',
+        shadowScale: 0,
+        shadowOpacity: 0.5,
+    },
+    frameSolidColor: { 
+        color: '#121212', 
+        colorOpacity: 1 
+    },
+    frameNoise: {noise : 0},
+    frameBlur: {blur : 0},
 };
 
 const mockLabSlice = createSlice({
@@ -259,56 +228,63 @@ const mockLabSlice = createSlice({
 
     // Frame Reducer
 
-    setFrameBackground(state, action: PayloadAction<string>) {
+    setFrameTransparent(state, action: PayloadAction<boolean>) {
+        console.log(action.payload)
+        state.frameTransparent.transparent = action.payload;
+    },
+    
+    setFrameBackgroundType(state, action: PayloadAction<'importImage' | 'unsplash' | 'pixabay' | 'gradient' | 'none'>) {
+        console.log(action.payload)
+        state.frameBackground.backgroundType = action.payload;
+    },
+
+    setFrameBackgroundSrc(state, action: PayloadAction<string>) {
+        console.log(action.payload)
         state.frameBackground.backgroundSrc = action.payload;
     },
-
-    setFrameGradient(state, action: PayloadAction<string>) {
-        // console.log(action.payload)
-        state.frameGradient.gradientSrc = action.payload;
+    
+    setFrameBackgroundScale(state, action: PayloadAction<number>) {
+        console.log(action.payload)
+        state.frameBackground.backgroundScale = action.payload;
     },
 
-    setFrameGradientOpacity(state, action: PayloadAction<number>) {
-        state.frameGradientOpacity.gradientOpacityValue = action.payload;
-    },
-
-    setFrameGradientScale(state, action: PayloadAction<number>) {
-        state.frameGradientScale.gradientScaleValue = action.payload;
-    },
-
-    setFrameGradientRotation(state, action: PayloadAction<number>) {
-        state.frameGradientRotation.gradientRotationValue = action.payload;
+    setFrameBackgroundOpacity(state, action: PayloadAction<number>) {
+        console.log(action.payload)
+        state.frameBackground.backgroundOpacity = action.payload;
     },
 
     setFrameShadow(state, action: PayloadAction<string>) {
+        console.log(action.payload)
         state.frameShadow.shadowSrc = action.payload;
     },
 
     setFrameShadowOpacity(state, action: PayloadAction<number>) {
-        state.frameShadowOpacity.shadowOpacityValue = action.payload;
+        console.log(action.payload)
+        state.frameShadow.shadowOpacity = action.payload;
     },
 
     setFrameShadowScale(state, action: PayloadAction<number>) {
-        state.frameShadowScale.shadowScaleValue = action.payload;
-    },
-
-    setFrameShadowRotation(state, action: PayloadAction<number>) {
-        state.frameShadowRotation.shadowRotationValue = action.payload;
+        console.log(action.payload)
+        state.frameShadow.shadowScale = action.payload;
     },
 
     setFrameSolidColor(state, action: PayloadAction<string>) {
+        console.log(action.payload)
         state.frameSolidColor.color = action.payload;
     },
     
     setFrameSolidColorOpacity(state, action: PayloadAction<number>) {
-        state.frameSolidColorOpacity.colorOpacityValue = action.payload;
+        console.log(action.payload)
+        state.frameSolidColor.colorOpacity = action.payload;
     },
 
     setFrameNoise(state, action: PayloadAction<number>) {
+        console.log(action.payload)
         state.frameNoise.noise = action.payload;
     },
 
     setFrameBlur(state, action: PayloadAction<number>) {
+        console.log(action.payload)
         state.frameBlur.blur = action.payload;
     },
   },
@@ -324,15 +300,15 @@ export const {
     setMockupRotation,
     setMockupPositionX,
     setMockupPositionY,
-    setFrameBackground,
-    setFrameGradient,
-    setFrameGradientOpacity,
-    setFrameGradientScale,
-    setFrameGradientRotation,
+
+    setFrameTransparent,
+    setFrameBackgroundType,
+    setFrameBackgroundSrc,
+    setFrameBackgroundScale,
+    setFrameBackgroundOpacity,
     setFrameShadow,
     setFrameShadowOpacity,
     setFrameShadowScale,
-    setFrameShadowRotation,
     setFrameSolidColor,
     setFrameSolidColorOpacity,
     setFrameNoise,

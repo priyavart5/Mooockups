@@ -312,6 +312,22 @@
     flex-direction: column;
     gap: 12px;
 
+    .EF_panels_title_clear{
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+
+        p{
+            font: 400 clamp(12px, 1.5vw, 12px) var(--inter); 
+            color: vars.$off-white;
+        }
+        
+        .EF_panels_clear{
+            cursor: pointer;
+            color: vars.$secondary-grey;
+        }
+    }
+
     p{
         font: 400 clamp(12px, 1.5vw, 12px) var(--inter); 
         color: vars.$off-white;
@@ -381,6 +397,22 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
+
+    .EF_panels_title_clear{
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+
+        p{
+            font: 400 clamp(12px, 1.5vw, 12px) var(--inter); 
+            color: vars.$off-white;
+        }
+        
+        .EF_panels_clear{
+            cursor: pointer;
+            color: vars.$secondary-grey;
+        }
+    }
     
     p{
         font: 400 clamp(12px, 1.5vw, 12px) var(--inter); 
