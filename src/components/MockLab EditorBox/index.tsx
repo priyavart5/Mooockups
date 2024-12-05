@@ -7,6 +7,7 @@ import { GalleryHorizontalEnd, Frame, Ellipsis, ChevronDown, ChevronUp, ImageUp,
 import { mockLabFrame, mockLabMockup, shadow } from '../../utils/defaultData';
 import Slider from '../Slider';
 import InputSlider from '../InputSlider';
+import Icon from '../Icon';
 import BackGroundIntegrations from "../Background Integrations";
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
@@ -20,21 +21,20 @@ import {
     setMockupRotation,
     setMockupPositionX,
     setMockupPositionY,
-    setFrameBackground,
-    setFrameGradient,
-    setFrameGradientOpacity,
-    setFrameGradientScale,
-    setFrameGradientRotation,
+    setFrameTransparent,
+    setFrameBackgroundType,
+    setFrameBackgroundSrc,
+    setFrameBackgroundScale,
+    setFrameBackgroundOpacity,
     setFrameShadow,
     setFrameShadowOpacity,
     setFrameShadowScale,
-    setFrameShadowRotation,
     setFrameSolidColor,
     setFrameSolidColorOpacity,
     setFrameNoise,
     setFrameBlur,
 } from '../../redux/slices/mockLabSlice';
-import Icon from '../Icon';
+
 
 type DeviceCategory = "Phone" | "Tablet";
 
@@ -55,30 +55,45 @@ interface Device {
 
 
 const MockLabEditor = () => {
-
+    
     // Redux Dispatch
     const dispatch = useDispatch();
-
+    
+    // *******************
     // Frame ToolBox
+    // *******************
     const [editorService, setEditorService] = useState<string>('Mockup');
+    const [visibleBGImportImage, setVisibleBGImportImage] = useState(false);
+    const [bgImportImageName, setBgImportImageName] = useState('Import image');
     const [showAllGradient, setShowAllGradient] = useState<boolean>(false);
+    const [selectedGradientImageIndex, setSelectedGradientImageIndex] = useState<number | null>(null);
     const [showAllShadow, setShowAllShadow] = useState<boolean>(false);
-    const [showBGImportImage, setShowBGImportImage] = useState(false);
-    const [showBGImportImageFileName, setShowBGImportImageFileName] = useState('Import image');
-    const [showUnsplash, setShowUnsplash] = useState(false);
-    const [showPixabay, setShowPixabay] = useState(false);
+    const [selectedShadowImageIndex, setSelectedShadowImageIndex] = useState<number | null>(null);
+    const [visibleUnsplash, setVisibleUnsplash] = useState(false);
+    const [visiblePixabay, setVisiblePixabay] = useState(false);
 
+    const [visibleClearBackground, setVisibleClearBackground] = useState(false);
+    const [visibleClearGradient, setVisibleClearGradient] = useState(false);
+    const [visibleClearShadow, setVisibleClearShadow] = useState(false);
+    const [visibleClearSolidColor, setVisibleClearSolidColor] = useState(false);
 
-    // Mockup ToolBox
-    const [deviceToogle, setDeviceToogle] = useState<boolean>(false);
-    const selectedDevice = useSelector((state: RootState) => state.mockLab.mockupSelectedDevice);
+    // Frame Use Selector
     const selectedSolidColor = useSelector((state: RootState) => state.mockLab.frameSolidColor);
+    const { frameTransparent } = useSelector((state: any) => state.mockLab);
 
+
+    // *******************
+    // Mockup ToolBox
+    // *******************
+    const [deviceToogle, setDeviceToogle] = useState<boolean>(false);
+
+    const selectedDevice = useSelector((state: RootState) => state.mockLab.mockupSelectedDevice);
+
+    
     const categoryRefs: Record<DeviceCategory, React.RefObject<HTMLDivElement>> = {
         Phone: useRef<HTMLDivElement>(null),
         Tablet: useRef<HTMLDivElement>(null),
     };
-    
 
     const scrollToCategory = (category: DeviceCategory) => {
         if (categoryRefs[category]?.current) {
@@ -118,21 +133,24 @@ const MockLabEditor = () => {
                     const img = new window.Image();
                     img.src = reader.result as string;
                     img.onload = () => {
-                        dispatch(setFrameBackground(reader.result as string));
-                        setShowBGImportImageFileName(image.name)
+                        dispatch(setFrameTransparent(false));
+                        dispatch(setFrameBackgroundType('importImage'));
+                        dispatch(setFrameBackgroundSrc(reader.result as string));
+                        setBgImportImageName(image.name);
                     };
                 }
             };
-
+            
             reader.readAsDataURL(image);
         }
     };
-
-    const handleClearImage = () => {
+    
+    const handleClearImportImage = () => {
         const ImageInput = document.getElementById('importBGFile') as HTMLInputElement;
         if (ImageInput) ImageInput.value = '';
-        dispatch(setFrameBackground('transparent'));
-        setShowBGImportImageFileName('Import image');
+        dispatch(setFrameBackgroundType('none'));
+        dispatch(setFrameBackgroundSrc(''));
+        setBgImportImageName('Import image');
     };
 
     // ************************
@@ -172,61 +190,35 @@ const MockLabEditor = () => {
     }
 
 
-    // ************************
-    // Frame Functions
-    // ************************
+    // *************************
+    // Clear Button Function
+    // *************************
 
-    const handleFrameBackGround = (background: string) => {
-        dispatch(setFrameBackground(background));
-    }
-
-    const handleFrameGradient = (gradient: string) => {
-        dispatch(setFrameGradient(gradient));
-    }
-
-    const handleFrameGradientOpacity = (opacity: number) => {
-        dispatch(setFrameGradientOpacity(opacity));
-    }
-
-    const handleFrameGradientScale = (scale: number) => {
-        dispatch(setFrameGradientScale(scale));
-    }
-
-    const handleFrameGradientRotation = (rotation: number) => {
-        dispatch(setFrameGradientRotation(rotation));
-    }
-
-    const handleFrameShadow = (shadow: string) => {
-        dispatch(setFrameShadow(shadow));
-    }
-
-    const handleFrameShadowOpacity = (opacity: number) => {
-        dispatch(setFrameShadowOpacity(opacity));
-    }
-
-    const handleFrameShadowScale = (scale: number) => {
-        dispatch(setFrameShadowScale(scale));
-    }
-
-    const handleFrameShadowRotation = (rotation: number) => {
-        dispatch(setFrameShadowRotation(rotation));
-    }
-
-    const handleFrameSolidColor = (color: string) => {
-        dispatch(setFrameSolidColor(color));
-    }
-
-    const handleFrameSolidColorOpacity = (opacity: number) => {
-        dispatch(setFrameSolidColorOpacity(opacity));
-    }
-
-    const handleFrameNoise = (noise: number) => {
-        dispatch(setFrameNoise(noise));
-    }
-
-    const handleFrameBlur = (blur: number) => {
-        dispatch(setFrameBlur(blur));
-    }
+    const handleClearBackground = () => {
+        dispatch(setFrameBackgroundType('none'));
+        dispatch(setFrameBackgroundSrc(''));
+        dispatch(setFrameNoise(0));
+        setVisibleClearBackground(false);
+      };
+      
+      const handleClearGradient = () => {
+        dispatch(setFrameBackgroundType('none'));
+        dispatch(setFrameBackgroundSrc(''));
+        setVisibleClearGradient(false);
+        setSelectedGradientImageIndex(null)
+      };
+      
+      const handleClearShadow = () => {
+        dispatch(setFrameShadow(''));
+        setVisibleClearShadow(false);
+        setSelectedShadowImageIndex(null);
+      };
+      
+      const handleClearSolidColor = () => {
+        dispatch(setFrameSolidColor("#121212"));
+        dispatch(setFrameSolidColorOpacity(1));
+        setVisibleClearSolidColor(false);
+      };
 
     return (
         <>
@@ -438,33 +430,36 @@ const MockLabEditor = () => {
 
                         {/* Background Tool */}
                         <div className={styles.EF_background}>
-                            <p>Background</p>
+                            <div className={styles.EF_panels_title_clear}>
+                                <p className={styles.EF_panels_title}>Background</p>
+                                { visibleClearBackground && <p className={styles.EF_panels_clear} onClick={handleClearBackground}>Clear</p> }
+                            </div>
                             <div className={styles.EF_background_buttons}>
-                                <button onClick={() => handleFrameBackGround('transparent')}>Transparent</button>
+                                <button onClick={() => dispatch(setFrameTransparent(!frameTransparent.transparent))}>Transparent</button>
                                 <button onClick={()=> {
-                                    setShowBGImportImage(true)
-                                    setShowUnsplash(false)
-                                    setShowPixabay(false)
+                                    setVisibleBGImportImage(true)
+                                    setVisibleUnsplash(false)
+                                    setVisiblePixabay(false)
                                 }}>
                                     Import image
                                 </button>
                                 <button onClick={() => {
-                                    setShowBGImportImage(false)
-                                    setShowUnsplash(true)
-                                    setShowPixabay(false)
+                                    setVisibleBGImportImage(false)
+                                    setVisibleUnsplash(true)
+                                    setVisiblePixabay(false)
                                 }}>
                                     Unsplash
                                 </button>
                                 <button onClick={() => {
-                                    setShowBGImportImage(false)
-                                    setShowUnsplash(false)
-                                    setShowPixabay(true)
+                                    setVisibleBGImportImage(false)
+                                    setVisibleUnsplash(false)
+                                    setVisiblePixabay(true)
                                 }}>
                                     Pixabay
                                 </button>
                             </div>
 
-                            { showBGImportImage && 
+                            { visibleBGImportImage && 
                                 <div className={styles.EF_background_imageImport}>
                                     <div className={styles.EF_background_image}>
                                         <Icon
@@ -482,7 +477,7 @@ const MockLabEditor = () => {
                                             onChange={handleBGImageChange}
                                             accept="image/*, video/*"
                                         />
-                                        <label className={styles.EF_background_imageLabel} htmlFor="importBGFile">{showBGImportImageFileName}</label>
+                                        <label className={styles.EF_background_imageLabel} htmlFor="importBGFile">{bgImportImageName}</label>
                                     </div>
                                     {  
                                         <Icon
@@ -492,7 +487,7 @@ const MockLabEditor = () => {
                                             strokeWidth={1}
                                             tipTitle="Clear file"
                                             tipPosition='bottom'
-                                            onClick={handleClearImage}
+                                            onClick={handleClearImportImage}
                                         />
                                     }
                                     <Icon
@@ -502,17 +497,20 @@ const MockLabEditor = () => {
                                         strokeWidth={1}
                                         tipTitle="Close"
                                         tipPosition='bottom'
-                                        onClick={() => setShowBGImportImage(false)}
+                                        onClick={() => setVisibleBGImportImage(false)}
                                     />
                                 </div>
                             }
-                            { showUnsplash && <BackGroundIntegrations onClose={() => setShowUnsplash(false)} source="unsplash" /> }
-                            { showPixabay && <BackGroundIntegrations onClose={() => setShowPixabay(false)} source="pixabay" /> }
+                            { visibleUnsplash && <BackGroundIntegrations onClose={() => {setVisibleUnsplash(false)}} source="unsplash" onSetVisibleClearBackground={() => setVisibleClearBackground(true)} /> }
+                            { visiblePixabay && <BackGroundIntegrations onClose={() => setVisiblePixabay(false)} source="pixabay" onSetVisibleClearBackground={() => setVisibleClearBackground(true)} /> }
                         </div>
 
                         {/* Gradient Tool */}
                         <div className={styles.EF_panels}>
-                            <p>Gradient</p>
+                            <div className={styles.EF_panels_title_clear}>
+                                <p className={styles.EF_panels_title}>Gradient</p>
+                                { visibleClearGradient && <p className={styles.EF_panels_clear} onClick={handleClearGradient}>Clear</p> }
+                            </div>
                             <div className={styles.EF_panels_featuredImage}>
                                 {mockLabFrame.gradient.slice(0, showAllGradient ? mockLabFrame.gradient.length : 5).map((image, index) => (
                                 <Image
@@ -523,7 +521,16 @@ const MockLabEditor = () => {
                                     width={77}
                                     height={50}
                                     loading="lazy"
-                                    onClick={() => handleFrameGradient(image.canvasSrc)}
+                                    onClick={() => {
+                                        dispatch(setFrameTransparent(false));
+                                        dispatch(setFrameBackgroundType('gradient'));
+                                        dispatch(setFrameBackgroundSrc(image.canvasSrc));
+                                        setVisibleClearGradient(true);
+                                        setSelectedGradientImageIndex(index);
+                                    }}
+                                    style={{
+                                        border: selectedGradientImageIndex === index ? "2px solid #5C5C5C" : "none"
+                                    }}
                                 />
                                 ))}
                                 { mockLabFrame.gradient.length > 5 && (
@@ -535,32 +542,27 @@ const MockLabEditor = () => {
                             <Slider 
                                 title="Opacity"
                                 min={0}
-                                max={100}
-                                step={1}
-                                initialValue={100}
-                                onValueChange={(opacity) => handleFrameGradientOpacity(opacity)}
+                                max={1}
+                                step={0.1}
+                                initialValue={1}
+                                onValueChange={(opacity) => dispatch(setFrameBackgroundOpacity(opacity))}
                             />
                             <Slider 
                                 title="Scale"
                                 min={0}
-                                max={100}
-                                step={1}
-                                initialValue={50}
-                                onValueChange={(scale) => handleFrameGradientScale(scale)}
-                            />
-                             <Slider 
-                                title="Rotation"
-                                min={0}
-                                max={360}
-                                step={1}
-                                initialValue={180}
-                                onValueChange={(rotation) => handleFrameGradientRotation(rotation)}
+                                max={0.3}
+                                step={0.1}
+                                initialValue={0}
+                                onValueChange={(scale) => dispatch(setFrameBackgroundScale(scale))}
                             />
                         </div>
 
                         {/* Shadow Tool */}
                         <div className={styles.EF_panels}>
-                            <p>Shadow</p>
+                            <div className={styles.EF_panels_title_clear}>
+                                <p className={styles.EF_panels_title}>Shadow</p>
+                                { visibleClearShadow && <p className={styles.EF_panels_clear} onClick={handleClearShadow}>Clear</p> }
+                            </div>
                             <div className={styles.EF_panels_featuredImage}>
                                 {mockLabFrame.shadow.slice(0, showAllShadow ? mockLabFrame.shadow.length : 5).map((image, index) => (
                                 <Image
@@ -571,7 +573,14 @@ const MockLabEditor = () => {
                                     width={77}
                                     height={50}
                                     loading="lazy"
-                                    onClick={() => handleFrameShadow(image.canvasSrc)}
+                                    onClick={() => {
+                                        dispatch(setFrameShadow(image.canvasSrc));
+                                        setVisibleClearShadow(true);
+                                        setSelectedShadowImageIndex(index);
+                                    }}
+                                    style={{
+                                        border: selectedShadowImageIndex === index ? "2px solid #5C5C5C" : "none"
+                                    }}
                                 />
                                 ))}
                                 { mockLabFrame.shadow.length > 5 && (
@@ -583,32 +592,27 @@ const MockLabEditor = () => {
                             <Slider 
                                 title="Opacity"
                                 min={0}
-                                max={100}
-                                step={1}
-                                initialValue={100}
-                                onValueChange={(opacity) => handleFrameShadowOpacity(opacity)}
+                                max={1}
+                                step={0.1}
+                                initialValue={0.5}
+                                onValueChange={(opacity) => dispatch(setFrameShadowOpacity(opacity))}
                             />
                             <Slider 
                                 title="Scale"
                                 min={0}
-                                max={100}
-                                step={1}
-                                initialValue={50}
-                                onValueChange={(scale) => handleFrameShadowScale(scale)}
-                            />
-                            <Slider 
-                                title="Rotation"
-                                min={0}
-                                max={360}
-                                step={1}
-                                initialValue={180}
-                                onValueChange={(rotation) => handleFrameShadowRotation(rotation)}
+                                max={0.3}
+                                step={0.1}
+                                initialValue={0}
+                                onValueChange={(scale) => dispatch(setFrameShadowScale(scale))}
                             />
                         </div>
 
                         {/* Color Tool */}
                         <div className={styles.EF_panels}>
-                            <p>Solid Color</p>
+                            <div className={styles.EF_panels_title_clear}>
+                                <p className={styles.EF_panels_title}>Solid Color</p>
+                                { visibleClearSolidColor && <p className={styles.EF_panels_clear} onClick={handleClearSolidColor}>Clear</p> }
+                            </div>
                             <div className={styles.EF_panels_solidColor}>
                                 {mockLabFrame.solidColor.map((color, index) => {
                                     return(
@@ -616,7 +620,11 @@ const MockLabEditor = () => {
                                             key={index} 
                                             className={styles.EF_panels_solidColor_selective} 
                                             style={{ backgroundColor: color}}
-                                            onClick={() => handleFrameSolidColor(color)}
+                                            onClick={() => {
+                                                dispatch(setFrameTransparent(false));
+                                                dispatch(setFrameSolidColor(color))
+                                                setVisibleClearSolidColor(true)
+                                            }}
                                             >
                                         </span>
                                     )
@@ -624,17 +632,21 @@ const MockLabEditor = () => {
                                 <input
                                     type="color"
                                     value={selectedSolidColor.color}
-                                    onChange={(e) => handleFrameSolidColor(e.target.value)}
+                                    onChange={(e) => {
+                                        dispatch(setFrameTransparent(false));
+                                        dispatch(setFrameSolidColor(e.target.value))
+                                        setVisibleClearSolidColor(true)
+                                    }}
                                     className={styles.customColorPicker}
                                 />
                             </div>
                             <Slider 
                                 title="Opacity"
                                 min={0}
-                                max={100}
-                                step={1}
-                                initialValue={100}
-                                onValueChange={(opacity) => handleFrameSolidColorOpacity(opacity)}
+                                max={1}
+                                step={0.1}
+                                initialValue={1}
+                                onValueChange={(opacity) => dispatch(setFrameSolidColorOpacity(opacity))}
                             />
                         </div>
 
@@ -647,7 +659,7 @@ const MockLabEditor = () => {
                                     max={1}
                                     step={0.1}
                                     initialValue={0.1}
-                                    onValueChange={(noise) => handleFrameNoise(noise)}
+                                    onValueChange={(noise) => dispatch(setFrameNoise(noise))}
                                 />
                             </div>
                         </div>
@@ -661,7 +673,7 @@ const MockLabEditor = () => {
                                     max={10}
                                     step={0.1}
                                     initialValue={0}
-                                    onValueChange={(blur) => handleFrameBlur(blur)}
+                                    onValueChange={(blur) => dispatch(setFrameBlur(blur))}
                                 />
                             </div>
                         </div>

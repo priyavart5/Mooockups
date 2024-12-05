@@ -7,14 +7,20 @@ import { predefinedQueries } from "../../utils/defaultData";
 import { usePhotoFetch } from "../../hooks/usePhotoFetch";
 
 import { useDispatch } from 'react-redux';
-import { setFrameBackground } from '../../redux/slices/mockLabSlice';
+import { 
+  setFrameTransparent,
+  setFrameBackgroundType,
+  setFrameBackgroundSrc,
+} from '../../redux/slices/mockLabSlice';
 
 interface BackgroundIntegrationProps {
   onClose: () => void;
   source: string;
+  onSetVisibleClearBackground: (visible: boolean) => void;
 }
 
-const BackGroundIntegrations: React.FC<BackgroundIntegrationProps> = ({ onClose, source }) => {
+const BackGroundIntegrations: React.FC<BackgroundIntegrationProps> = ({ onClose, source, onSetVisibleClearBackground }) => {
+
   const dispatch = useDispatch();
 
   const { photos, loading, searchQuery, setSearchQuery, isSearching, setIsSearching, page, fetchPhotos, setPage, error, setPhotos, setError } = usePhotoFetch(source);
@@ -47,8 +53,11 @@ const BackGroundIntegrations: React.FC<BackgroundIntegrationProps> = ({ onClose,
     fetchPhotos(searchQuery, nextPage);
   };
 
-  const handleImageClick = (imageUrl: string) => {
-    dispatch(setFrameBackground(imageUrl));
+  const handleImageClick = (source: any, imageUrl: string) => {
+    dispatch(setFrameTransparent(false));
+    dispatch(setFrameBackgroundType(source));
+    dispatch(setFrameBackgroundSrc(imageUrl));
+    onSetVisibleClearBackground(true);
   };
 
   return (
@@ -114,7 +123,7 @@ const BackGroundIntegrations: React.FC<BackgroundIntegrationProps> = ({ onClose,
                 className={styles.BGI_imageWrapper} 
                 key={photo.id}
                 onClick={() =>
-                  handleImageClick(
+                  handleImageClick(source,
                     source === 'unsplash' ? photo.urls.full : photo.largeImageURL
                   )
                 }
@@ -143,3 +152,4 @@ const BackGroundIntegrations: React.FC<BackgroundIntegrationProps> = ({ onClose,
 };
 
 export default BackGroundIntegrations;
+
