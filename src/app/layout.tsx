@@ -1,6 +1,7 @@
 'use client';
 
 import '../styles/globals.scss';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Inter } from 'next/font/google';
 import { metadata } from './seo';
 import { Provider } from 'react-redux';
@@ -27,6 +28,7 @@ export default function RootLayout({
       <body>
         <Provider store={store}>
           {children}
+          <SpeedInsights />
         </Provider>
       </body>
     </html>
