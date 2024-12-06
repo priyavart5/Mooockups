@@ -29,8 +29,6 @@ import {
     setFrameShadow,
     setFrameShadowOpacity,
     setFrameShadowScale,
-    setFrameSolidColor,
-    setFrameSolidColorOpacity,
     setFrameNoise,
     setFrameBlur,
 } from '../../redux/slices/mockLabSlice';
@@ -63,23 +61,25 @@ const MockLabEditor = () => {
     // Frame ToolBox
     // *******************
     const [editorService, setEditorService] = useState<string>('Mockup');
-    const [visibleBGImportImage, setVisibleBGImportImage] = useState(false);
-    const [bgImportImageName, setBgImportImageName] = useState('Import image');
+    const [visibleBGImportImage, setVisibleBGImportImage] = useState<boolean>(false);
+    const [bgImportImageName, setBgImportImageName] = useState<string>('Import image');
     const [showAllGradient, setShowAllGradient] = useState<boolean>(false);
     const [selectedGradientImageIndex, setSelectedGradientImageIndex] = useState<number | null>(null);
     const [showAllShadow, setShowAllShadow] = useState<boolean>(false);
     const [selectedShadowImageIndex, setSelectedShadowImageIndex] = useState<number | null>(null);
-    const [visibleUnsplash, setVisibleUnsplash] = useState(false);
-    const [visiblePixabay, setVisiblePixabay] = useState(false);
+    const [visibleUnsplash, setVisibleUnsplash] = useState<boolean>(false);
+    const [visiblePixabay, setVisiblePixabay] = useState<boolean>(false);
 
-    const [visibleClearBackground, setVisibleClearBackground] = useState(false);
-    const [visibleClearGradient, setVisibleClearGradient] = useState(false);
-    const [visibleClearShadow, setVisibleClearShadow] = useState(false);
-    const [visibleClearSolidColor, setVisibleClearSolidColor] = useState(false);
+    const [visibleClearBackground, setVisibleClearBackground] = useState<boolean>(false);
+    const [visibleClearGradient, setVisibleClearGradient] = useState<boolean>(false);
+    const [visibleClearShadow, setVisibleClearShadow] = useState<boolean>(false);
+
+    const [visibleBackgroundEffect, setVisibleBackgroundEffect] = useState<boolean>(false);
+    const [visibleGradientEffect, setVisibleGradientEffect] = useState<boolean>(false);
+    const [visibleShadowEffect, setVisibleShadowEffect] = useState<boolean>(false);
 
     // Frame Use Selector
-    const selectedSolidColor = useSelector((state: RootState) => state.mockLab.frameSolidColor);
-    const { frameTransparent } = useSelector((state: any) => state.mockLab);
+    const { frameTransparent, frameBackground, frameShadow } = useSelector((state: any) => state.mockLab);
 
 
     // *******************
@@ -137,6 +137,10 @@ const MockLabEditor = () => {
                         dispatch(setFrameBackgroundType('importImage'));
                         dispatch(setFrameBackgroundSrc(reader.result as string));
                         setBgImportImageName(image.name);
+                        setVisibleBackgroundEffect(true);
+                        setVisibleGradientEffect(false);
+                        dispatch(setFrameBackgroundScale(0));
+                        dispatch(setFrameBackgroundOpacity(1));
                     };
                 }
             };
@@ -151,6 +155,9 @@ const MockLabEditor = () => {
         dispatch(setFrameBackgroundType('none'));
         dispatch(setFrameBackgroundSrc(''));
         setBgImportImageName('Import image');
+        setVisibleBackgroundEffect(false);
+        dispatch(setFrameBackgroundScale(0));
+        dispatch(setFrameBackgroundOpacity(1));
     };
 
     // ************************
@@ -197,28 +204,28 @@ const MockLabEditor = () => {
     const handleClearBackground = () => {
         dispatch(setFrameBackgroundType('none'));
         dispatch(setFrameBackgroundSrc(''));
-        dispatch(setFrameNoise(0));
+        dispatch(setFrameBackgroundScale(0));
+        dispatch(setFrameBackgroundOpacity(1));
         setVisibleClearBackground(false);
-      };
+        setVisibleBackgroundEffect(false);
+    };
       
-      const handleClearGradient = () => {
+    const handleClearGradient = () => {
         dispatch(setFrameBackgroundType('none'));
         dispatch(setFrameBackgroundSrc(''));
+        dispatch(setFrameBackgroundScale(0));
+        dispatch(setFrameBackgroundOpacity(1));
         setVisibleClearGradient(false);
-        setSelectedGradientImageIndex(null)
-      };
+        setSelectedGradientImageIndex(null);
+        setVisibleGradientEffect(false);
+    };
       
-      const handleClearShadow = () => {
+    const handleClearShadow = () => {
         dispatch(setFrameShadow(''));
         setVisibleClearShadow(false);
         setSelectedShadowImageIndex(null);
-      };
-      
-      const handleClearSolidColor = () => {
-        dispatch(setFrameSolidColor("#121212"));
-        dispatch(setFrameSolidColorOpacity(1));
-        setVisibleClearSolidColor(false);
-      };
+        setVisibleShadowEffect(false);
+    };
 
     return (
         <>
@@ -501,8 +508,52 @@ const MockLabEditor = () => {
                                     />
                                 </div>
                             }
-                            { visibleUnsplash && <BackGroundIntegrations onClose={() => {setVisibleUnsplash(false)}} source="unsplash" onSetVisibleClearBackground={() => setVisibleClearBackground(true)} /> }
-                            { visiblePixabay && <BackGroundIntegrations onClose={() => setVisiblePixabay(false)} source="pixabay" onSetVisibleClearBackground={() => setVisibleClearBackground(true)} /> }
+                            { visibleUnsplash && 
+                                <BackGroundIntegrations 
+                                    source="unsplash" 
+                                    onClose={() => {setVisibleUnsplash(false)}} 
+                                    onSetVisibleClearBackground={() => setVisibleClearBackground(true)}
+                                    onSetVisibleEffect={() => {
+                                        setVisibleBackgroundEffect(true);
+                                        setVisibleGradientEffect(false);
+                                        setSelectedGradientImageIndex(null);
+                                        setVisibleClearGradient(false);
+                                    }} 
+                                    /> 
+                                }
+                            { visiblePixabay && 
+                                <BackGroundIntegrations 
+                                    source="pixabay" 
+                                    onClose={() => setVisiblePixabay(false)} 
+                                    onSetVisibleClearBackground={() => setVisibleClearBackground(true)} 
+                                    onSetVisibleEffect={() => {
+                                        setVisibleBackgroundEffect(true);
+                                        setVisibleGradientEffect(false);
+                                        setSelectedGradientImageIndex(null);
+                                        setVisibleClearGradient(false);
+                                    }} 
+                                /> 
+                            }
+                            {   visibleBackgroundEffect && (
+                                    <>
+                                        <Slider 
+                                            title="Opacity"
+                                            min={0}
+                                            max={1}
+                                            step={0.1}
+                                            initialValue={frameBackground.backgroundOpacity}
+                                            onValueChange={(opacity) => dispatch(setFrameBackgroundOpacity(opacity))}
+                                        />
+                                        <Slider 
+                                            title="Scale"
+                                            min={0}
+                                            max={0.3}
+                                            step={0.1}
+                                            initialValue={frameBackground.backgroundScale}
+                                            onValueChange={(scale) => dispatch(setFrameBackgroundScale(scale))}
+                                        />
+                                    </>
+                            )}
                         </div>
 
                         {/* Gradient Tool */}
@@ -527,6 +578,14 @@ const MockLabEditor = () => {
                                         dispatch(setFrameBackgroundSrc(image.canvasSrc));
                                         setVisibleClearGradient(true);
                                         setSelectedGradientImageIndex(index);
+                                        setVisibleGradientEffect(true);
+                                        setVisibleBackgroundEffect(false);
+                                        setVisibleClearBackground(false);
+                                        setVisibleUnsplash(false);
+                                        setVisiblePixabay(false);
+                                        setVisibleBGImportImage(false);
+                                        dispatch(setFrameBackgroundScale(0));
+                                        dispatch(setFrameBackgroundOpacity(1));
                                     }}
                                     style={{
                                         border: selectedGradientImageIndex === index ? "2px solid #5C5C5C" : "none"
@@ -539,22 +598,28 @@ const MockLabEditor = () => {
                                 </button>
                                 )}
                             </div>
-                            <Slider 
-                                title="Opacity"
-                                min={0}
-                                max={1}
-                                step={0.1}
-                                initialValue={1}
-                                onValueChange={(opacity) => dispatch(setFrameBackgroundOpacity(opacity))}
-                            />
-                            <Slider 
-                                title="Scale"
-                                min={0}
-                                max={0.3}
-                                step={0.1}
-                                initialValue={0}
-                                onValueChange={(scale) => dispatch(setFrameBackgroundScale(scale))}
-                            />
+                            {
+                                visibleGradientEffect && (
+                                    <>
+                                        <Slider 
+                                            title="Opacity"
+                                            min={0}
+                                            max={1}
+                                            step={0.1}
+                                            initialValue={frameBackground.backgroundOpacity}
+                                            onValueChange={(opacity) => dispatch(setFrameBackgroundOpacity(opacity))}
+                                        />
+                                        <Slider 
+                                            title="Scale"
+                                            min={0}
+                                            max={0.3}
+                                            step={0.1}
+                                            initialValue={frameBackground.backgroundScale}
+                                            onValueChange={(scale) => dispatch(setFrameBackgroundScale(scale))}
+                                        />
+                                    </>
+                                )
+                            }
                         </div>
 
                         {/* Shadow Tool */}
@@ -577,6 +642,7 @@ const MockLabEditor = () => {
                                         dispatch(setFrameShadow(image.canvasSrc));
                                         setVisibleClearShadow(true);
                                         setSelectedShadowImageIndex(index);
+                                        setVisibleShadowEffect(true);
                                     }}
                                     style={{
                                         border: selectedShadowImageIndex === index ? "2px solid #5C5C5C" : "none"
@@ -589,65 +655,28 @@ const MockLabEditor = () => {
                                 </button>
                                 )}
                             </div>
-                            <Slider 
-                                title="Opacity"
-                                min={0}
-                                max={1}
-                                step={0.1}
-                                initialValue={0.5}
-                                onValueChange={(opacity) => dispatch(setFrameShadowOpacity(opacity))}
-                            />
-                            <Slider 
-                                title="Scale"
-                                min={0}
-                                max={0.3}
-                                step={0.1}
-                                initialValue={0}
-                                onValueChange={(scale) => dispatch(setFrameShadowScale(scale))}
-                            />
-                        </div>
-
-                        {/* Color Tool */}
-                        <div className={styles.EF_panels}>
-                            <div className={styles.EF_panels_title_clear}>
-                                <p className={styles.EF_panels_title}>Solid Color</p>
-                                { visibleClearSolidColor && <p className={styles.EF_panels_clear} onClick={handleClearSolidColor}>Clear</p> }
-                            </div>
-                            <div className={styles.EF_panels_solidColor}>
-                                {mockLabFrame.solidColor.map((color, index) => {
-                                    return(
-                                        <span 
-                                            key={index} 
-                                            className={styles.EF_panels_solidColor_selective} 
-                                            style={{ backgroundColor: color}}
-                                            onClick={() => {
-                                                dispatch(setFrameTransparent(false));
-                                                dispatch(setFrameSolidColor(color))
-                                                setVisibleClearSolidColor(true)
-                                            }}
-                                            >
-                                        </span>
-                                    )
-                                })}
-                                <input
-                                    type="color"
-                                    value={selectedSolidColor.color}
-                                    onChange={(e) => {
-                                        dispatch(setFrameTransparent(false));
-                                        dispatch(setFrameSolidColor(e.target.value))
-                                        setVisibleClearSolidColor(true)
-                                    }}
-                                    className={styles.customColorPicker}
-                                />
-                            </div>
-                            <Slider 
-                                title="Opacity"
-                                min={0}
-                                max={1}
-                                step={0.1}
-                                initialValue={1}
-                                onValueChange={(opacity) => dispatch(setFrameSolidColorOpacity(opacity))}
-                            />
+                            {
+                                visibleShadowEffect && (
+                                    <>
+                                        <Slider 
+                                            title="Opacity"
+                                            min={0}
+                                            max={1}
+                                            step={0.1}
+                                            initialValue={frameShadow.shadowOpacity}
+                                            onValueChange={(opacity) => dispatch(setFrameShadowOpacity(opacity))}
+                                        />
+                                        <Slider 
+                                            title="Scale"
+                                            min={0}
+                                            max={0.3}
+                                            step={0.1}
+                                            initialValue={frameShadow.shadowScale}
+                                            onValueChange={(scale) => dispatch(setFrameShadowScale(scale))}
+                                        />
+                                    </>
+                                )
+                            }
                         </div>
 
                         {/* Noise Tool */}
@@ -658,7 +687,7 @@ const MockLabEditor = () => {
                                     min={0}
                                     max={1}
                                     step={0.1}
-                                    initialValue={0.1}
+                                    initialValue={0}
                                     onValueChange={(noise) => dispatch(setFrameNoise(noise))}
                                 />
                             </div>
@@ -670,8 +699,8 @@ const MockLabEditor = () => {
                             <div>
                                 <InputSlider 
                                     min={0}
-                                    max={10}
-                                    step={0.1}
+                                    max={100}
+                                    step={1}
                                     initialValue={0}
                                     onValueChange={(blur) => dispatch(setFrameBlur(blur))}
                                 />
