@@ -11,15 +11,18 @@ import {
   setFrameTransparent,
   setFrameBackgroundType,
   setFrameBackgroundSrc,
+  setFrameBackgroundScale,
+  setFrameBackgroundOpacity,
 } from '../../redux/slices/mockLabSlice';
 
 interface BackgroundIntegrationProps {
   onClose: () => void;
   source: string;
   onSetVisibleClearBackground: (visible: boolean) => void;
+  onSetVisibleEffect: (visible: boolean) => void;
 }
 
-const BackGroundIntegrations: React.FC<BackgroundIntegrationProps> = ({ onClose, source, onSetVisibleClearBackground }) => {
+const BackGroundIntegrations: React.FC<BackgroundIntegrationProps> = ({ onClose, source, onSetVisibleClearBackground, onSetVisibleEffect }) => {
 
   const dispatch = useDispatch();
 
@@ -58,6 +61,9 @@ const BackGroundIntegrations: React.FC<BackgroundIntegrationProps> = ({ onClose,
     dispatch(setFrameBackgroundType(source));
     dispatch(setFrameBackgroundSrc(imageUrl));
     onSetVisibleClearBackground(true);
+    onSetVisibleEffect(true);
+    dispatch(setFrameBackgroundScale(0));
+    dispatch(setFrameBackgroundOpacity(1));
   };
 
   return (

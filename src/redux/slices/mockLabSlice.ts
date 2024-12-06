@@ -76,11 +76,6 @@ interface FrameShadowState {
     shadowOpacity: number;
 }
 
-interface FrameSolidColorState{
-    color: string;
-    colorOpacity: number;
-}
-
 interface frameNoiseState{
     noise : number;
 }
@@ -111,7 +106,6 @@ interface MockLabState {
     frameTransparent: FrameTransparentState;
     frameBackground: FrameBackgroundState;
     frameShadow: FrameShadowState;
-    frameSolidColor: FrameSolidColorState;
     frameNoise: frameNoiseState;
     frameBlur: frameBlurState;
 }
@@ -175,10 +169,6 @@ const initialState: MockLabState = {
         shadowScale: 0,
         shadowOpacity: 0.5,
     },
-    frameSolidColor: { 
-        color: '#121212', 
-        colorOpacity: 1 
-    },
     frameNoise: {noise : 0},
     frameBlur: {blur : 0},
 };
@@ -229,62 +219,42 @@ const mockLabSlice = createSlice({
     // Frame Reducer
 
     setFrameTransparent(state, action: PayloadAction<boolean>) {
-        console.log(action.payload)
         state.frameTransparent.transparent = action.payload;
     },
     
     setFrameBackgroundType(state, action: PayloadAction<'importImage' | 'unsplash' | 'pixabay' | 'gradient' | 'none'>) {
-        console.log(action.payload)
         state.frameBackground.backgroundType = action.payload;
     },
 
     setFrameBackgroundSrc(state, action: PayloadAction<string>) {
-        console.log(action.payload)
         state.frameBackground.backgroundSrc = action.payload;
     },
     
     setFrameBackgroundScale(state, action: PayloadAction<number>) {
-        console.log(action.payload)
         state.frameBackground.backgroundScale = action.payload;
     },
 
     setFrameBackgroundOpacity(state, action: PayloadAction<number>) {
-        console.log(action.payload)
         state.frameBackground.backgroundOpacity = action.payload;
     },
 
     setFrameShadow(state, action: PayloadAction<string>) {
-        console.log(action.payload)
         state.frameShadow.shadowSrc = action.payload;
     },
 
     setFrameShadowOpacity(state, action: PayloadAction<number>) {
-        console.log(action.payload)
         state.frameShadow.shadowOpacity = action.payload;
     },
 
     setFrameShadowScale(state, action: PayloadAction<number>) {
-        console.log(action.payload)
         state.frameShadow.shadowScale = action.payload;
     },
 
-    setFrameSolidColor(state, action: PayloadAction<string>) {
-        console.log(action.payload)
-        state.frameSolidColor.color = action.payload;
-    },
-    
-    setFrameSolidColorOpacity(state, action: PayloadAction<number>) {
-        console.log(action.payload)
-        state.frameSolidColor.colorOpacity = action.payload;
-    },
-
     setFrameNoise(state, action: PayloadAction<number>) {
-        console.log(action.payload)
         state.frameNoise.noise = action.payload;
     },
 
     setFrameBlur(state, action: PayloadAction<number>) {
-        console.log(action.payload)
         state.frameBlur.blur = action.payload;
     },
   },
@@ -309,8 +279,6 @@ export const {
     setFrameShadow,
     setFrameShadowOpacity,
     setFrameShadowScale,
-    setFrameSolidColor,
-    setFrameSolidColorOpacity,
     setFrameNoise,
     setFrameBlur,
 } = mockLabSlice.actions;

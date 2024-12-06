@@ -23,7 +23,6 @@ const Canvas = () => {
     frameTransparent,
     frameBackground,
     frameShadow,
-    frameSolidColor,
     frameNoise,
     frameBlur,
   } = useSelector((state: RootState) => state.mockLab);
@@ -38,7 +37,7 @@ const Canvas = () => {
           className={styles.frameBackground}
           style={{
             backgroundImage: `url(${frameBackground.backgroundSrc})`, 
-            backgroundColor: frameSolidColor.color || '#121212',
+            backgroundColor: '#121212',
             opacity: frameBackground.backgroundOpacity,
             scale: (frameBackground.backgroundScale + 0.1) * 10,
             filter: `blur(${frameBlur.blur}px)`,
@@ -56,10 +55,10 @@ const Canvas = () => {
             width: '100%',
             height: '100%',
             pointerEvents: 'none',
-            backgroundImage: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><filter id="noise" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="1.5" numOctaves="3" stitchTiles="stitch" result="turbulence"/><feComponentTransfer><feFuncR type="linear" slope="0.2"/><feFuncG type="linear" slope="0.2"/><feFuncB type="linear" slope="0.2"/></feComponentTransfer></filter><rect width="100%" height="100%" filter="url(%23noise)" fill="black" /></svg>')`,
-            mixBlendMode: 'multiply',
+            background: `url(https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/noise.svg) 0% 0% / 40% repeat`,
+            mixBlendMode: 'overlay',
             opacity: frameNoise.noise,
-            filter: `blur(${frameBlur.blur}px)`,
+            backdropFilter: `blur(${frameBlur.blur / 4}px)`,
           }}
         />
       )}

@@ -6,12 +6,13 @@
     "dev": "node loadEnv.js && next dev --turbopack",
     "build": "node loadEnv.js && next build",
     "start": "node loadEnv.js && next start",
-    "lint": "next lint" 
+    "lint": "next lint"
   },
   "dependencies": {
     "@radix-ui/react-slider": "^1.2.1",
     "@reduxjs/toolkit": "^2.3.0",
     "dotenv": "^16.4.5",
+    "html2canvas": "^1.4.1",
     "lucide-react": "^0.456.0",
     "next": "^15.0.3",
     "react": "^18.0.0",
