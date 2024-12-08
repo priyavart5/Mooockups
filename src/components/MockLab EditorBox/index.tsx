@@ -8,13 +8,14 @@ import { mockLabFrame, mockLabMockup, shadow } from '../../utils/defaultData';
 import Slider from '../Slider';
 import InputSlider from '../InputSlider';
 import Icon from '../Icon';
+// import MockupLayout from './MockupLayout';
 import BackGroundIntegrations from "../Background Integrations";
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../redux/store';
+// import { RootState } from '../../redux/store';
 import { 
     setMockupSelectedDevice,
-    setMockupShade,
-    // setMockupLayout,
+    setMockupLayoutSource,
+    // setSelectedMockupLayout,
     setMockupShadow,
     setMockupShadowOpacity,
     setMockupScale,
@@ -38,8 +39,16 @@ type DeviceCategory = "Phone" | "Tablet";
 
 interface Shade {
     name: string;
-    featuredSrc: string;
-    canvasSrc: string;
+    shadeSrc: string;
+    layoutSrc: string;
+}
+
+interface Layout {
+    name: string;
+    x: number;
+    y: number;
+    width: number;
+    height: number;
 }
 
 interface Device {
@@ -48,7 +57,7 @@ interface Device {
     screenPixels: string;
     image: string;
     shade: Shade[];
-    Layout: unknown[];
+    layout: Layout[];
 }
 
 
@@ -64,7 +73,7 @@ const MockLabEditor = () => {
     const [visibleBGImportImage, setVisibleBGImportImage] = useState<boolean>(false);
     const [bgImportImageName, setBgImportImageName] = useState<string>('Import image');
     const [showAllGradient, setShowAllGradient] = useState<boolean>(false);
-    const [selectedGradientImageIndex, setSelectedGradientImageIndex] = useState<number | null>(null);
+    const [selectedGradientImageIndex, setSelectedGradientImageIndex] = useState<number | null>(0);
     const [showAllShadow, setShowAllShadow] = useState<boolean>(false);
     const [selectedShadowImageIndex, setSelectedShadowImageIndex] = useState<number | null>(null);
     const [visibleUnsplash, setVisibleUnsplash] = useState<boolean>(false);
@@ -77,51 +86,6 @@ const MockLabEditor = () => {
     const [visibleBackgroundEffect, setVisibleBackgroundEffect] = useState<boolean>(false);
     const [visibleGradientEffect, setVisibleGradientEffect] = useState<boolean>(false);
     const [visibleShadowEffect, setVisibleShadowEffect] = useState<boolean>(false);
-
-    // Frame Use Selector
-    const { frameTransparent, frameBackground, frameShadow } = useSelector((state: any) => state.mockLab);
-
-
-    // *******************
-    // Mockup ToolBox
-    // *******************
-    const [deviceToogle, setDeviceToogle] = useState<boolean>(false);
-
-    const selectedDevice = useSelector((state: RootState) => state.mockLab.mockupSelectedDevice);
-
-    
-    const categoryRefs: Record<DeviceCategory, React.RefObject<HTMLDivElement>> = {
-        Phone: useRef<HTMLDivElement>(null),
-        Tablet: useRef<HTMLDivElement>(null),
-    };
-
-    const scrollToCategory = (category: DeviceCategory) => {
-        if (categoryRefs[category]?.current) {
-            categoryRefs[category].current.scrollIntoView({ behavior: "smooth" });
-        }
-    };
-
-    const renderDevicesByType = (type: DeviceCategory) => {
-        const key = type.toLowerCase() as keyof typeof mockLabMockup; // Explicit cast
-        const devices = Object.entries(mockLabMockup[key] || {}) as [string, Device][];
-        return devices.map(([_, device], index) => (
-            <div
-                key={index}
-                className={styles.EM_devices_category_device}
-                onClick={() => handleMockupDevice(device)}
-            >
-                <Image
-                    src={device.image}
-                    alt={device.model}
-                    className={styles.EM_devices_category_deviceImage}
-                    width={54}
-                    height={68}
-                    loading="lazy"
-                />
-                <p className={styles.EM_devices_category_deviceModel}>{device.model}</p>
-            </div>
-        ));
-    };
 
     const handleBGImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const image = e.target.files?.[0];
@@ -160,45 +124,62 @@ const MockLabEditor = () => {
         dispatch(setFrameBackgroundOpacity(1));
     };
 
-    // ************************
-    // Mockup Functions
-    // ************************
+
+    // *******************
+    // Mockup ToolBox
+    // *******************
+    const [deviceToogle, setDeviceToogle] = useState<boolean>(false);
+    const [selectedShadeIndex, setSelectedShadeIndex] = useState<number | null>(0);
+
+     // Frame useSelector()
+    const {frameTransparent, 
+        frameBackground, 
+        frameShadow, 
+        mockupSelectedDevice, 
+        // mockupLayout, 
+        // mockupLayoutSource, 
+        mockupScale, 
+        mockupRotation,
+        mockupPosition,
+    } = useSelector((state: any) => state.mockLab);
+
     
-    const handleMockupDevice = (device: Device) => {
-        dispatch(setMockupSelectedDevice(device));
+    const categoryRefs: Record<DeviceCategory, React.RefObject<HTMLDivElement>> = {
+        Phone: useRef<HTMLDivElement>(null),
+        Tablet: useRef<HTMLDivElement>(null),
     };
 
-    const handleMockupShade = (shade: string) => {
-        dispatch(setMockupShade(shade));
+    const scrollToCategory = (category: DeviceCategory) => {
+        if (categoryRefs[category]?.current) {
+            categoryRefs[category].current.scrollIntoView({ behavior: "smooth" });
+        }
     };
 
-    const handleMockupShadow = (shadow: string) => {
-        dispatch(setMockupShadow(shadow));
-    }
-
-    const handleMockupShadowOpacity = (opacity: number) => {
-        dispatch(setMockupShadowOpacity(opacity));
-    }
-
-    const handleMockupScale = (scale: number) => {
-        dispatch(setMockupScale(scale));
-    }
-
-    const handleMockupRotation = (rotation: number) => {
-        dispatch(setMockupRotation(rotation));
-    }
-
-    const handleMockupPositionX = (x: number) => {
-        dispatch(setMockupPositionX(x));
-    }
-
-    const handleMockupPositionY = (y: number) => {
-        dispatch(setMockupPositionY(y));
-    }
+    const renderDevicesByType = (type: DeviceCategory) => {
+        const key = type.toLowerCase() as keyof typeof mockLabMockup; // Explicit cast
+        const devices = Object.entries(mockLabMockup[key] || {}) as [string, Device][];
+        return devices.map(([_, device], index) => (
+            <div
+                key={index}
+                className={styles.EM_devices_category_device}
+                onClick={() => dispatch(setMockupSelectedDevice(device))}
+            >
+                <Image
+                    src={device.image}
+                    alt={device.model}
+                    className={styles.EM_devices_category_deviceImage}
+                    width={54}
+                    height={68}
+                    loading="lazy"
+                />
+                <p className={styles.EM_devices_category_deviceModel}>{device.model}</p>
+            </div>
+        ));
+    };
 
 
     // *************************
-    // Clear Button Function
+    // Frame - Clear Button Function
     // *************************
 
     const handleClearBackground = () => {
@@ -254,19 +235,19 @@ const MockLabEditor = () => {
                         {/* Devices Tool */}
                         <div className={styles.EM_devices}>
                             <div className={styles.EM_devices_selected} onClick={() => setDeviceToogle(!deviceToogle)}>
-                                {selectedDevice && (
+                                {mockupSelectedDevice && (
                                     <>
                                         <Image
-                                            src={selectedDevice.image}
-                                            alt={selectedDevice.model}
+                                            src={mockupSelectedDevice.image}
+                                            alt={mockupSelectedDevice.model}
                                             className={styles.EM_devices_selected_image}
                                             width={28}
                                             height={36}
                                             loading="lazy"
                                         />
                                         <div className={styles.EM_devices_selected_specification}>
-                                            <p className={styles.EM_devices_selected_brand}>{selectedDevice.brand}</p>
-                                            <p className={styles.EM_devices_selected_model}>{selectedDevice.model}</p>
+                                            <p className={styles.EM_devices_selected_brand}>{mockupSelectedDevice.brand}</p>
+                                            <p className={styles.EM_devices_selected_model}>{mockupSelectedDevice.model}</p>
                                         </div>
                                     </>
                                 )}
@@ -316,10 +297,19 @@ const MockLabEditor = () => {
                         <div className={styles.EM_panels}>
                             <p>Shade</p>
                             <div className={styles.EM_panels_shade_featuredImage}>
-                                {selectedDevice.shade.map((shade : Shade, index) => (
-                                    <div key={index} className={styles.EM_panels_shade_image_div} onClick={() => handleMockupShade(shade.canvasSrc)}>
+                                {mockupSelectedDevice.shade.map((shade : Shade, index: any) => (
+                                    <div 
+                                        key={index} 
+                                        className={styles.EM_panels_shade_image_div} 
+                                        style={{
+                                            border: selectedShadeIndex === index ? "2px solid #5C5C5C" : "none"
+                                        }}
+                                        onClick={() => {
+                                            dispatch(setMockupLayoutSource(shade.layoutSrc));
+                                            setSelectedShadeIndex(index);
+                                        }} >
                                         <Image
-                                            src={shade.featuredSrc}
+                                            src={shade.shadeSrc}
                                             alt={shade.name || "Imported image"}
                                             className={styles.EM_panels_shade_image}
                                             width={77}
@@ -331,6 +321,23 @@ const MockLabEditor = () => {
                                 ))}
                             </div>
                         </div>
+
+                        {/* Layout Tool */}
+                        {/* {   mockupLayoutSource && 
+                                <MockupLayout
+                                    layouts={mockupSelectedDevice.layout}
+                                    layoutSrc={mockupLayoutSource.layoutSrc}
+                                    onSelect={(layout:any) => {
+                                        dispatch(setSelectedMockupLayout({
+                                            name: layout.name,
+                                            x: layout.x,
+                                            y: layout.y,
+                                            width: layout.width,
+                                            height: layout.height,
+                                        }));
+                                    }}
+                                />
+                        } */}
 
                         {/* Shadow Tool */}
                         <div className={styles.EM_panels}>
@@ -345,7 +352,7 @@ const MockLabEditor = () => {
                                     width={77}
                                     height={50}
                                     loading="lazy"
-                                    onClick={() => handleMockupShadow(sahdows.featuredSrc)}
+                                    onClick={() => dispatch(setMockupShadow(sahdows.featuredSrc))}
                                 />
                                 ))}
                             </div>
@@ -355,7 +362,7 @@ const MockLabEditor = () => {
                                 max={100}
                                 step={1}
                                 initialValue={100}
-                                onValueChange={(opacity) => handleMockupShadowOpacity(opacity)}
+                                onValueChange={(opacity) => dispatch(setMockupShadowOpacity(opacity))}
                             />
                         </div>
 
@@ -365,10 +372,10 @@ const MockLabEditor = () => {
                             <div>
                                 <InputSlider 
                                     min={0}
-                                    max={1}
+                                    max={10}
                                     step={0.1}
-                                    initialValue={0.1}
-                                    onValueChange={(scale) => handleMockupScale(scale)}
+                                    initialValue={mockupScale.scale}
+                                    onValueChange={(scale) => dispatch(setMockupScale(scale))}
                                 />
                             </div>
                         </div>
@@ -381,30 +388,37 @@ const MockLabEditor = () => {
                                     min={0}
                                     max={360}
                                     step={1}
-                                    initialValue={180}
-                                    onValueChange={(rotation) => handleMockupRotation(rotation)}
+                                    initialValue={mockupRotation.rotation}
+                                    onValueChange={(rotation) => dispatch(setMockupRotation(rotation))}
                                 />
                             </div>
                         </div>
 
                         {/* Position Tool */}
                         <div className={styles.EM_panels}>
-                            <p>Position</p>
+                            <div className={styles.EM_panels_title_clear}>
+                                <p className={styles.EM_panels_title}>Position</p>
+                                <p className={styles.EM_panels_reset} onClick={ () =>{
+                                    dispatch(setMockupPositionX(0))
+                                    dispatch(setMockupPositionY(0))
+                                }
+                                }>Reset</p>
+                            </div>
                                 <Slider 
                                     title="x - Axis"
-                                    min={0}
+                                    min={-100}
                                     max={100}
                                     step={1}
-                                    initialValue={50}
-                                    onValueChange={(x) => handleMockupPositionX(x)}
+                                    initialValue={mockupPosition.position_X}
+                                    onValueChange={(x) => dispatch(setMockupPositionX(x))}
                                 />
                                 <Slider 
                                     title="y - Axis"
-                                    min={0}
+                                    min={-100}
                                     max={100}
                                     step={1}
-                                    initialValue={50}
-                                    onValueChange={(y) => handleMockupPositionY(y)}
+                                    initialValue={mockupPosition.position_Y}
+                                    onValueChange={(y) => dispatch(setMockupPositionY(y))}
                                 />
                         </div>
 
@@ -414,11 +428,11 @@ const MockLabEditor = () => {
                             <div className={styles.EM_panels_deviceOverview}>
                                 <span className={styles.EM_panels_deviceOverview_span}>
                                     <p className={styles.EM_panels_deviceOverview_key}>Device</p>
-                                    <p className={styles.EM_panels_deviceOverview_value}>{selectedDevice.brand} {selectedDevice.model}</p>
+                                    <p className={styles.EM_panels_deviceOverview_value}>{mockupSelectedDevice.brand} {mockupSelectedDevice.model}</p>
                                 </span>
                                 <span className={styles.EM_panels_deviceOverview_span}>
                                     <p className={styles.EM_panels_deviceOverview_key}>Screen Pixels</p>
-                                    <p className={styles.EM_panels_deviceOverview_value}>{selectedDevice.screenPixels}</p>
+                                    <p className={styles.EM_panels_deviceOverview_value}>{mockupSelectedDevice.screenPixels}</p>
                                 </span>
                             </div>
                         </div>
@@ -729,6 +743,6 @@ const MockLabEditor = () => {
         </div>
         </>
     )
-}
+};
 
 export default MockLabEditor;
