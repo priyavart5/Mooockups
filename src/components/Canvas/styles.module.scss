@@ -1,12 +1,48 @@
 @use '../../styles/variables' as vars;
 
+
+.frame{
+    will-change: aspect-ratio, font-size, width, height, flex-direction;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    container-type: size;
+    container-name: frame-container;
+}
+
 .canvas {
   position: relative;
   width: 100%;
   height: 100%;
   overflow: hidden;
   border-radius: 12px;
-  border: 2px solid vars.$primary-grey;
+  // border: 2px solid vars.$primary-grey;
+
+  .canvas>.canvasSafeArea{
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  .previewFrame{
+    border-radius: 10px;
+    position: absolute;
+    inset: 0;
+    max-height: 100%;
+    margin: auto;
+    outline: solid 1px rgba(var(--primary), .12);
+    overflow: hidden;
+  }
+
+  .frameContent{
+    width: 100%;
+    height: 100%;
+    @container frame-container (width > 0px) {
+      .frame .frame-content {
+          font-size: calc((100cqw + 100cqh) / 150);
+      }
+    }
+  }
 }
 
 .frameGradient,
@@ -34,6 +70,8 @@
   background-repeat: no-repeat;
   background-position: center;
   transition: all 0.3s ease-in-out;
+  object-fit: cover;
+  overflow: hidden;
 }
 
 .frameShadow {
@@ -46,6 +84,22 @@
   background-repeat: no-repeat;
   background-position: center;
   transition: all 0.3s ease-in-out;
+}
+
+.mockupLayout, .mockupScreen{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.layoutSrc{
+  width: 100%;
+  height: auto;
 }
 
 .EF_panels_image{

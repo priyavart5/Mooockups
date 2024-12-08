@@ -5,52 +5,50 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 // ************************
 // Mockup Interfaces
 // ************************
+
+interface Shade {
+    name: string;
+    shadeSrc: string;
+    layoutSrc: string;
+}
+
+interface MockupSelectedLayoutState {
+    name: string;
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+}
+
 interface MockupDeviceState{
     brand: string;
     model: string;
     screenPixels: string;
     image: string;
     shade: Shade[];
-    Layout: unknown[];
+    layout: MockupSelectedLayoutState[];
 }
 
-interface Shade {
-    name: string;
-    featuredSrc: string;
-    canvasSrc: string;
-}
-
-
-interface MockupShadeState {
-    shadeSrc: string;
-}
-
-interface MockupLayoutState {
+interface MockupLayoutSourceState {
     layoutSrc: string;
 }
 
 interface MockupShadowState {
-    shadowValue: string;
-}
-
-interface MockupShadowOpacityState {
-    shadowOpacityValue: number;
+    shadow: string;
+    shadowOpacity: number;
 }
 
 interface MockupScaleState {
-    scaleValue: number;
+    scale: number;
 }
 
 interface MockupRotationState{
-    rotationValue: number;
+    rotation: number;
 }
 
-interface MockupPosition_X_State{
-    position_X_Value: number;
-}
-  
-interface MockupPosition_Y_State{
-    position_Y_Value: number;
+interface MockupPositionState{
+    position_X: number;
+    position_Y: number;
 }
 
 
@@ -87,20 +85,12 @@ interface frameBlurState{
 interface MockLabState {
     // Mockup
     mockupSelectedDevice: MockupDeviceState;
-
-    mockupShade: MockupShadeState;
-
-    mockupLayout: MockupLayoutState;
-
+    mockupLayoutSource: MockupLayoutSourceState;
+    mockupSelectedLayout: MockupSelectedLayoutState;
     mockupShadow: MockupShadowState;
-    mockupShadowOpacity: MockupShadowOpacityState;
-
     mockupScale: MockupScaleState;
-
     mockupRotation: MockupRotationState;
-
-    mockupPositionX: MockupPosition_X_State;
-    mockupPositionY: MockupPosition_Y_State;
+    mockupPosition: MockupPositionState
 
     // Frame
     frameTransparent: FrameTransparentState;
@@ -114,47 +104,77 @@ const defaultDevice = {
     brand : 'Apple',
     model : 'iPad Mini',
     screenPixels : '1488 x 2266',
-    image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Shade/Featured+Image/Space+Grey.webp',
+    image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Space+Grey/space-grey.webp',
     shade : [
         {
-            name: 'Space Grey',
-            featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Shade/Featured+Image/Space+Grey.webp',
-            canvasSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Shade/Canvas+Image/Space+Grey.png'
-        },
-        {
             name: 'Blue',
-            featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Shade/Featured+Image/Blue.webp',
-            canvasSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Shade/Canvas+Image/Blue.png'
+            shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Blue/blue.webp',
+            layoutSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Blue/blue.png'
         },
         {
             name: 'Purple',
-            featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Shade/Featured+Image/Purple.webp',
-            canvasSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Shade/Canvas+Image/Purple.png'
+            shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Purple/purple.webp',
+            layoutSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Purple/purple.png'
+        },
+        {
+            name: 'Space Grey',
+            shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Space+Grey/space-grey.webp',
+            layoutSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Space+Grey/space-grey.png'
         },
         {
             name: 'Starlight',
-            featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Shade/Featured+Image/Starlight.webp',
-            canvasSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Shade/Canvas+Image/Starlight.png'
+            shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Starlight/starlight.webp',
+            layoutSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Starlight/starlight.png'
         },
     ],
-    Layout : []
+    layout : [
+        {
+            name: "Center Layout",
+            x: 100,
+            y: 200,
+            width: 500,
+            height: 700,
+            rotation: 90,
+        },
+        {
+            name: "Top Left Layout",
+            x: 0,
+            y: 0,
+            width: 500,
+            height: 700,
+            rotation: 180,
+        },
+        {
+            name: 'bottom-left',
+            x: 0,
+            y: 100,
+            width: 500,
+            height: 700,
+            rotation: 230,
+        },
+    ]
 };
 
 const initialState: MockLabState = {
     mockupSelectedDevice: defaultDevice,
-
-    mockupShade: { shadeSrc: '' },
-
-    mockupLayout: { layoutSrc: '' },
-
-    mockupShadow: { shadowValue: '' },
-    mockupShadowOpacity: { shadowOpacityValue: 1 },
-
-    mockupScale: { scaleValue: 1 },
-    mockupRotation: { rotationValue: 0 },
-
-    mockupPositionX: {position_X_Value: 0},
-    mockupPositionY: {position_Y_Value : 0},
+    mockupLayoutSource: { layoutSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Blue/blue.png' },
+    mockupSelectedLayout: { 
+        name: "Center layout",
+        x: 100,
+        y: 200,
+        width: 500,
+        height: 700
+    },
+    mockupShadow: { 
+        shadow: '',
+        shadowOpacity: 1,
+    },
+    mockupScale: { scale: 3 },
+    mockupRotation: { rotation: 0 },
+    mockupPosition: {
+        position_X: 0,
+        position_Y: 0,
+    },
 
 
     frameTransparent : { transparent: false},
@@ -183,36 +203,36 @@ const mockLabSlice = createSlice({
         state.mockupSelectedDevice = action.payload;
     },
 
-    setMockupShade(state, action: PayloadAction<string>) {
-        state.mockupShade.shadeSrc = action.payload;
+    setMockupLayoutSource(state, action: PayloadAction<string>){
+        state.mockupLayoutSource.layoutSrc = action.payload;
     },
-
-    setMockupLayout(state, action: PayloadAction<string>) {
-        state.mockupLayout.layoutSrc = action.payload;
+    
+    setSelectedMockupLayout(state, action: PayloadAction<MockupSelectedLayoutState>) {
+        state.mockupSelectedLayout = action.payload;
     },
 
     setMockupShadow(state, action: PayloadAction<string>) {
-        state.mockupShadow.shadowValue = action.payload;
+        state.mockupShadow.shadow = action.payload;
     },
 
     setMockupShadowOpacity(state, action: PayloadAction<number>) {
-        state.mockupShadowOpacity.shadowOpacityValue = action.payload;
+        state.mockupShadow.shadowOpacity = action.payload;
     },
 
     setMockupScale(state, action: PayloadAction<number>) {
-        state.mockupScale.scaleValue = action.payload;
+        state.mockupScale.scale = action.payload;
     },
 
     setMockupRotation(state, action: PayloadAction<number>) {
-        state.mockupRotation.rotationValue = action.payload;
+        state.mockupRotation.rotation = action.payload;
     },
 
     setMockupPositionX(state, action: PayloadAction<number>) {
-        state.mockupPositionX.position_X_Value = action.payload;
+        state.mockupPosition.position_X = action.payload;
     },
 
     setMockupPositionY(state, action: PayloadAction<number>) {
-        state.mockupPositionY.position_Y_Value = action.payload;
+        state.mockupPosition.position_Y = action.payload;
     },
 
 
@@ -262,8 +282,8 @@ const mockLabSlice = createSlice({
 
 export const {
     setMockupSelectedDevice,
-    setMockupShade,
-    setMockupLayout,
+    setMockupLayoutSource,
+    setSelectedMockupLayout,
     setMockupShadow,
     setMockupShadowOpacity,
     setMockupScale,

@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import styles from "./styles.module.scss";
 import { debounce } from "../../lib/debounce";
 
@@ -21,7 +21,13 @@ const Slider: React.FC<SliderProps> = ({
     onValueChange, 
     debounceDelay = 300,
 }) => {
+
+
     const [value, setValue] = useState(initialValue);
+
+    useEffect(() => {
+        setValue(initialValue);
+    }, [initialValue]);
 
     const debouncedValueChange = useMemo(() => {
         if (onValueChange) {
@@ -50,7 +56,7 @@ const Slider: React.FC<SliderProps> = ({
                 onChange={handleInputChange}
                 className={styles.slider}
                 style={{
-                    background: `linear-gradient(to right, #5C5C5C 0%, #5C5C5C ${(value / max) * 100}%, #262626 ${(value / max) * 100}%, #262626 100%)`,
+                    background: title === 'x - Axis' || title === 'y - Axis' ? '' :`linear-gradient(to right, #5C5C5C 0%, #5C5C5C ${(value / max) * 100}%, #262626 ${(value / max) * 100}%, #262626 100%)`,
                 }}
             />
         </div>
