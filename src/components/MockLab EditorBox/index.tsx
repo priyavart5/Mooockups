@@ -141,6 +141,8 @@ const MockLabEditor = () => {
         mockupScale, 
         mockupRotation,
         mockupPosition,
+        frameNoise,
+        frameBlur
     } = useSelector((state: any) => state.mockLab);
 
     
@@ -374,7 +376,7 @@ const MockLabEditor = () => {
                                     min={0}
                                     max={10}
                                     step={0.1}
-                                    initialValue={mockupScale.scale}
+                                    value={mockupScale.scale}
                                     onValueChange={(scale) => dispatch(setMockupScale(scale))}
                                 />
                             </div>
@@ -388,7 +390,7 @@ const MockLabEditor = () => {
                                     min={0}
                                     max={360}
                                     step={1}
-                                    initialValue={mockupRotation.rotation}
+                                    value={mockupRotation.rotation}
                                     onValueChange={(rotation) => dispatch(setMockupRotation(rotation))}
                                 />
                             </div>
@@ -701,7 +703,7 @@ const MockLabEditor = () => {
                                     min={0}
                                     max={1}
                                     step={0.1}
-                                    initialValue={0}
+                                    value={frameNoise.noise}
                                     onValueChange={(noise) => dispatch(setFrameNoise(noise))}
                                 />
                             </div>
@@ -715,7 +717,7 @@ const MockLabEditor = () => {
                                     min={0}
                                     max={100}
                                     step={1}
-                                    initialValue={0}
+                                    value={frameBlur.blur}
                                     onValueChange={(blur) => dispatch(setFrameBlur(blur))}
                                 />
                             </div>

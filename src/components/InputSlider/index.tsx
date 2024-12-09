@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useMemo } from "react";
 import styles from "./styles.module.scss";
 import { debounce } from "../../lib/debounce"; // Import your debounce utility
 
@@ -6,7 +6,7 @@ interface InputSliderProps {
     min: number;
     max: number;
     step?: number;
-    initialValue?: number;
+    value: number; // Changed from initialValue to value to make it controlled
     onValueChange?: (value: number) => void;
     debounceDelay?: number; // Optional debounce delay
 }
@@ -15,12 +15,10 @@ const InputSlider: React.FC<InputSliderProps> = ({
     min, 
     max, 
     step = 1, 
-    initialValue = min, 
+    value, 
     onValueChange, 
-    debounceDelay = 300, // Default debounce delay
+    debounceDelay = 1, // Default debounce delay
 }) => {
-    const [value, setValue] = useState(initialValue);
-
     // Memoize the debounced onValueChange function
     const debouncedValueChange = useMemo(() => {
         if (onValueChange) {
@@ -30,15 +28,20 @@ const InputSlider: React.FC<InputSliderProps> = ({
     }, [onValueChange, debounceDelay]);
 
     const handleValueChange = (newValue: number) => {
-        setValue(newValue);
-        if (debouncedValueChange) {
-            debouncedValueChange(newValue);
+        if (onValueChange) {
+            if (debouncedValueChange) {
+                debouncedValueChange(newValue);
+            } else {
+                onValueChange(newValue);
+            }
         }
     };
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const newValue = parseFloat(e.target.value);
-        handleValueChange(newValue);
+        if (!isNaN(newValue) && newValue >= min && newValue <= max) {
+            handleValueChange(newValue);
+        }
     };
 
     return (
