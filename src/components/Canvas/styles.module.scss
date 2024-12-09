@@ -86,8 +86,73 @@
   transition: all 0.3s ease-in-out;
 }
 
-.mockupLayout, .mockupScreen{
-  position: absolute;
+// .mockupLayout{
+//   position: relative;
+//   top: 50%;
+//   left: 50%;
+//   transform: translate(-50%, -50%);
+//   transition: all 0.3s ease-in-out;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+
+//   .layoutSrc{
+//     width: 100%;
+//     height: auto;
+//   }
+// }
+
+.mockupWrapper {
+  position: absolute; /* Ensures the wrapper is centered */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .mockupLayout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease-in-out;
+    width: max-content;
+    height: auto;
+  
+    .corner {
+      position: absolute;
+      pointer-events: auto;
+      cursor: grab;
+      z-index: 11;
+      transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out; 
+      opacity: 0.4;
+      color: vars.$off-white; 
+    }
+    
+    .corner:hover {
+      opacity: 0.8;
+      transform: scale(1.2);
+    }
+
+    .topRight {
+      top: -20px;
+      right: -20px;
+      rotate: 90deg;
+    }
+    
+    .bottomRight {
+      bottom: -20px;
+      right: -20px;
+      rotate: 180deg;
+    }
+  }
+  
+}
+
+.mockupScreen{
+  position: relative;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -97,12 +162,6 @@
   justify-content: center;
 }
 
-.layoutSrc{
-  width: 100%;
-  height: auto;
-}
 
-.EF_panels_image{
-  width: 100%;
-  height: 100%;
-}
+
+
