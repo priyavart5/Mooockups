@@ -1,5 +1,6 @@
 'use client'
 
+import {useRef} from 'react';
 import styles from  './styles.module.scss';
 
 import Canvas from '../../components/Canvas';
@@ -14,6 +15,7 @@ import { RootState } from '../../redux/store';
 
 const MockLab = () => {
 
+  const canvasRef = useRef<HTMLDivElement | null>(null);
   const isPreview = useSelector((state: RootState) => state.preview.isPreview);
 
   return (
@@ -22,13 +24,13 @@ const MockLab = () => {
         <Docks />
       </div>
       <div className={styles.mockLab_canvas}>
-        <Canvas />
+        <Canvas ref={canvasRef} />
       </div>
       {!isPreview && (
         <div className={styles.mockLab_toolBox}>
           <Import />
           <EditorBox />
-          <Export />
+          <Export canvasRef={canvasRef} />
         </div>
       )}
     </div>

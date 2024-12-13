@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, forwardRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Image from 'next/image';
 import { RootState } from '../../redux/store';
@@ -9,7 +9,12 @@ import { Tooltip } from 'react-tippy';
 import 'react-tippy/dist/tippy.css';
 
 
-const Canvas = () => {
+const Canvas = forwardRef<HTMLDivElement>((_, ref) => {
+
+  // const canvasRef = useRef<HTMLDivElement>(null);
+
+  const [imageLoaded, setImageLoaded] = useState(false);
+
 
   // Redux Dispatch
   const dispatch = useDispatch();
@@ -81,28 +86,64 @@ const Canvas = () => {
     };
   }, [isDragging, mockupScale.scale, mockupRotation.rotation]);
 
+  useEffect(() => {
+    const img = new window.Image();
+    img.src = frameBackground.backgroundSrc;
+  
+    img.onload = () => {
+      setImageLoaded(true); // Set the state to true once the image is loaded
+    };
+  
+    img.onerror = () => {
+      console.error("Failed to load background image from S3.");
+      setImageLoaded(false);
+    };
+  }, [frameBackground.backgroundSrc]);
+
+  // const [scale, setScale] = useState(1);
+  const scale = 1;
+
+  const frameWidth = 1920; // Set the default width
+  const frameHeight = 1080; // Set the default height
+
+  // useEffect(() => {
+  //   const resizeFrame = () => {
+  //     if (ref && ref.current) {
+  //       const parent = ref.current.parentElement;
+  //       if (parent) {
+  //         const widthRatio = parent.clientWidth / frameWidth;
+  //         const heightRatio = parent.clientHeight / frameHeight;
+  //         setScale(Math.min(widthRatio, heightRatio));
+  //       }
+  //     }
+  //   };
+
+  //   window.addEventListener('resize', resizeFrame);
+  //   resizeFrame();
+
+  //   return () => window.removeEventListener('resize', resizeFrame);
+  // }, [frameWidth, frameHeight, ref]);
+
 
   return (
-    <div className={styles.canvas} >
-
-      <div className={styles.canvasSafeArea}>
-
+    <>
       <div 
-        className={`${styles.frame} ${styles.previewFrame}`}
+        className={styles.previewFrame}
+        ref={ref}
         style={{
-          aspectRatio: 16/9,
-          transform: 'none',
-          transformOrigin: '50% 50% 0px',
+          transform: `scale(${scale})`,
+          width: `${frameWidth}px`,
+          height: `${frameHeight}px`,
+          aspectRatio: 16/9
         }}
       >
-
         {/* Unified Frame Background */}
-        {!frameTransparent.transparent && (
+        {!frameTransparent.transparent && imageLoaded && (
           <div
             className={styles.frameBackground}
             style={{
+              backgroundColor: '#fff',
               backgroundImage: `url(${frameBackground.backgroundSrc})`, 
-              backgroundColor: '#121212',
               opacity: frameBackground.backgroundOpacity,
               scale: (frameBackground.backgroundScale + 0.1) * 10,
               filter: `blur(${frameBlur.blur}px)`,
@@ -123,7 +164,6 @@ const Canvas = () => {
               background: `url(https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/noise.svg) 0% 0% / 40% repeat`,
               mixBlendMode: 'overlay',
               opacity: frameNoise.noise,
-              backdropFilter: `blur(${frameBlur.blur / 4}px)`,
               overflow: 'hidden',
             }}
           />
@@ -233,12 +273,10 @@ const Canvas = () => {
             }}
           />
         )}
-        </div>
       </div>
-      
-
-    </div>
+    </>
   );
-};
+});
 
+Canvas.displayName = 'Canvas';
 export default Canvas;

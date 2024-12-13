@@ -6,8 +6,10 @@ import styles from './styles.module.scss';
 import Icon from '../Icon';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
+// import html2canvas from 'html2canvas';
+import { toPng, toJpeg, toBlob,  } from 'html-to-image';
 
-const Export = () => {
+const Export = ({ canvasRef }: { canvasRef: React.RefObject<HTMLDivElement> }) => {
   const { file, width: originalWidth, height: originalHeight } = useSelector(
     (state: RootState) => state.import
   );
@@ -58,53 +60,63 @@ const Export = () => {
   const currentDimensions = calculateDimensions(getMultiplier(selectedSize));
 
   // Export the canvas
-  const handleExport = () => {
-    if (!file) {
-      alert('No image to export!');
+  const handleExport = async () => {
+    if (!canvasRef.current) {
+      alert('Canvas not found!');
       return;
     }
-
-    // Create a canvas element
-    const canvas = document.createElement('canvas');
-    const context = canvas.getContext('2d');
-    if (!context) return;
-
-    // Set canvas dimensions
-    canvas.width = currentDimensions.width;
-    canvas.height = currentDimensions.height;
-
-    // Load the image into the canvas
-    const img = new Image();
-    img.onload = () => {
-      context.drawImage(img, 0, 0, canvas.width, canvas.height);
-
-      // Get the image data in the desired format
-      const mimeType =
-        selectedFormat === 'JPG'
-          ? 'image/jpeg'
-          : selectedFormat === 'WEBP'
-          ? 'image/webp'
-          : 'image/png';
-
-      // Trigger download
-      canvas.toBlob(
-        (blob) => {
-          if (blob) {
-            const url = URL.createObjectURL(blob);
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = `mockup.${selectedFormat.toLowerCase()}`;
-            link.click();
-            URL.revokeObjectURL(url);
-          }
-        },
-        mimeType,
-        1.0 // Image quality (only applies to JPG and WEBP)
-      );
-    };
-
-    img.src = file;
+  
+    try {
+      let dataUrl: string | Blob | null = null;
+      if (selectedFormat === 'PNG') {
+        dataUrl = await toPng(canvasRef.current, {
+          pixelRatio: getMultiplier(selectedSize), // Adjust image resolution
+          backgroundColor: 'transparent', // Retain transparency
+          // useCors: true,
+        });
+      } else if (selectedFormat === 'JPG') {
+        dataUrl = await toJpeg(canvasRef.current, {
+          pixelRatio: getMultiplier(selectedSize),
+          backgroundColor: 'transparent',
+        });
+      } else if (selectedFormat === 'WEBP') {
+        dataUrl = await toBlob(canvasRef.current, {
+          pixelRatio: getMultiplier(selectedSize),
+        });
+      }
+  
+      if (dataUrl) {
+        let url: string | undefined;
+  
+        // If dataUrl is a string (for PNG/JPEG), create an object URL for download
+        if (typeof dataUrl === 'string') {
+          url = dataUrl;
+        } 
+        // If dataUrl is a Blob (for WEBP), create an object URL for download
+        else if (dataUrl instanceof Blob) {
+          url = URL.createObjectURL(dataUrl);
+        }
+  
+        if (url) {
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = `mockup.${selectedFormat.toLowerCase()}`;
+          link.click();
+          URL.revokeObjectURL(url); // Clean up the object URL
+        } else {
+          throw new Error('Failed to generate download URL');
+        }
+      } else {
+        throw new Error('Failed to generate image');
+      }
+    } catch (error) {
+      console.error('Failed to export canvas:', error);
+      alert('Failed to export the canvas. Please try again.');
+    }
   };
+  
+  
+  
 
   // Copy the image to clipboard
   const handleCopy = () => {
