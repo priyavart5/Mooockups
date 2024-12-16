@@ -3,25 +3,23 @@
 import React, { useState, useRef } from 'react';
 import Image from 'next/image';
 import styles from './styles.module.scss';
-import { GalleryHorizontalEnd, Frame, Ellipsis, ChevronDown, ChevronUp, ImageUp, Minus, X } from 'lucide-react';
-import { mockLabFrame, mockLabMockup, shadow } from '../../utils/defaultData';
+import { GalleryHorizontalEnd, Frame, Ellipsis, ChevronDown, ChevronUp, ImageUp, Minus, X, PencilRuler } from 'lucide-react';
+import { mockLabFrame, mockLabMockup } from '../../utils/defaultData';
 import Slider from '../Slider';
 import InputSlider from '../InputSlider';
 import Icon from '../Icon';
-// import MockupLayout from './MockupLayout';
 import BackGroundIntegrations from "../Background Integrations";
 import { useDispatch, useSelector } from 'react-redux';
-// import { RootState } from '../../redux/store';
 import { 
     setMockupSelectedDevice,
     setMockupLayoutSource,
-    // setSelectedMockupLayout,
-    setMockupShadow,
     setMockupShadowOpacity,
     setMockupScale,
     setMockupRotation,
     setMockupPositionX,
     setMockupPositionY,
+
+    setSelectedFrameLayout,
     setFrameTransparent,
     setFrameBackgroundType,
     setFrameBackgroundSrc,
@@ -36,6 +34,8 @@ import {
 
 
 type DeviceCategory = "Phone" | "Tablet";
+
+type FrameLayoutCategory = "Default" | "Instagram" | "Twitter" | "Dribbble" | "Youtube" | "Pinterest";
 
 interface Shade {
     name: string;
@@ -65,10 +65,25 @@ const MockLabEditor = () => {
     
     // Redux Dispatch
     const dispatch = useDispatch();
+
+    const {
+        frameLayout,
+        frameTransparent, 
+        frameBackground, 
+        frameShadow, 
+        mockupSelectedDevice, 
+        mockupScale, 
+        mockupRotation,
+        mockupPosition,
+        mockupShadow,
+        frameNoise,
+        frameBlur
+    } = useSelector((state: any) => state.mockLab);
     
     // *******************
     // Frame ToolBox
     // *******************
+    const [frameLayoutToogle, setFrameLayoutToogle] = useState<boolean>(false);
     const [editorService, setEditorService] = useState<string>('Mockup');
     const [visibleBGImportImage, setVisibleBGImportImage] = useState<boolean>(false);
     const [bgImportImageName, setBgImportImageName] = useState<string>('Import image');
@@ -124,26 +139,87 @@ const MockLabEditor = () => {
         dispatch(setFrameBackgroundOpacity(1));
     };
 
+    const frameLayoutCategoryRefs: Record<FrameLayoutCategory, React.RefObject<HTMLDivElement>> = {
+        Default: useRef<HTMLDivElement>(null),
+        Instagram: useRef<HTMLDivElement>(null),
+        Twitter: useRef<HTMLDivElement>(null),
+        Dribbble: useRef<HTMLDivElement>(null),
+        Youtube: useRef<HTMLDivElement>(null),
+        Pinterest: useRef<HTMLDivElement>(null),
+    };
+
+    const renderFrameLayoutsByType = (type: FrameLayoutCategory) => {
+        const layoutCategory = mockLabFrame.frameLayout.find((layout) => layout.type === type);
+    
+        if (!layoutCategory) return null;
+    
+        return layoutCategory.typeLayouts.map((device, index) => (
+            <div
+                key={index}
+                className={`${styles.EM_devices_category_device} ${
+                    frameLayout.type === layoutCategory.type &&
+                    frameLayout.name === device.name &&
+                    frameLayout.width === device.width &&
+                    frameLayout.height === device.height
+                        ? styles.EM_devices_category_selectedLayout
+                        : ""
+                }`}
+                onClick={() => {
+                    setSelectedFrameLayout({
+                        type: layoutCategory.type,
+                        name: device.name,
+                        aspectRatio: device.aspectRatio,
+                        width: device.width,
+                        height: device.height,
+                    });
+                    dispatch(
+                        setSelectedFrameLayout({
+                            type: layoutCategory.type,
+                            name: device.name,
+                            aspectRatio: device.aspectRatio,
+                            width: device.width,
+                            height: device.height,
+                        })
+                    );
+                }}
+            >
+                <button className={styles.frameItem}>
+                    <div className={styles.iconWrapper}>
+                        <div className={styles.frameIconDisplay}>
+                            <div
+                                className={styles.frameItemIcon}
+                                style={{ aspectRatio: device.aspectRatio }}
+                            >
+                                <span className={styles.frameTextSpan}>
+                                    {device.width} x {device.height}
+                                    <PencilRuler
+                                        className={styles.frameTextSpanIcon}
+                                        color="#5C5C5C"
+                                        size={16}
+                                        strokeWidth={1.5}
+                                    />
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className={styles.details}>
+                        <p className={styles.frameType}>{device.name}</p>
+                        <p className={styles.frameType}>
+                            {device.width} x {device.height}
+                        </p>
+                    </div>
+                </button>
+            </div>
+        ));
+    };
+    
+
 
     // *******************
     // Mockup ToolBox
     // *******************
     const [deviceToogle, setDeviceToogle] = useState<boolean>(false);
     const [selectedShadeIndex, setSelectedShadeIndex] = useState<number | null>(0);
-
-     // Frame useSelector()
-    const {frameTransparent, 
-        frameBackground, 
-        frameShadow, 
-        mockupSelectedDevice, 
-        // mockupLayout, 
-        // mockupLayoutSource, 
-        mockupScale, 
-        mockupRotation,
-        mockupPosition,
-        frameNoise,
-        frameBlur
-    } = useSelector((state: any) => state.mockLab);
 
     
     const categoryRefs: Record<DeviceCategory, React.RefObject<HTMLDivElement>> = {
@@ -324,48 +400,18 @@ const MockLabEditor = () => {
                             </div>
                         </div>
 
-                        {/* Layout Tool */}
-                        {/* {   mockupLayoutSource && 
-                                <MockupLayout
-                                    layouts={mockupSelectedDevice.layout}
-                                    layoutSrc={mockupLayoutSource.layoutSrc}
-                                    onSelect={(layout:any) => {
-                                        dispatch(setSelectedMockupLayout({
-                                            name: layout.name,
-                                            x: layout.x,
-                                            y: layout.y,
-                                            width: layout.width,
-                                            height: layout.height,
-                                        }));
-                                    }}
-                                />
-                        } */}
-
                         {/* Shadow Tool */}
                         <div className={styles.EM_panels}>
                             <p>Shadow</p>
-                            <div className={styles.EM_panels_shadow_featuredImage}>
-                                {shadow.map((sahdows, index) => (
-                                <Image
-                                    key={index}
-                                    src={sahdows.featuredSrc}
-                                    alt={sahdows.name || "Imported image"}
-                                    className={styles.EM_panels_shadow_image}
-                                    width={77}
-                                    height={50}
-                                    loading="lazy"
-                                    onClick={() => dispatch(setMockupShadow(sahdows.featuredSrc))}
+                            <div>
+                                <InputSlider 
+                                    min={0}
+                                    max={1}
+                                    step={0.1}
+                                    value={mockupShadow.shadowOpacity}
+                                    onValueChange={(opacity) => dispatch(setMockupShadowOpacity(opacity))}
                                 />
-                                ))}
                             </div>
-                            <Slider 
-                                title="Opacity"
-                                min={0}
-                                max={100}
-                                step={1}
-                                initialValue={100}
-                                onValueChange={(opacity) => dispatch(setMockupShadowOpacity(opacity))}
-                            />
                         </div>
 
                         {/* Scale Tool */}
@@ -408,16 +454,16 @@ const MockLabEditor = () => {
                             </div>
                                 <Slider 
                                     title="x - Axis"
-                                    min={-100}
-                                    max={100}
+                                    min={-500}
+                                    max={500}
                                     step={1}
                                     initialValue={mockupPosition.position_X}
                                     onValueChange={(x) => dispatch(setMockupPositionX(x))}
                                 />
                                 <Slider 
                                     title="y - Axis"
-                                    min={-100}
-                                    max={100}
+                                    min={-500}
+                                    max={500}
                                     step={1}
                                     initialValue={mockupPosition.position_Y}
                                     onValueChange={(y) => dispatch(setMockupPositionY(y))}
@@ -450,6 +496,68 @@ const MockLabEditor = () => {
                 editorService === 'Frame' && (
                     <>
                     <div className={styles.EditorFrame}>
+
+                        {/* Layout Tool */}
+                        <div className={styles.EF_layouts}>
+                            <div className={styles.EF_layouts_selected} onClick={() => setFrameLayoutToogle(!frameLayoutToogle)}>
+                                {frameLayout && (
+                                    <>
+                                        <div className={styles.EF_layouts_selected_preview}>
+                                            <div className={styles.EF_layouts_selected_framePreview}>
+                                                <div className={styles.EF_layouts_selected_currentframeIcon} style={{ aspectRatio: frameLayout.aspectRatio }}>
+                                                    <PencilRuler className={styles.frameTextSpanIcon} color="#5C5C5C" size={14} strokeWidth={1.5} />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className={styles.EF_layouts_selected_specification}>
+                                            <p className={styles.EF_layouts_selected_model}>{frameLayout.type} {frameLayout.name}</p>
+                                            <p className={styles.EF_layouts_selected_brand}>{frameLayout.width} x {frameLayout.height}</p>
+                                        </div>
+                                    </>
+                                )}
+                                {!frameLayoutToogle ? (
+                                    <ChevronDown className={styles.EF_layouts_selected_icon} color="#EFEFEF" size={20} />
+                                ) : (
+                                    <ChevronUp className={styles.EF_layouts_selected_icon} color="#EFEFEF" size={20} />
+                                )}
+                            </div>
+
+                            {frameLayoutToogle && (
+                                <>
+
+                                    <div className={styles.EF_layouts_category}>
+                                        {Object.keys(frameLayoutCategoryRefs).map((category, index) => (
+                                            <div
+                                                key={index}
+                                                id={`${category.toLowerCase()}-category`}
+                                                ref={frameLayoutCategoryRefs[category as keyof typeof frameLayoutCategoryRefs]}
+                                                className={styles.EF_layouts_category_section}
+                                            >
+                                                <div className={styles.EF_layouts_category_name_icon}>
+                                                    {
+                                                        mockLabFrame.frameLayout.map((item: any, index: any) => 
+                                                        item.type === category && (
+                                                            <Image 
+                                                            className={styles.EF_layouts_category_icon}
+                                                                key={index} 
+                                                                src={item.typeImage} 
+                                                                alt={`${category} icon`} 
+                                                                width={22} 
+                                                                height={22} 
+                                                            />
+                                                        ))
+                                                    }
+                                                    <p className={styles.EF_layouts_category_name}>{category}</p>
+                                                </div>
+                                                <div className={styles.EF_layouts_category_devices}>
+                                                    {renderFrameLayoutsByType(category as FrameLayoutCategory)}
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </>
+                            )}
+                        </div>
 
                         {/* Background Tool */}
                         <div className={styles.EF_background}>

@@ -1,147 +1,143 @@
 @use '../../styles/variables' as vars;
 
 
-.previewFrame{
-  position: relative;
-  // width: 100%;
-  // height: 100%;
-  // display: flex;
-  // justify-content: center;
-  // align-items: center;
-  // overflow: hidden;
-  // border-radius: 10px;
-}
-
-.canvas {
-  position: relative;
-  width: 100%;
+.canvas{
   height: 100%;
+  width: 100%;
   overflow: hidden;
-  border-radius: vars.$border-radius-xl;
-  display: flex;
-  justify-content: center;
-  align-self: center;
+  border: 1px solid transparent;
+  // padding: 100px;
+  border-radius: 10px;
 
-  
-}
+  .canvasSafeArea{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    border-radius: 10px;
 
-.frameGradient,
-.mockupShade,
-.mockupScreen,
-.mockupLayout,
-.mockupShadow,
-.frameNoise {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.frameBackground{
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  transition: all 0.3s ease-in-out;
-  object-fit: cover;
-  overflow: hidden;
-}
-
-.frameShadow {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  transition: all 0.3s ease-in-out;
-}
-
-// .mockupLayout{
-//   position: relative;
-//   top: 50%;
-//   left: 50%;
-//   transform: translate(-50%, -50%);
-//   transition: all 0.3s ease-in-out;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-
-//   .layoutSrc{
-//     width: 100%;
-//     height: auto;
-//   }
-// }
-
-.mockupWrapper {
-  position: absolute; /* Ensures the wrapper is centered */
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  .mockupLayout {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease-in-out;
-    width: max-content;
-    height: auto;
-  
-    .corner {
+    .previewframe{
+      border-radius: 10px;
       position: absolute;
-      pointer-events: auto;
-      cursor: grab;
-      z-index: 11;
-      transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out; 
-      opacity: 0;
-      color: vars.$off-white;
-    }
-    
-    .corner:hover {
-      opacity: 0.8;
-      transform: scale(1.2);
+      inset: 0;
+      max-height: 100%;
+      margin: auto;
+      // outline: solid 1px rgba(var(--primary), .12);
+      overflow: hidden;
     }
 
-    .topRight {
-      top: -20px;
-      right: -20px;
-      rotate: 90deg;
-    }
-    
-    .bottomRight {
-      bottom: -20px;
-      right: -20px;
-      rotate: 180deg;
+    .frameContent {
+      width: 100%;
+      height: 100%;
+      
+      .canvasBackGround{
+        width: 100%;
+        height: 100%;
+
+        .canvas_frameShadow{
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+          background-repeat: repeat;
+          z-index: 6;
+        }
+
+        .canvas_frameNoise{
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+          background: url('https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/noise.svg');
+          background-size: 40%;
+          background-repeat: repeat;
+          mix-blend-mode: overlay;
+          z-index: 2;
+        }
+
+        .canvas_frameBackground{
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          z-index: 1;
+        }
+      }
+
+      .canvasDevice{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        display: flex;
+        align-items: center;
+        justify-content:center;
+
+        .canvasDevice_layout{
+          z-index: 4;
+        }
+
+        .shadow{
+          position: absolute;
+          width: 500px;
+          height: 320px;
+          z-index: 3;
+                    
+          .shadowLayer{
+            width: 500px;
+            height: 320px;
+            background-color: vars.$black-color;
+          }
+        }
+
+        
+        .corner {
+          position: absolute;
+          pointer-events: auto;
+          cursor: grab;
+          z-index: 11;
+          transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out; 
+          opacity: 0;
+          color: vars.$off-white;
+        }
+        
+        .topRight {
+          position: absolute;
+          top: -20px;
+          right: -20px;
+          rotate: 90deg;
+          width: 50px;
+          height: 50px;
+        }
+
+        .topRight:hover .corner {
+          opacity: 0.8;
+          transform: scale(1.2);
+        }
+        
+        .bottomRight {
+          position: absolute;
+          bottom: -20px;
+          right: -20px;
+          rotate: 180deg;
+          width: 50px;
+          height: 50px
+        }
+
+        .bottomRight:hover .corner {
+          opacity: 0.8;
+          transform: scale(1.2);
+        }
+
+        .canvasDevice_screen{
+          position: absolute;
+          z-index: 5;
+        }
+      }
     }
   }
-  
-}
-
-.mockupScreen{
-  position: relative;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  transition: all 0.3s ease-in-out;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 
-
-
+@media screen and (width < 1600px) and (width > 800px) {
+  .canvas{
+      padding: clamp(88px, 7%, 1000px) clamp(32px, 3%, 1000px);
+  }
+}

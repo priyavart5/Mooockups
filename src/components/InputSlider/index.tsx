@@ -1,14 +1,12 @@
-import React, { useMemo } from "react";
+import React from "react";
 import styles from "./styles.module.scss";
-import { debounce } from "../../lib/debounce"; // Import your debounce utility
 
 interface InputSliderProps {
     min: number;
     max: number;
     step?: number;
-    value: number; // Changed from initialValue to value to make it controlled
+    value: number;
     onValueChange?: (value: number) => void;
-    debounceDelay?: number; // Optional debounce delay
 }
 
 const InputSlider: React.FC<InputSliderProps> = ({ 
@@ -16,24 +14,11 @@ const InputSlider: React.FC<InputSliderProps> = ({
     max, 
     step = 1, 
     value, 
-    onValueChange, 
-    debounceDelay = 1, // Default debounce delay
+    onValueChange,
 }) => {
-    // Memoize the debounced onValueChange function
-    const debouncedValueChange = useMemo(() => {
-        if (onValueChange) {
-            return debounce(onValueChange, debounceDelay);
-        }
-        return undefined;
-    }, [onValueChange, debounceDelay]);
-
     const handleValueChange = (newValue: number) => {
         if (onValueChange) {
-            if (debouncedValueChange) {
-                debouncedValueChange(newValue);
-            } else {
-                onValueChange(newValue);
-            }
+            onValueChange(newValue);
         }
     };
 

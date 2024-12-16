@@ -34,7 +34,6 @@ interface MockupLayoutSourceState {
 }
 
 interface MockupShadowState {
-    shadow: string;
     shadowOpacity: number;
 }
 
@@ -56,6 +55,14 @@ interface MockupPositionState{
 // ************************
 // Frame Interfaces
 // ************************
+
+interface FrameLayoutState{
+    type: string,
+    name: string,
+    aspectRatio: number,
+    width: number,
+    height: number
+}
 
 interface FrameTransparentState{
     transparent: boolean;
@@ -93,6 +100,7 @@ interface MockLabState {
     mockupPosition: MockupPositionState
 
     // Frame
+    frameLayout: FrameLayoutState;
     frameTransparent: FrameTransparentState;
     frameBackground: FrameBackgroundState;
     frameShadow: FrameShadowState;
@@ -166,8 +174,7 @@ const initialState: MockLabState = {
         height: 700
     },
     mockupShadow: { 
-        shadow: '',
-        shadowOpacity: 1,
+        shadowOpacity: 0,
     },
     mockupScale: { scale: 3 },
     mockupRotation: { rotation: 0 },
@@ -177,10 +184,17 @@ const initialState: MockLabState = {
     },
 
 
+    frameLayout : {
+        type: 'Default',
+        name: '',
+        aspectRatio: 16/9,
+        width: 1920,
+        height: 1080,
+    },
     frameTransparent : { transparent: false},
     frameBackground: { 
         backgroundType: 'gradient', 
-        backgroundSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Gradient/Canvas+Image/Galactic20Ring20-2016.webp',
+        backgroundSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Gradient/Canvas+Image/Spectral20Light20-2050.webp',
         backgroundScale: 0,
         backgroundOpacity: 1,
     },
@@ -211,10 +225,6 @@ const mockLabSlice = createSlice({
         state.mockupSelectedLayout = action.payload;
     },
 
-    setMockupShadow(state, action: PayloadAction<string>) {
-        state.mockupShadow.shadow = action.payload;
-    },
-
     setMockupShadowOpacity(state, action: PayloadAction<number>) {
         state.mockupShadow.shadowOpacity = action.payload;
     },
@@ -237,6 +247,11 @@ const mockLabSlice = createSlice({
 
 
     // Frame Reducer
+
+    setSelectedFrameLayout(state, action: PayloadAction<FrameLayoutState>){
+        console.log(action.payload)
+        state.frameLayout = action.payload;
+    },
 
     setFrameTransparent(state, action: PayloadAction<boolean>) {
         state.frameTransparent.transparent = action.payload;
@@ -284,13 +299,13 @@ export const {
     setMockupSelectedDevice,
     setMockupLayoutSource,
     setSelectedMockupLayout,
-    setMockupShadow,
     setMockupShadowOpacity,
     setMockupScale,
     setMockupRotation,
     setMockupPositionX,
     setMockupPositionY,
 
+    setSelectedFrameLayout,
     setFrameTransparent,
     setFrameBackgroundType,
     setFrameBackgroundSrc,
