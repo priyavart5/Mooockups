@@ -8,27 +8,24 @@ import { Spline, MoveDiagonal2 } from 'lucide-react';
 import { Tooltip } from 'react-tippy';
 import 'react-tippy/dist/tippy.css';
 
-
 const Canvas = forwardRef<HTMLDivElement>((_, ref) => {
 
-  // const canvasRef = useRef<HTMLDivElement>(null);
-
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragType, setDragType] = useState("");
 
-
-  // Redux Dispatch
   const dispatch = useDispatch();
 
-  // Fetch Mockup states
   const {
     mockupLayoutSource,
     mockupScale,
     mockupRotation,
-    mockupPosition
+    mockupPosition,
+    mockupShadow
   } = useSelector((state: RootState) => state.mockLab);
 
-  // Fetch Frame states
   const {
+    frameLayout,
     frameTransparent,
     frameBackground,
     frameShadow,
@@ -39,18 +36,12 @@ const Canvas = forwardRef<HTMLDivElement>((_, ref) => {
   const { file } = useSelector((state: RootState) => state.import);
   const isPreview = useSelector((state: RootState) => state.preview.isPreview);
 
-  // Dragging State
-  const [isDragging, setIsDragging] = useState(false);
-  const [dragType, setDragType] = useState("");
-
-  // Handle Drag Start
   const handleMouseDown = (e: any, type: string) => {
     e.preventDefault();
     setIsDragging(true);
     setDragType(type);
   };
 
-  // Handle Drag Move
   const handleMouseMove = (e: any) => {
     if (!isDragging) return;
 
@@ -64,13 +55,11 @@ const Canvas = forwardRef<HTMLDivElement>((_, ref) => {
     }
   };
 
-  // Handle Drag End
   const handleMouseUp = () => {
     setIsDragging(false);
     setDragType("");
   };
 
-  // Attach/Detach Mouse Listeners
   useEffect(() => {
     if (isDragging) {
       document.addEventListener("mousemove", handleMouseMove);
@@ -84,196 +73,174 @@ const Canvas = forwardRef<HTMLDivElement>((_, ref) => {
       document.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("mouseup", handleMouseUp);
     };
-  }, [isDragging, mockupScale.scale, mockupRotation.rotation]);
+  }, [isDragging, mockupScale.scale, mockupRotation.rotation, handleMouseMove]);
 
   useEffect(() => {
     const img = new window.Image();
     img.src = frameBackground.backgroundSrc;
   
     img.onload = () => {
-      setImageLoaded(true); // Set the state to true once the image is loaded
+      setImageLoaded(true);
     };
   
     img.onerror = () => {
-      console.error("Failed to load background image from S3.");
+      console.error("Failed to load background image.");
       setImageLoaded(false);
     };
   }, [frameBackground.backgroundSrc]);
 
-  // const [scale, setScale] = useState(1);
-  const scale = 1;
-
-  const frameWidth = 1920; // Set the default width
-  const frameHeight = 1080; // Set the default height
-
-  // useEffect(() => {
-  //   const resizeFrame = () => {
-  //     if (ref && ref.current) {
-  //       const parent = ref.current.parentElement;
-  //       if (parent) {
-  //         const widthRatio = parent.clientWidth / frameWidth;
-  //         const heightRatio = parent.clientHeight / frameHeight;
-  //         setScale(Math.min(widthRatio, heightRatio));
-  //       }
-  //     }
-  //   };
-
-  //   window.addEventListener('resize', resizeFrame);
-  //   resizeFrame();
-
-  //   return () => window.removeEventListener('resize', resizeFrame);
-  // }, [frameWidth, frameHeight, ref]);
-
 
   return (
     <>
-      <div 
-        className={styles.previewFrame}
-        ref={ref}
-        style={{
-          transform: `scale(${scale})`,
-          width: `${frameWidth}px`,
-          height: `${frameHeight}px`,
-          aspectRatio: 16/9
-        }}
-      >
-        {/* Unified Frame Background */}
-        {!frameTransparent.transparent && imageLoaded && (
-          <div
-            className={styles.frameBackground}
-            style={{
-              backgroundColor: '#fff',
-              backgroundImage: `url(${frameBackground.backgroundSrc})`, 
-              opacity: frameBackground.backgroundOpacity,
-              scale: (frameBackground.backgroundScale + 0.1) * 10,
-              filter: `blur(${frameBlur.blur}px)`,
-            }}
-          />
-        )}
+    <div className={styles.canvas}>
+      <div className={styles.canvasSafeArea} >
+        <div className={styles.previewframe} style={{aspectRatio: frameLayout.aspectRatio}}>
+          <div className={styles.frameContent} ref={ref} >
+            <div className={styles.canvasBackGround}>
+              {/* Frame Shadow */}
+              {frameShadow.shadowSrc && (
+                <Image
+                  crossOrigin='anonymous'
+                  loading='eager'
+                  className={styles.canvas_frameShadow}
+                  alt='shadow'
+                  src= {frameShadow.shadowSrc}
+                  fill
+                  style={{
+                    opacity: frameShadow.shadowOpacity,
+                    transform: `scale(${(frameShadow.shadowScale + 0.1) * 10})`
+                  }}
+                />
+                )}
+              {/* Frame Noise */}
+              {frameNoise.noise > 0 && !frameTransparent.transparent && (
+                <div className={styles.canvas_frameNoise} style={{ opacity: frameNoise.noise}} ></div>
+              )}
+              
+              {/* Frame Background */}
+              {!frameTransparent.transparent && imageLoaded && (
+                <Image
+                  crossOrigin='anonymous'
+                  loading='eager'
+                  className={styles.canvas_frameBackground}
+                  alt='background'
+                  src= {frameBackground.backgroundSrc}
+                  fill
+                  style={{
+                    backgroundColor: 'transparent',
+                    opacity: frameBackground.backgroundOpacity,
+                    scale: (frameBackground.backgroundScale + 0.1) * 10,
+                    filter: `blur(${frameBlur.blur}px)`,
+                  }}
+                />
+              )}
+            </div>
+            <div className={styles.canvasDevice}>
 
-        {/* Frame Noise Overlay */}
-        {frameNoise.noise > 0 && !frameTransparent.transparent && (
-          <div
-            style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              width: '100%',
-              height: '100%',
-              pointerEvents: 'none',
-              background: `url(https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/noise.svg) 0% 0% / 40% repeat`,
-              mixBlendMode: 'overlay',
-              opacity: frameNoise.noise,
-              overflow: 'hidden',
-            }}
-          />
-        )}
+               {/* Device Layout */}
+               {mockupLayoutSource.layoutSrc && (
+                  <div
+                    className={styles.canvasDevice_layout}
+                    style={{
+                      transform:`
+                        rotate(${mockupRotation.rotation}deg) 
+                        translate(${mockupPosition.position_X}px, ${mockupPosition.position_Y}px)
+                        scale(${mockupScale.scale / 3})`,
+                    }}
+                  >
+                    {
+                      !isPreview && (
+                        <>
+                        <div className={styles.topRight}>
+                          {/* @ts-expect-error is necessary */}
+                          <Tooltip
+                            title="Rotation"
+                            position= "right"
+                            trigger="mouseenter"
+                            size="small"
+                            animation="fade"
+                            className={`${styles.corner}`}
+                            >
+                            <Spline 
+                              strokeWidth={2}
+                              size={18}
+                              className={styles.corner}
+                              onMouseDown={(e) => handleMouseDown(e, "rotate")}
+                              />
+                          </Tooltip>
+                        </div>
+                        <div className={styles.bottomRight}>
+                          {/* @ts-expect-error is necessary */}
+                          <Tooltip
+                            title="Scale"
+                            position= "right"
+                            trigger="mouseenter"
+                            size="small"
+                            animation="fade"
+                            className={styles.corner}
+                          >
+                            <MoveDiagonal2 
+                              strokeWidth={2}
+                              size={18}
+                              className={styles.corner}
+                              onMouseDown={(e) => handleMouseDown(e, "scale")}
+                            />
+                          </Tooltip>
+                        </div>
+                        </>
+                    )}
 
-        {/* Mockup Layout */}
-        {mockupLayoutSource.layoutSrc && (
-          <div className={styles.mockupWrapper}>
-            <div
-              className={styles.mockupLayout}
-              style={{
-                transform: `
-                  translate(-50%, -50%) 
-                  rotate(${mockupRotation.rotation}deg) 
-                  translate(${mockupPosition.position_X}px, ${mockupPosition.position_Y}px)
-                  scale(${mockupScale.scale / 3})`,
-              }}
-            >
-              {
-                !isPreview && (
-                  <>
-                  {/* @ts-expect-error is necessary */}
-                    <Tooltip
-                      title="Rotation"
-                      position= "right"
-                      trigger="mouseenter"
-                      size="small"
-                      animation="fade"
-                      className={`${styles.corner} ${styles.topRight}`}
-                      >
-                      <Spline 
-                        strokeWidth={2}
-                        size={18}
-                        className={`${styles.corner}`}
-                        onMouseDown={(e) => handleMouseDown(e, "rotate")}
-                        />
-                    </Tooltip>
-                    {/* @ts-expect-error is necessary */}
-                    <Tooltip
-                      title="Scale"
-                      position= "right"
-                      trigger="mouseenter"
-                      size="small"
-                      animation="fade"
-                      className={`${styles.corner} ${styles.bottomRight}`}
-                    >
-                      <MoveDiagonal2 
-                        strokeWidth={2}
-                        size={18}
-                        className={`${styles.corner}`}
-                        onMouseDown={(e) => handleMouseDown(e, "scale")}
-                      />
-                    </Tooltip>
-                  </>
-                )
-              }
+                    <Image
+                      src={mockupLayoutSource.layoutSrc}
+                      alt="Device Shade"
+                      width={500}
+                      height={320}
+                      className={styles.layoutimage}
+                    />
+                  </div>
+              )}
 
-              <Image
-                src={mockupLayoutSource.layoutSrc}
-                alt="Device Shade"
-                width={500}
-                height={320}
-              />
+              {/* Device Screen */}
+              {file  && (
+                <div
+                  className={styles.canvasDevice_screen}
+                  style={{
+                    transform:` 
+                    rotate(${mockupRotation.rotation}deg) 
+                    translate(${mockupPosition.position_X}px, ${mockupPosition.position_Y}px)
+                    scale(${mockupScale.scale / 3})`,
+                  }}
+                >
+                  <Image src={file} alt="Screen Image" style={{ borderRadius: '10px' }} width={452} height={278} />
+                </div>
+              )}
+
+              {/* Device Shadow */}
+              <div className={styles.shadow} style={{ borderRadius: "2.5em" }}>
+                <div
+                  className={styles.shadowLayer}
+                  style={{
+                    transform: `translateX(0.46875em) translateY(0.65625em) scale(${mockupScale.scale / 3})`,
+                    filter: "blur(1em)",
+                    opacity: `${mockupShadow.shadowOpacity}`,
+                    position: "absolute",
+                  }}
+                ></div>
+                <div
+                  className={styles.shadowLayer}
+                  style={{
+                    transform: `translateX(1.40625em) translateY(1.96875em) scale(${mockupScale.scale / 3})`,
+                    filter: "blur(0.975em)",
+                    opacity: `${mockupShadow.shadowOpacity}`,
+                    position: "absolute",
+                  }}
+                ></div>
+              </div>
             </div>
           </div>
-        )}
-
-        {file && (
-          <div
-            className={styles.mockupScreen}
-            style={{
-              position: 'absolute', // Align with layoutSrc
-              width: 'auto', // Dynamically adjust to fit
-              height: 'auto',
-              transform: ` translate(-50%, -50%) 
-              rotate(${mockupRotation.rotation}deg) 
-              translate(${mockupPosition.position_X}px, ${mockupPosition.position_Y}px)
-              scale(${mockupScale.scale / 3})`,
-            }}
-          >
-            <Image src={file} alt="Screen Image" style={{ borderRadius: '10px' }} width={452} height={278} />
-          </div>
-        )}
-
-
-        {/* Mockup Shadow */}
-        {/* {mockupShadow.shadowValue && (
-          <div
-            className={styles.mockupShadow}
-            style={{
-              transform: `scale(${mockupScale.scaleValue}) rotate(${mockupRotation.rotationValue}deg) translate(${mockupPositionX.position_X_Value}px, ${mockupPositionY.position_Y_Value}px)`,
-              opacity: mockupShadowOpacity.shadowOpacityValue,
-            }}
-          >
-            <Image src={mockupShadow.shadowValue} alt="Mockup Shadow" width={550} height={350} />
-          </div>
-        )} */}
-
-        {/* Frame Shadow */}
-        {frameShadow.shadowSrc && (
-          <div
-            className={styles.frameShadow}
-            style={{
-              backgroundImage: `url(${frameShadow.shadowSrc})`,
-              opacity: frameShadow.shadowOpacity,
-              transform: `scale(${(frameShadow.shadowScale + 0.1) * 10})`,
-            }}
-          />
-        )}
+        </div>
       </div>
+    </div>
     </>
   );
 });

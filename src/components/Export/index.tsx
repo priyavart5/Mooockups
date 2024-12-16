@@ -7,12 +7,14 @@ import Icon from '../Icon';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 // import html2canvas from 'html2canvas';
-import { toPng, toJpeg, toBlob,  } from 'html-to-image';
+import { toPng, toBlob, toJpeg } from 'html-to-image';
 
 const Export = ({ canvasRef }: { canvasRef: React.RefObject<HTMLDivElement> }) => {
-  const { file, width: originalWidth, height: originalHeight } = useSelector(
+  const { file,} = useSelector(
     (state: RootState) => state.import
   );
+
+  const { frameLayout } = useSelector((state: RootState) => state.mockLab);
 
   // *****************
   // States - Start
@@ -48,16 +50,18 @@ const Export = ({ canvasRef }: { canvasRef: React.RefObject<HTMLDivElement> }) =
   const calculateDimensions = (multiplier: number) => {
     return {
       width: roundToEven(
-        Math.round((originalWidth ?? 0) * multiplier)
+        Math.round((frameLayout.width ?? 0) * multiplier)
       ),
       height: roundToEven(
-        Math.round((originalHeight ?? 0) * multiplier)
+        Math.round((frameLayout.height ?? 0) * multiplier)
       ),
     };
   };
   
 
   const currentDimensions = calculateDimensions(getMultiplier(selectedSize));
+
+
 
   // Export the canvas
   const handleExport = async () => {
@@ -72,7 +76,7 @@ const Export = ({ canvasRef }: { canvasRef: React.RefObject<HTMLDivElement> }) =
         dataUrl = await toPng(canvasRef.current, {
           pixelRatio: getMultiplier(selectedSize), // Adjust image resolution
           backgroundColor: 'transparent', // Retain transparency
-          // useCors: true,
+          // useCors: false,
         });
       } else if (selectedFormat === 'JPG') {
         dataUrl = await toJpeg(canvasRef.current, {
@@ -114,9 +118,6 @@ const Export = ({ canvasRef }: { canvasRef: React.RefObject<HTMLDivElement> }) =
       alert('Failed to export the canvas. Please try again.');
     }
   };
-  
-  
-  
 
   // Copy the image to clipboard
   const handleCopy = () => {
@@ -201,7 +202,7 @@ const Export = ({ canvasRef }: { canvasRef: React.RefObject<HTMLDivElement> }) =
         </div>
 
         <div className={styles.export}>
-          <button className={styles.export_button} onClick={handleExport}>
+          <button onClick={handleExport} className={styles.export_button}>
             Export
           </button>
           <Icon

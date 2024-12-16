@@ -1,4 +1,178 @@
 export const mockLabFrame = {
+    frameLayout:[
+        {
+            type: 'Default',
+            typeImage: 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiNlZmVmZWYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1zcXVhcmUtZGFzaGVkIj48cGF0aCBkPSJNNSAzYTIgMiAwIDAgMC0yIDIiLz48cGF0aCBkPSJNMTkgM2EyIDIgMCAwIDEgMiAyIi8+PHBhdGggZD0iTTIxIDE5YTIgMiAwIDAgMS0yIDIiLz48cGF0aCBkPSJNNSAyMWEyIDIgMCAwIDEtMi0yIi8+PHBhdGggZD0iTTkgM2gxIi8+PHBhdGggZD0iTTkgMjFoMSIvPjxwYXRoIGQ9Ik0xNCAzaDEiLz48cGF0aCBkPSJNMTQgMjFoMSIvPjxwYXRoIGQ9Ik0zIDl2MSIvPjxwYXRoIGQ9Ik0yMSA5djEiLz48cGF0aCBkPSJNMyAxNHYxIi8+PHBhdGggZD0iTTIxIDE0djEiLz48L3N2Zz4=',
+            typeLayouts : [
+                {
+                    name: '',
+                    aspectRatio: 16/9,
+                    width: 1920,
+                    height: 1080,
+                },
+                {
+                    name: '',
+                    aspectRatio: 3/2,
+                    width: 1920,
+                    height: 1280,
+                },
+                {
+                    name: '',
+                    aspectRatio: 4/3,
+                    width: 1920,
+                    height: 1440,
+                },
+                {
+                    name: '',
+                    aspectRatio: 5/4,
+                    width: 1920,
+                    height: 1536,
+                },
+                {
+                    name: '',
+                    aspectRatio: 1/1,
+                    width: 1920,
+                    height: 1920,
+                },
+                {
+                    name: '',
+                    aspectRatio: 4/5,
+                    width: 1080,
+                    height: 1350,
+                },
+                {
+                    name: '',
+                    aspectRatio: 3/4,
+                    width: 1080,
+                    height: 1440,
+                },
+                {
+                    name: '',
+                    aspectRatio: 2/3,
+                    width: 1080,
+                    height: 1620,
+                },
+                {
+                    name: '',
+                    aspectRatio: 9/16,
+                    width: 1080,
+                    height: 1920,
+                },
+            ],
+        },
+        {
+            type: 'Instagram',
+            typeImage: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Layout/instagram.webp',
+            typeLayouts : [
+                {
+                    name: 'Post',
+                    aspectRatio: 1/1,
+                    width: 1080,
+                    height: 1080,
+                },
+                {
+                    name: 'Portrait',
+                    aspectRatio: 4/5,
+                    width: 1080,
+                    height: 1350,
+                },
+                {
+                    name: 'Story',
+                    aspectRatio: 9/16,
+                    width: 1080,
+                    height: 1920,
+                },
+            ]
+        },
+        {
+            type: 'Twitter',
+            typeImage: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Layout/twitter.webp',
+            typeLayouts : [
+                {
+                    name: 'Tweet',
+                    aspectRatio: 16/9,
+                    width: 1200,
+                    height: 675,
+                },
+                {
+                    name: 'Cover',
+                    aspectRatio: 3/1,
+                    width: 1500,
+                    height: 500,
+                },
+            ]
+        },
+        {
+            type: 'Dribbble',
+            typeImage: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Layout/dribbble.webp',
+            typeLayouts : [
+                {
+                    name: 'Shot',
+                    aspectRatio: 4/3,
+                    width: 2800,
+                    height: 2100,
+                },
+            ]
+        },
+        {
+            type: 'Youtube',
+            typeImage: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Layout/youtube.webp',
+            typeLayouts : [
+                {
+                    name: 'Banner',
+                    aspectRatio: 16/9,
+                    width: 2560,
+                    height: 1440,
+                },
+                {
+                    name: 'Thumbnail',
+                    aspectRatio: 16/9,
+                    width: 1280,
+                    height: 720,
+                },
+                {
+                    name: 'Video',
+                    aspectRatio: 16/9,
+                    width: 1920,
+                    height: 1080,
+                },
+            ]
+        },
+        {
+            type: 'Pinterest',
+            typeImage: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Layout/pinterest.webp',
+            typeLayouts : [
+                {
+                    name: 'Long',
+                    aspectRatio: 10/21,
+                    width: 1000,
+                    height: 2100,
+                },
+                {
+                    name: 'Optimal',
+                    aspectRatio: 2/3,
+                    width: 1000,
+                    height: 1500,
+                },
+                {
+                    name: 'Square',
+                    aspectRatio: 1/1,
+                    width: 1000,
+                    height: 1000,
+                },
+            ]
+        },
+    ],
+    predefinedQueries : [
+        "Abstract",
+        "Geometry",
+        "Sand Dune",
+        "Dark Matte",
+        "Gradient",
+        "Nature",
+        "Cityscape",
+        "Ocean",
+    ],
     gradient : [
         {
             name: 'Galactic Ring - 16',
@@ -305,14 +479,3 @@ export const shadow = [
         featuredSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Shadow/darkShadow.webp'
     },
 ];
-
-export const predefinedQueries = [
-    "Abstract",
-    "Geometry",
-    "Sand Dune",
-    "Dark Matte",
-    "Gradient",
-    "Nature",
-    "Cityscape",
-    "Ocean",
-  ];

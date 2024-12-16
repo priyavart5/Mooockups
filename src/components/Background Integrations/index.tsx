@@ -3,8 +3,9 @@ import React from "react";
 import styles from "./styles.module.scss";
 
 import { Minus, Search, X, Ellipsis } from "lucide-react";
-import { predefinedQueries } from "../../utils/defaultData";
+import { mockLabFrame } from "../../utils/defaultData";
 import { usePhotoFetch } from "../../hooks/usePhotoFetch";
+import Image from "next/image";
 
 import { useDispatch } from 'react-redux';
 import { 
@@ -105,7 +106,7 @@ const BackGroundIntegrations: React.FC<BackgroundIntegrationProps> = ({ onClose,
         <div className={styles.BGI_predefinedQueries}>
           <p>Popular Searches:</p>
           <div className={styles.BGI_preQuery_buttons}>
-            {predefinedQueries.map((query) => (
+            {mockLabFrame.predefinedQueries.map((query) => (
               <button
                 key={query}
                 onClick={() => handlePredefinedQueryClick(query)}
@@ -134,10 +135,13 @@ const BackGroundIntegrations: React.FC<BackgroundIntegrationProps> = ({ onClose,
                   )
                 }
                 >
-                <img
+                <Image
                   src={source === "unsplash" ? photo.urls.small : photo.webformatURL}
                   alt={photo.alt_description || "Photo"}
                   className={styles.BGI__fetched_image}
+                  fill
+                  loading="eager"
+                  unoptimized
                 />
               </div>
               )

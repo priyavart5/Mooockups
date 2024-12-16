@@ -23,7 +23,7 @@ const MockLab = () => {
       <div className={styles.mockLab_dock}>
         <Docks />
       </div>
-      <div className={styles.mockLab_canvas}>
+      <div className={styles.mockLab_canvas} >
         <Canvas ref={canvasRef} />
       </div>
       {!isPreview && (
