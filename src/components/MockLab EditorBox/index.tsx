@@ -566,7 +566,7 @@ const MockLabEditor = () => {
                                 { visibleClearBackground && <p className={styles.EF_panels_clear} onClick={handleClearBackground}>Clear</p> }
                             </div>
                             <div className={styles.EF_background_buttons}>
-                                <button onClick={() => dispatch(setFrameTransparent(!frameTransparent.transparent))}>Transparent</button>
+                                <button onClick={() => dispatch(setFrameTransparent(!frameTransparent.transparent))}>{ frameTransparent.transparent ? 'Non - Transparent' : 'Transparent' }</button>
                                 <button onClick={()=> {
                                     setVisibleBGImportImage(true)
                                     setVisibleUnsplash(false)

@@ -6,14 +6,12 @@ import styles from './styles.module.scss';
 import Icon from '../Icon';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
-// import html2canvas from 'html2canvas';
-import { toPng, toBlob, toJpeg } from 'html-to-image';
+import * as htmlToImage from 'html-to-image';
+import { Toaster, toast } from 'react-hot-toast';
 
 const Export = ({ canvasRef }: { canvasRef: React.RefObject<HTMLDivElement> }) => {
-  const { file,} = useSelector(
-    (state: RootState) => state.import
-  );
 
+  // const { file,} = useSelector((state: RootState) => state.import);
   const { frameLayout } = useSelector((state: RootState) => state.mockLab);
 
   // *****************
@@ -22,7 +20,7 @@ const Export = ({ canvasRef }: { canvasRef: React.RefObject<HTMLDivElement> }) =
 
   const [exportSetting, setExportSetting] = useState<boolean>(false);
   const [selectedFormat, setSelectedFormat] = useState<string>('PNG');
-  const [selectedSize, setSelectedSize] = useState<string>('1x');
+  const [selectedSize, setSelectedSize] = useState<string>('3x');
 
   // *****************
   // States - End
@@ -61,52 +59,73 @@ const Export = ({ canvasRef }: { canvasRef: React.RefObject<HTMLDivElement> }) =
 
   const currentDimensions = calculateDimensions(getMultiplier(selectedSize));
 
-
-
   // Export the canvas
   const handleExport = async () => {
     if (!canvasRef.current) {
-      alert('Canvas not found!');
+      toast.error('Failed to Export Image. Please try again.',
+        {
+          style: {
+            borderRadius: '100px',
+            background: '#2a2a2a',
+            color: '#FF5959',
+          },
+        }
+      );
       return;
     }
   
+    const loadingToast = toast.loading('Preparing...',
+      {
+        style: {
+          borderRadius: '100px',
+          background: '#2a2a2a',
+          color: '#efefef',
+        },
+      }
+    );
     try {
       let dataUrl: string | Blob | null = null;
       if (selectedFormat === 'PNG') {
-        dataUrl = await toPng(canvasRef.current, {
-          pixelRatio: getMultiplier(selectedSize), // Adjust image resolution
-          backgroundColor: 'transparent', // Retain transparency
-          // useCors: false,
+        dataUrl = await htmlToImage.toPng(canvasRef.current, {
+          pixelRatio: getMultiplier(selectedSize),
+          cacheBust: true,
+          canvasWidth: frameLayout.width,
+          canvasHeight: frameLayout.height,
         });
       } else if (selectedFormat === 'JPG') {
-        dataUrl = await toJpeg(canvasRef.current, {
+        dataUrl = await htmlToImage.toJpeg(canvasRef.current, {
           pixelRatio: getMultiplier(selectedSize),
-          backgroundColor: 'transparent',
+          cacheBust: true,
+          canvasWidth: frameLayout.width,
+          canvasHeight: frameLayout.height
         });
       } else if (selectedFormat === 'WEBP') {
-        dataUrl = await toBlob(canvasRef.current, {
+        dataUrl = await htmlToImage.toBlob(canvasRef.current, {
           pixelRatio: getMultiplier(selectedSize),
+          cacheBust: true,
+          canvasWidth: frameLayout.width,
+          canvasHeight: frameLayout.height
         });
       }
   
       if (dataUrl) {
-        let url: string | undefined;
-  
-        // If dataUrl is a string (for PNG/JPEG), create an object URL for download
-        if (typeof dataUrl === 'string') {
-          url = dataUrl;
-        } 
-        // If dataUrl is a Blob (for WEBP), create an object URL for download
-        else if (dataUrl instanceof Blob) {
-          url = URL.createObjectURL(dataUrl);
-        }
-  
+        const url = typeof dataUrl === 'string' ? dataUrl : URL.createObjectURL(dataUrl);
         if (url) {
           const link = document.createElement('a');
           link.href = url;
           link.download = `mockup.${selectedFormat.toLowerCase()}`;
           link.click();
-          URL.revokeObjectURL(url); // Clean up the object URL
+          URL.revokeObjectURL(url);
+          toast.success('Ready to Export Image',
+            {
+              id: loadingToast,
+              style: {
+                borderRadius: '100px',
+                background: '#2a2a2a',
+                color: '#00D547',
+              },
+            }
+          );
         } else {
           throw new Error('Failed to generate download URL');
         }
@@ -115,50 +134,103 @@ const Export = ({ canvasRef }: { canvasRef: React.RefObject<HTMLDivElement> }) =
       }
     } catch (error) {
       console.error('Failed to export canvas:', error);
-      alert('Failed to export the canvas. Please try again.');
+      toast.error('Failed to Export Image. Please try again.',
+        {
+          id: loadingToast,
+          style: {
+            borderRadius: '100px',
+            background: '#2a2a2a',
+            color: '#FF5959',
+          },
+        }
+      );
     }
   };
 
-  // Copy the image to clipboard
-  const handleCopy = () => {
-    if (!file) {
-      alert('No image to copy!');
+  const handleCopy = async () => {
+    if (!canvasRef.current) {
+      toast.error('Failed to Copy Image. Please try again.',
+        {
+          style: {
+            borderRadius: '100px',
+            background: '#2a2a2a',
+            color: '#FF5959',
+          },
+        }
+      );
       return;
     }
-
-    // Create a canvas element for copying
-    const canvas = document.createElement('canvas');
-    const context = canvas.getContext('2d');
-    if (!context) return;
-
-    // Set canvas dimensions
-    canvas.width = currentDimensions.width;
-    canvas.height = currentDimensions.height;
-
-    // Load the image into the canvas
-    const img = new Image();
-    img.onload = () => {
-      context.drawImage(img, 0, 0, canvas.width, canvas.height);
-
-      // Copy the canvas image to clipboard
-      canvas.toBlob((blob) => {
-        if (blob) {
-          const clipboardItem = new ClipboardItem({ 'image/png': blob });
-          navigator.clipboard.write([clipboardItem])
-            .then(() => {
-              alert('Image copied to clipboard!');
-            })
-            .catch((err) => {
-              console.error('Failed to copy image to clipboard: ', err);
-            });
+  
+    const loadingToast = toast.loading('Copying...',
+      {
+        style: {
+          borderRadius: '100px',
+          background: '#2a2a2a',
+          color: '#efefef',
+        },
+      }
+    );
+    try {
+      let dataUrl: string | Blob | null = null;
+      if (selectedFormat === 'PNG') {
+        dataUrl = await htmlToImage.toPng(canvasRef.current, {
+          pixelRatio: getMultiplier(selectedSize),
+          cacheBust: true,
+          canvasWidth: frameLayout.width,
+          canvasHeight: frameLayout.height,
+        });
+      } else if (selectedFormat === 'JPG') {
+        dataUrl = await htmlToImage.toJpeg(canvasRef.current, {
+          pixelRatio: getMultiplier(selectedSize),
+          cacheBust: true,
+          canvasWidth: frameLayout.width,
+          canvasHeight: frameLayout.height,
+        });
+      }
+  
+      if (dataUrl) {
+        const blob = await (await fetch(dataUrl)).blob();
+  
+        if (navigator.clipboard && navigator.clipboard.write) {
+          const clipboardItem = new ClipboardItem({
+            [blob.type]: blob,
+          });
+          await navigator.clipboard.write([clipboardItem]);
+          toast.success('Image copied to clipboard!',
+            {
+              id: loadingToast,
+              style: {
+                borderRadius: '100px',
+                background: '#2a2a2a',
+                color: '#00D547',
+              },
+            }
+          );
+        } else {
+          throw new Error('Clipboard API is not supported in this browser.');
         }
-      }, 'image/png');
-    };
-    img.src = file;
+      } else {
+        throw new Error('Failed to generate image');
+      }
+    } catch (error) {
+      console.error('Failed to copy image:', error);
+      toast.error('Failed to copy image. Please try again.',
+        {
+          id: loadingToast,
+          style: {
+            borderRadius: '100px',
+            background: '#2a2a2a',
+            color: '#FF5959',
+          },
+        }
+      );
+    }
   };
+  
 
   return (
     <>
+    <Toaster position="top-center"/>
       <div className={styles.export_container}>
         <div
           className={`${styles.export_setting_container} ${

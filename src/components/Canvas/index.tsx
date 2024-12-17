@@ -10,7 +10,7 @@ import 'react-tippy/dist/tippy.css';
 
 const Canvas = forwardRef<HTMLDivElement>((_, ref) => {
 
-  const [imageLoaded, setImageLoaded] = useState(false);
+  // const [imageLoaded, setImageLoaded] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [dragType, setDragType] = useState("");
 
@@ -75,19 +75,20 @@ const Canvas = forwardRef<HTMLDivElement>((_, ref) => {
     };
   }, [isDragging, mockupScale.scale, mockupRotation.rotation, handleMouseMove]);
 
-  useEffect(() => {
-    const img = new window.Image();
-    img.src = frameBackground.backgroundSrc;
+  // useEffect(() => {
+  //   const img = new window.Image();
+  //   img.src = frameBackground.backgroundSrc;
   
-    img.onload = () => {
-      setImageLoaded(true);
-    };
+  //   img.onload = () => {
+  //     setImageLoaded(true);
+  //   };
   
-    img.onerror = () => {
-      console.error("Failed to load background image.");
-      setImageLoaded(false);
-    };
-  }, [frameBackground.backgroundSrc]);
+  //   img.onerror = () => {
+  //     console.error("Failed to load background image.");
+  //     setImageLoaded(false);
+  //   };
+  // }, [frameBackground.backgroundSrc]);
+
 
 
   return (
@@ -98,8 +99,9 @@ const Canvas = forwardRef<HTMLDivElement>((_, ref) => {
           <div className={styles.frameContent} ref={ref} >
             <div className={styles.canvasBackGround}>
               {/* Frame Shadow */}
-              {frameShadow.shadowSrc && (
+              { !frameTransparent.transparent && frameShadow.shadowSrc && (
                 <Image
+                  unoptimized
                   crossOrigin='anonymous'
                   loading='eager'
                   className={styles.canvas_frameShadow}
@@ -111,21 +113,22 @@ const Canvas = forwardRef<HTMLDivElement>((_, ref) => {
                     transform: `scale(${(frameShadow.shadowScale + 0.1) * 10})`
                   }}
                 />
-                )}
+              )}
+              
               {/* Frame Noise */}
               {frameNoise.noise > 0 && !frameTransparent.transparent && (
                 <div className={styles.canvas_frameNoise} style={{ opacity: frameNoise.noise}} ></div>
               )}
               
               {/* Frame Background */}
-              {!frameTransparent.transparent && imageLoaded && (
-                <Image
+              {!frameTransparent.transparent && (
+                <img
                   crossOrigin='anonymous'
                   loading='eager'
                   className={styles.canvas_frameBackground}
                   alt='background'
+                  // src= {frameBackground.backgroundSrc || 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Gradient/Canvas+Image/Galactic20Ring20-2016.webp'}
                   src= {frameBackground.backgroundSrc}
-                  fill
                   style={{
                     backgroundColor: 'transparent',
                     opacity: frameBackground.backgroundOpacity,
@@ -136,9 +139,33 @@ const Canvas = forwardRef<HTMLDivElement>((_, ref) => {
               )}
             </div>
             <div className={styles.canvasDevice}>
+              {/* Device Shadow */}
+              <div className={styles.shadow} style={{ 
+                borderRadius: "2.5em",
+                transform: `rotate(${mockupRotation.rotation}deg)`
+                }}>
+                <div
+                  className={styles.shadowLayer}
+                  style={{
+                    transform: `translateX(0.46875em) translateY(0.65625em) scale(${mockupScale.scale / 3})`,
+                    filter: "blur(1em)",
+                    opacity: `${mockupShadow.shadowOpacity}`,
+                    position: "absolute",
+                  }}
+                ></div>
+                <div
+                  className={styles.shadowLayer}
+                  style={{
+                    transform: `translateX(1.40625em) translateY(1.96875em) scale(${mockupScale.scale / 3})`,
+                    filter: "blur(0.975em)",
+                    opacity: `${mockupShadow.shadowOpacity}`,
+                    position: "absolute",
+                  }}
+                ></div>
+              </div>
 
-               {/* Device Layout */}
-               {mockupLayoutSource.layoutSrc && (
+              {/* Device Layout */}
+              {mockupLayoutSource.layoutSrc && (
                   <div
                     className={styles.canvasDevice_layout}
                     style={{
@@ -191,11 +218,14 @@ const Canvas = forwardRef<HTMLDivElement>((_, ref) => {
                     )}
 
                     <Image
+                      crossOrigin='anonymous'
+                      loading='eager'
                       src={mockupLayoutSource.layoutSrc}
                       alt="Device Shade"
                       width={500}
                       height={320}
                       className={styles.layoutimage}
+                      unoptimized
                     />
                   </div>
               )}
@@ -211,31 +241,9 @@ const Canvas = forwardRef<HTMLDivElement>((_, ref) => {
                     scale(${mockupScale.scale / 3})`,
                   }}
                 >
-                  <Image src={file} alt="Screen Image" style={{ borderRadius: '10px' }} width={452} height={278} />
+                  <Image unoptimized crossOrigin='anonymous' loading='eager' src={file} alt="Screen Image" style={{ borderRadius: '10px' }} width={452} height={278} />
                 </div>
               )}
-
-              {/* Device Shadow */}
-              <div className={styles.shadow} style={{ borderRadius: "2.5em" }}>
-                <div
-                  className={styles.shadowLayer}
-                  style={{
-                    transform: `translateX(0.46875em) translateY(0.65625em) scale(${mockupScale.scale / 3})`,
-                    filter: "blur(1em)",
-                    opacity: `${mockupShadow.shadowOpacity}`,
-                    position: "absolute",
-                  }}
-                ></div>
-                <div
-                  className={styles.shadowLayer}
-                  style={{
-                    transform: `translateX(1.40625em) translateY(1.96875em) scale(${mockupScale.scale / 3})`,
-                    filter: "blur(0.975em)",
-                    opacity: `${mockupShadow.shadowOpacity}`,
-                    position: "absolute",
-                  }}
-                ></div>
-              </div>
             </div>
           </div>
         </div>
