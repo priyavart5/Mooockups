@@ -11,7 +11,6 @@ import { Toaster, toast } from 'react-hot-toast';
 
 const Export = ({ canvasRef }: { canvasRef: React.RefObject<HTMLDivElement> }) => {
 
-  // const { file,} = useSelector((state: RootState) => state.import);
   const { frameLayout } = useSelector((state: RootState) => state.mockLab);
 
   // *****************
@@ -21,6 +20,7 @@ const Export = ({ canvasRef }: { canvasRef: React.RefObject<HTMLDivElement> }) =
   const [exportSetting, setExportSetting] = useState<boolean>(false);
   const [selectedFormat, setSelectedFormat] = useState<string>('PNG');
   const [selectedSize, setSelectedSize] = useState<string>('3x');
+  const [disableExportActions, setDisableExportActions] = useState<boolean>(false);
 
   // *****************
   // States - End
@@ -59,9 +59,10 @@ const Export = ({ canvasRef }: { canvasRef: React.RefObject<HTMLDivElement> }) =
 
   const currentDimensions = calculateDimensions(getMultiplier(selectedSize));
 
-  // Export the canvas
   const handleExport = async () => {
+    setDisableExportActions(true);
     if (!canvasRef.current) {
+      setDisableExportActions(false);
       toast.error('Failed to Export Image. Please try again.',
         {
           style: {
@@ -116,6 +117,7 @@ const Export = ({ canvasRef }: { canvasRef: React.RefObject<HTMLDivElement> }) =
           link.download = `mockup.${selectedFormat.toLowerCase()}`;
           link.click();
           URL.revokeObjectURL(url);
+          setDisableExportActions(false);
           toast.success('Ready to Export Image',
             {
               id: loadingToast,
@@ -134,6 +136,7 @@ const Export = ({ canvasRef }: { canvasRef: React.RefObject<HTMLDivElement> }) =
       }
     } catch (error) {
       console.error('Failed to export canvas:', error);
+      setDisableExportActions(false);
       toast.error('Failed to Export Image. Please try again.',
         {
           id: loadingToast,
@@ -148,7 +151,9 @@ const Export = ({ canvasRef }: { canvasRef: React.RefObject<HTMLDivElement> }) =
   };
 
   const handleCopy = async () => {
+    setDisableExportActions(true);
     if (!canvasRef.current) {
+      setDisableExportActions(false);
       toast.error('Failed to Copy Image. Please try again.',
         {
           style: {
@@ -196,6 +201,7 @@ const Export = ({ canvasRef }: { canvasRef: React.RefObject<HTMLDivElement> }) =
             [blob.type]: blob,
           });
           await navigator.clipboard.write([clipboardItem]);
+          setDisableExportActions(false);
           toast.success('Image copied to clipboard!',
             {
               id: loadingToast,
@@ -214,6 +220,7 @@ const Export = ({ canvasRef }: { canvasRef: React.RefObject<HTMLDivElement> }) =
       }
     } catch (error) {
       console.error('Failed to copy image:', error);
+      setDisableExportActions(false);
       toast.error('Failed to copy image. Please try again.',
         {
           id: loadingToast,
@@ -274,7 +281,7 @@ const Export = ({ canvasRef }: { canvasRef: React.RefObject<HTMLDivElement> }) =
         </div>
 
         <div className={styles.export}>
-          <button onClick={handleExport} className={styles.export_button}>
+          <button onClick={handleExport} disabled={disableExportActions} className={styles.export_button}>
             Export
           </button>
           <Icon
@@ -284,7 +291,7 @@ const Export = ({ canvasRef }: { canvasRef: React.RefObject<HTMLDivElement> }) =
             strokeWidth={1}
             tipTitle="Copy Mockup"
             tipPosition="top"
-            onClick={handleCopy}
+            onClick={!disableExportActions ? handleCopy : undefined}
           />
           <Icon
             icon={Settings2}

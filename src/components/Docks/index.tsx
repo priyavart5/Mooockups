@@ -4,27 +4,15 @@ import { ChevronLeft, Maximize2, Undo2, Redo2, EqualNot, SquareDashed } from 'lu
 import styles from './styles.module.scss';
 import Icon from '../Icon';
 import { useDispatch, useSelector } from 'react-redux';
-import { togglePreview } from '../../redux/slices/previewSlice';
+import { setPreview, setHideMockup, setHideBackground } from '../../redux/slices/dockSlice';
 import { RootState } from '../../redux/store';
 import Link from 'next/link';
 
 
 const Docks = () => {
 
-    // *****************
-    //States - Start
-    // *****************
-
-    // *****************
-    //States - End
-    // *****************
-
     const dispatch = useDispatch();
-    const isPreview = useSelector((state: RootState) => state.preview.isPreview);
-    
-    const handlePreview = () => {
-        dispatch(togglePreview()); // Dispatch action to toggle preview
-    };
+    const { preview, hideMockup, hideBackground } = useSelector((state: RootState) => state.dock);
 
     return (
         <div className={styles.dock}>
@@ -42,23 +30,25 @@ const Docks = () => {
             </div>
             <div className={styles.dock_other}>
                 {
-                    !isPreview && (
+                    !preview.isPreview && (
                         <>
                             <Icon 
                                 icon={EqualNot} 
                                 color='#EFEFEF' 
                                 size={20} 
                                 strokeWidth={1} 
-                                tipTitle="Hide Mockup"
+                                tipTitle={!hideMockup.isMockupHide ? 'Hide Mockup' : 'Unhide Mockup'}
                                 tipPosition='right'
+                                onClick={() => dispatch(setHideMockup(!hideMockup.isMockupHide))}
                             />
                             <Icon 
                                 icon={SquareDashed} 
                                 color='#EFEFEF' 
                                 size={20} 
                                 strokeWidth={1} 
-                                tipTitle="Hide Background"
+                                tipTitle={!hideBackground.isBackgroundHide ? 'Hide Background' : 'Unhide Background'}
                                 tipPosition='right'
+                                onClick={() => dispatch(setHideBackground(!hideBackground.isBackgroundHide))}
                             />
                             <Icon 
                                 icon={Undo2} 
@@ -84,9 +74,9 @@ const Docks = () => {
                     color='#EFEFEF' 
                     size={20} 
                     strokeWidth={1} 
-                    tipTitle="Preview"
+                    tipTitle={!preview.isPreview ? 'Preview' : 'Unview'}
                     tipPosition='right'
-                    onClick={handlePreview}
+                    onClick={() => dispatch(setPreview(!preview.isPreview))}
                 />
             </div>
         </div>
