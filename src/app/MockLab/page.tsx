@@ -16,7 +16,7 @@ import { RootState } from '../../redux/store';
 const MockLab = () => {
 
   const canvasRef = useRef<HTMLDivElement | null>(null);
-  const isPreview = useSelector((state: RootState) => state.preview.isPreview);
+  const { preview } = useSelector((state: RootState) => state.dock);
 
   return (
     <div className={styles.mockLab}>
@@ -26,7 +26,7 @@ const MockLab = () => {
       <div className={styles.mockLab_canvas} >
         <Canvas ref={canvasRef} />
       </div>
-      {!isPreview && (
+      {!preview.isPreview && (
         <div className={styles.mockLab_toolBox}>
           <Import />
           <EditorBox />

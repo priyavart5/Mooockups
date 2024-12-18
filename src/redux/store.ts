@@ -1,12 +1,12 @@
 // redux/store.ts
 import { configureStore } from '@reduxjs/toolkit';
-import previewReducer from './slices/previewSlice';
+import dockReducer from './slices/dockSlice';
 import importReducer from './slices/importSlice';
 import mockLabReducer from './slices/mockLabSlice';
 
 export const store = configureStore({
   reducer: {
-    preview: previewReducer,
+    dock: dockReducer,
     import: importReducer,
     mockLab: mockLabReducer,
   },

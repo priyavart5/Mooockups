@@ -3,7 +3,7 @@
 import React, { useState, useRef } from 'react';
 import Image from 'next/image';
 import styles from './styles.module.scss';
-import { GalleryHorizontalEnd, Frame, Ellipsis, ChevronDown, ChevronUp, ImageUp, Minus, X, PencilRuler } from 'lucide-react';
+import { GalleryHorizontalEnd, Frame, Ellipsis, ChevronDown, ChevronUp, ImageUp, X, PencilRuler, Replace } from 'lucide-react';
 import { mockLabFrame, mockLabMockup } from '../../utils/defaultData';
 import Slider from '../Slider';
 import InputSlider from '../InputSlider';
@@ -94,8 +94,8 @@ const MockLabEditor = () => {
     const [visibleUnsplash, setVisibleUnsplash] = useState<boolean>(false);
     const [visiblePixabay, setVisiblePixabay] = useState<boolean>(false);
 
-    const [visibleClearBackground, setVisibleClearBackground] = useState<boolean>(false);
-    const [visibleClearGradient, setVisibleClearGradient] = useState<boolean>(false);
+    // const [visibleClearBackground, setVisibleClearBackground] = useState<boolean>(false);
+    // const [visibleClearGradient, setVisibleClearGradient] = useState<boolean>(false);
     const [visibleClearShadow, setVisibleClearShadow] = useState<boolean>(false);
 
     const [visibleBackgroundEffect, setVisibleBackgroundEffect] = useState<boolean>(false);
@@ -120,6 +120,7 @@ const MockLabEditor = () => {
                         setVisibleGradientEffect(false);
                         dispatch(setFrameBackgroundScale(0));
                         dispatch(setFrameBackgroundOpacity(1));
+                        setSelectedGradientImageIndex(null);
                     };
                 }
             };
@@ -128,15 +129,9 @@ const MockLabEditor = () => {
         }
     };
     
-    const handleClearImportImage = () => {
+    const handleReplaceImportImage = () => {
         const ImageInput = document.getElementById('importBGFile') as HTMLInputElement;
-        if (ImageInput) ImageInput.value = '';
-        dispatch(setFrameBackgroundType('none'));
-        dispatch(setFrameBackgroundSrc(''));
-        setBgImportImageName('Import image');
-        setVisibleBackgroundEffect(false);
-        dispatch(setFrameBackgroundScale(0));
-        dispatch(setFrameBackgroundOpacity(1));
+        if (ImageInput) ImageInput.click();
     };
 
     const frameLayoutCategoryRefs: Record<FrameLayoutCategory, React.RefObject<HTMLDivElement>> = {
@@ -260,24 +255,24 @@ const MockLabEditor = () => {
     // Frame - Clear Button Function
     // *************************
 
-    const handleClearBackground = () => {
-        dispatch(setFrameBackgroundType('none'));
-        dispatch(setFrameBackgroundSrc(''));
-        dispatch(setFrameBackgroundScale(0));
-        dispatch(setFrameBackgroundOpacity(1));
-        setVisibleClearBackground(false);
-        setVisibleBackgroundEffect(false);
-    };
+    // const handleClearBackground = () => {
+    //     dispatch(setFrameBackgroundType('none'));
+    //     dispatch(setFrameBackgroundSrc(''));
+    //     dispatch(setFrameBackgroundScale(0));
+    //     dispatch(setFrameBackgroundOpacity(1));
+    //     setVisibleClearBackground(false);
+    //     setVisibleBackgroundEffect(false);
+    // };
       
-    const handleClearGradient = () => {
-        dispatch(setFrameBackgroundType('none'));
-        dispatch(setFrameBackgroundSrc(''));
-        dispatch(setFrameBackgroundScale(0));
-        dispatch(setFrameBackgroundOpacity(1));
-        setVisibleClearGradient(false);
-        setSelectedGradientImageIndex(null);
-        setVisibleGradientEffect(false);
-    };
+    // const handleClearGradient = () => {
+    //     dispatch(setFrameBackgroundType('none'));
+    //     dispatch(setFrameBackgroundSrc(''));
+    //     dispatch(setFrameBackgroundScale(0));
+    //     dispatch(setFrameBackgroundOpacity(1));
+    //     setVisibleClearGradient(false);
+    //     setSelectedGradientImageIndex(null);
+    //     setVisibleGradientEffect(false);
+    // };
       
     const handleClearShadow = () => {
         dispatch(setFrameShadow(''));
@@ -563,7 +558,7 @@ const MockLabEditor = () => {
                         <div className={styles.EF_background}>
                             <div className={styles.EF_panels_title_clear}>
                                 <p className={styles.EF_panels_title}>Background</p>
-                                { visibleClearBackground && <p className={styles.EF_panels_clear} onClick={handleClearBackground}>Clear</p> }
+                                {/* { visibleClearBackground && <p className={styles.EF_panels_clear} onClick={handleClearBackground}>Clear</p> } */}
                             </div>
                             <div className={styles.EF_background_buttons}>
                                 <button onClick={() => dispatch(setFrameTransparent(!frameTransparent.transparent))}>{ frameTransparent.transparent ? 'Non - Transparent' : 'Transparent' }</button>
@@ -612,13 +607,13 @@ const MockLabEditor = () => {
                                     </div>
                                     {  
                                         <Icon
-                                            icon={Minus}
+                                            icon={Replace}
                                             color='#EFEFEF'
                                             size={20}
                                             strokeWidth={1}
                                             tipTitle="Clear file"
                                             tipPosition='bottom'
-                                            onClick={handleClearImportImage}
+                                            onClick={handleReplaceImportImage}
                                         />
                                     }
                                     <Icon
@@ -636,12 +631,12 @@ const MockLabEditor = () => {
                                 <BackGroundIntegrations 
                                     source="unsplash" 
                                     onClose={() => {setVisibleUnsplash(false)}} 
-                                    onSetVisibleClearBackground={() => setVisibleClearBackground(true)}
+                                    // onSetVisibleClearBackground={() => setVisibleClearBackground(true)}
                                     onSetVisibleEffect={() => {
                                         setVisibleBackgroundEffect(true);
                                         setVisibleGradientEffect(false);
                                         setSelectedGradientImageIndex(null);
-                                        setVisibleClearGradient(false);
+                                        // setVisibleClearGradient(false);
                                     }} 
                                     /> 
                                 }
@@ -649,12 +644,12 @@ const MockLabEditor = () => {
                                 <BackGroundIntegrations 
                                     source="pixabay" 
                                     onClose={() => setVisiblePixabay(false)} 
-                                    onSetVisibleClearBackground={() => setVisibleClearBackground(true)} 
+                                    // onSetVisibleClearBackground={() => setVisibleClearBackground(true)} 
                                     onSetVisibleEffect={() => {
                                         setVisibleBackgroundEffect(true);
                                         setVisibleGradientEffect(false);
                                         setSelectedGradientImageIndex(null);
-                                        setVisibleClearGradient(false);
+                                        // setVisibleClearGradient(false);
                                     }} 
                                 /> 
                             }
@@ -684,7 +679,7 @@ const MockLabEditor = () => {
                         <div className={styles.EF_panels}>
                             <div className={styles.EF_panels_title_clear}>
                                 <p className={styles.EF_panels_title}>Gradient</p>
-                                { visibleClearGradient && <p className={styles.EF_panels_clear} onClick={handleClearGradient}>Clear</p> }
+                                {/* { visibleClearGradient && <p className={styles.EF_panels_clear} onClick={handleClearGradient}>Clear</p> } */}
                             </div>
                             <div className={styles.EF_panels_featuredImage}>
                                 {mockLabFrame.gradient.slice(0, showAllGradient ? mockLabFrame.gradient.length : 5).map((image, index) => (
@@ -700,11 +695,11 @@ const MockLabEditor = () => {
                                         dispatch(setFrameTransparent(false));
                                         dispatch(setFrameBackgroundType('gradient'));
                                         dispatch(setFrameBackgroundSrc(image.canvasSrc));
-                                        setVisibleClearGradient(true);
+                                        // setVisibleClearGradient(true);
                                         setSelectedGradientImageIndex(index);
                                         setVisibleGradientEffect(true);
                                         setVisibleBackgroundEffect(false);
-                                        setVisibleClearBackground(false);
+                                        // setVisibleClearBackground(false);
                                         setVisibleUnsplash(false);
                                         setVisiblePixabay(false);
                                         setVisibleBGImportImage(false);
@@ -837,11 +832,11 @@ const MockLabEditor = () => {
                             <div className={styles.EF_panels_FrameOverview}>
                                 <span className={styles.EF_panels_FrameOverview_span}>
                                     <p className={styles.EF_panels_FrameOverview_key}>Frame</p>
-                                    <p className={styles.EF_panels_FrameOverview_value}>Behance Project</p>
+                                    <p className={styles.EF_panels_FrameOverview_value}>{frameLayout.type} {frameLayout.name}</p>
                                 </span>
                                 <span className={styles.EF_panels_FrameOverview_span}>
                                     <p className={styles.EF_panels_FrameOverview_key}>Frame Pixels</p>
-                                    <p className={styles.EF_panels_FrameOverview_value}>1440 x 768</p>
+                                    <p className={styles.EF_panels_FrameOverview_value}>{frameLayout.width} x {frameLayout.height}</p>
                                 </span>
                             </div>
                         </div>
