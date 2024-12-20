@@ -249,7 +249,6 @@ const mockLabSlice = createSlice({
     // Frame Reducer
 
     setSelectedFrameLayout(state, action: PayloadAction<FrameLayoutState>){
-        console.log(action.payload)
         state.frameLayout = action.payload;
     },
 

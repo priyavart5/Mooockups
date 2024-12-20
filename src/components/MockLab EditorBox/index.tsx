@@ -31,6 +31,7 @@ import {
     setFrameNoise,
     setFrameBlur,
 } from '../../redux/slices/mockLabSlice';
+import { detectOS } from '@/utils/osDetection';
 
 
 type DeviceCategory = "Phone" | "Tablet";
@@ -62,6 +63,8 @@ interface Device {
 
 
 const MockLabEditor = () => {
+
+    const os = detectOS();
     
     // Redux Dispatch
     const dispatch = useDispatch();
@@ -79,6 +82,8 @@ const MockLabEditor = () => {
         frameNoise,
         frameBlur
     } = useSelector((state: any) => state.mockLab);
+
+    const { hideMockup, hideBackground } = useSelector((state: any) => state.dock);
     
     // *******************
     // Frame ToolBox
@@ -303,185 +308,196 @@ const MockLabEditor = () => {
             {
                 editorService === 'Mockup' && (
                     <>
-                    <div className={styles.EditorMockup}>
+                        <div className={styles.EditorMockup} style={{
+                            filter: `${ hideMockup.isMockupHide ? 'blur(2px)' : 'none' }`,
+                        }}>
 
-                        {/* Devices Tool */}
-                        <div className={styles.EM_devices}>
-                            <div className={styles.EM_devices_selected} onClick={() => setDeviceToogle(!deviceToogle)}>
-                                {mockupSelectedDevice && (
+                            {/* Devices Tool */}
+                            <div className={styles.EM_devices}>
+                                <div className={styles.EM_devices_selected} onClick={() => setDeviceToogle(!deviceToogle)}>
+                                    {mockupSelectedDevice && (
+                                        <>
+                                            <Image
+                                                src={mockupSelectedDevice.image}
+                                                alt={mockupSelectedDevice.model}
+                                                className={styles.EM_devices_selected_image}
+                                                width={28}
+                                                height={36}
+                                                loading="lazy"
+                                            />
+                                            <div className={styles.EM_devices_selected_specification}>
+                                                <p className={styles.EM_devices_selected_brand}>{mockupSelectedDevice.brand}</p>
+                                                <p className={styles.EM_devices_selected_model}>{mockupSelectedDevice.model}</p>
+                                            </div>
+                                        </>
+                                    )}
+                                    {!deviceToogle ? (
+                                        <ChevronDown className={styles.EM_devices_selected_icon} color="#EFEFEF" size={20} />
+                                    ) : (
+                                        <ChevronUp className={styles.EM_devices_selected_icon} color="#EFEFEF" size={20} />
+                                    )}
+                                </div>
+
+                                {deviceToogle && (
                                     <>
-                                        <Image
-                                            src={mockupSelectedDevice.image}
-                                            alt={mockupSelectedDevice.model}
-                                            className={styles.EM_devices_selected_image}
-                                            width={28}
-                                            height={36}
-                                            loading="lazy"
-                                        />
-                                        <div className={styles.EM_devices_selected_specification}>
-                                            <p className={styles.EM_devices_selected_brand}>{mockupSelectedDevice.brand}</p>
-                                            <p className={styles.EM_devices_selected_model}>{mockupSelectedDevice.model}</p>
+                                        <div className={styles.EM_devices_list_categories}>
+                                            {Object.keys(categoryRefs).map((category, index) => (
+                                                <button
+                                                    key={index}
+                                                    className={styles.categoryButton}
+                                                    onClick={() =>
+                                                        scrollToCategory(category as DeviceCategory)
+                                                    }
+                                                >
+                                                    {category}
+                                                </button>
+                                            ))}
+                                        </div>
+
+                                        <div className={styles.EM_devices_category}>
+                                            {Object.keys(categoryRefs).map((category, index) => (
+                                                <div
+                                                    key={index}
+                                                    id={`${category.toLowerCase()}-category`}
+                                                    ref={categoryRefs[category as keyof typeof categoryRefs]}
+                                                    className={styles.EM_devices_category_section}
+                                                >
+                                                    <p className={styles.EM_devices_category_name}>{category}</p>
+                                                    <div className={styles.EM_devices_category_devices}>
+                                                        {renderDevicesByType(category as DeviceCategory)}
+                                                    </div>
+                                                </div>
+                                            ))}
                                         </div>
                                     </>
                                 )}
-                                {!deviceToogle ? (
-                                    <ChevronDown className={styles.EM_devices_selected_icon} color="#EFEFEF" size={20} />
-                                ) : (
-                                    <ChevronUp className={styles.EM_devices_selected_icon} color="#EFEFEF" size={20} />
-                                )}
                             </div>
 
-                            {deviceToogle && (
-                                <>
-                                    <div className={styles.EM_devices_list_categories}>
-                                        {Object.keys(categoryRefs).map((category, index) => (
-                                            <button
-                                                key={index}
-                                                className={styles.categoryButton}
-                                                onClick={() =>
-                                                    scrollToCategory(category as DeviceCategory)
-                                                }
-                                            >
-                                                {category}
-                                            </button>
-                                        ))}
-                                    </div>
-
-                                    <div className={styles.EM_devices_category}>
-                                        {Object.keys(categoryRefs).map((category, index) => (
-                                            <div
-                                                key={index}
-                                                id={`${category.toLowerCase()}-category`}
-                                                ref={categoryRefs[category as keyof typeof categoryRefs]}
-                                                className={styles.EM_devices_category_section}
-                                            >
-                                                <p className={styles.EM_devices_category_name}>{category}</p>
-                                                <div className={styles.EM_devices_category_devices}>
-                                                    {renderDevicesByType(category as DeviceCategory)}
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </>
-                            )}
-                        </div>
-
-                        {/* Shade Tool */}
-                        <div className={styles.EM_panels}>
-                            <p>Shade</p>
-                            <div className={styles.EM_panels_shade_featuredImage}>
-                                {mockupSelectedDevice.shade.map((shade : Shade, index: any) => (
-                                    <div 
-                                        key={index} 
-                                        className={styles.EM_panels_shade_image_div} 
-                                        style={{
-                                            border: selectedShadeIndex === index ? "2px solid #5C5C5C" : "none"
-                                        }}
-                                        onClick={() => {
-                                            dispatch(setMockupLayoutSource(shade.layoutSrc));
-                                            setSelectedShadeIndex(index);
-                                        }} >
-                                        <Image
-                                            src={shade.shadeSrc}
-                                            alt={shade.name || "Imported image"}
-                                            className={styles.EM_panels_shade_image}
-                                            width={77}
-                                            height={50}
-                                            // loading="lazy"
-                                            priority
-                                        />
-                                    </div>
-                                ))}
+                            {/* Shade Tool */}
+                            <div className={styles.EM_panels}>
+                                <p>Shade</p>
+                                <div className={styles.EM_panels_shade_featuredImage}>
+                                    {mockupSelectedDevice.shade.map((shade : Shade, index: any) => (
+                                        <div 
+                                            key={index} 
+                                            className={styles.EM_panels_shade_image_div} 
+                                            style={{
+                                                border: selectedShadeIndex === index ? "2px solid #5C5C5C" : "none"
+                                            }}
+                                            onClick={() => {
+                                                dispatch(setMockupLayoutSource(shade.layoutSrc));
+                                                setSelectedShadeIndex(index);
+                                            }} >
+                                            <Image
+                                                src={shade.shadeSrc}
+                                                alt={shade.name || "Imported image"}
+                                                className={styles.EM_panels_shade_image}
+                                                width={77}
+                                                height={50}
+                                                // loading="lazy"
+                                                priority
+                                            />
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
-                        </div>
 
-                        {/* Shadow Tool */}
-                        <div className={styles.EM_panels}>
-                            <p>Shadow</p>
-                            <div>
-                                <InputSlider 
-                                    min={0}
-                                    max={1}
-                                    step={0.1}
-                                    value={mockupShadow.shadowOpacity}
-                                    onValueChange={(opacity) => dispatch(setMockupShadowOpacity(opacity))}
-                                />
+                            {/* Shadow Tool */}
+                            <div className={styles.EM_panels}>
+                                <p>Shadow</p>
+                                <div>
+                                    <InputSlider 
+                                        min={0}
+                                        max={1}
+                                        step={0.1}
+                                        value={mockupShadow.shadowOpacity}
+                                        onValueChange={(opacity) => dispatch(setMockupShadowOpacity(opacity))}
+                                    />
+                                </div>
                             </div>
-                        </div>
 
-                        {/* Scale Tool */}
-                        <div className={styles.EM_panels}>
-                            <p>Scale</p>
-                            <div>
-                                <InputSlider 
-                                    min={0}
-                                    max={10}
-                                    step={0.1}
-                                    value={mockupScale.scale}
-                                    onValueChange={(scale) => dispatch(setMockupScale(scale))}
-                                />
+                            {/* Scale Tool */}
+                            <div className={styles.EM_panels}>
+                                <p>Scale</p>
+                                <div>
+                                    <InputSlider 
+                                        min={0}
+                                        max={10}
+                                        step={0.1}
+                                        value={mockupScale.scale}
+                                        onValueChange={(scale) => dispatch(setMockupScale(scale))}
+                                    />
+                                </div>
                             </div>
-                        </div>
 
-                        {/* Rotation Tool */}
-                        <div className={styles.EM_panels}>
-                            <p>Rotate</p>
-                            <div>
-                                <InputSlider 
-                                    min={0}
-                                    max={360}
-                                    step={1}
-                                    value={mockupRotation.rotation}
-                                    onValueChange={(rotation) => dispatch(setMockupRotation(rotation))}
-                                />
+                            {/* Rotation Tool */}
+                            <div className={styles.EM_panels}>
+                                <p>Rotate</p>
+                                <div>
+                                    <InputSlider 
+                                        min={0}
+                                        max={360}
+                                        step={1}
+                                        value={mockupRotation.rotation}
+                                        onValueChange={(rotation) => dispatch(setMockupRotation(rotation))}
+                                    />
+                                </div>
                             </div>
-                        </div>
 
-                        {/* Position Tool */}
-                        <div className={styles.EM_panels}>
-                            <div className={styles.EM_panels_title_clear}>
-                                <p className={styles.EM_panels_title}>Position</p>
-                                <p className={styles.EM_panels_reset} onClick={ () =>{
-                                    dispatch(setMockupPositionX(0))
-                                    dispatch(setMockupPositionY(0))
-                                }
-                                }>Reset</p>
+                            {/* Position Tool */}
+                            <div className={styles.EM_panels}>
+                                <div className={styles.EM_panels_title_clear}>
+                                    <p className={styles.EM_panels_title}>Position</p>
+                                    <p className={styles.EM_panels_reset} onClick={ () =>{
+                                        dispatch(setMockupPositionX(0))
+                                        dispatch(setMockupPositionY(0))
+                                    }
+                                    }>Reset</p>
+                                </div>
+                                    <Slider 
+                                        title="x - Axis"
+                                        min={-500}
+                                        max={500}
+                                        step={1}
+                                        initialValue={mockupPosition.position_X}
+                                        onValueChange={(x) => dispatch(setMockupPositionX(x))}
+                                    />
+                                    <Slider 
+                                        title="y - Axis"
+                                        min={-500}
+                                        max={500}
+                                        step={1}
+                                        initialValue={mockupPosition.position_Y}
+                                        onValueChange={(y) => dispatch(setMockupPositionY(y))}
+                                    />
                             </div>
-                                <Slider 
-                                    title="x - Axis"
-                                    min={-500}
-                                    max={500}
-                                    step={1}
-                                    initialValue={mockupPosition.position_X}
-                                    onValueChange={(x) => dispatch(setMockupPositionX(x))}
-                                />
-                                <Slider 
-                                    title="y - Axis"
-                                    min={-500}
-                                    max={500}
-                                    step={1}
-                                    initialValue={mockupPosition.position_Y}
-                                    onValueChange={(y) => dispatch(setMockupPositionY(y))}
-                                />
-                        </div>
 
-                        {/* Mockup Overview */}
-                        <div className={styles.EM_panels}>
-                            <p>Mockup Overview</p>
-                            <div className={styles.EM_panels_deviceOverview}>
-                                <span className={styles.EM_panels_deviceOverview_span}>
-                                    <p className={styles.EM_panels_deviceOverview_key}>Device</p>
-                                    <p className={styles.EM_panels_deviceOverview_value}>{mockupSelectedDevice.brand} {mockupSelectedDevice.model}</p>
-                                </span>
-                                <span className={styles.EM_panels_deviceOverview_span}>
-                                    <p className={styles.EM_panels_deviceOverview_key}>Screen Pixels</p>
-                                    <p className={styles.EM_panels_deviceOverview_value}>{mockupSelectedDevice.screenPixels}</p>
-                                </span>
+                            {/* Mockup Overview */}
+                            <div className={styles.EM_panels}>
+                                <p>Mockup Overview</p>
+                                <div className={styles.EM_panels_deviceOverview}>
+                                    <span className={styles.EM_panels_deviceOverview_span}>
+                                        <p className={styles.EM_panels_deviceOverview_key}>Device</p>
+                                        <p className={styles.EM_panels_deviceOverview_value}>{mockupSelectedDevice.brand} {mockupSelectedDevice.model}</p>
+                                    </span>
+                                    <span className={styles.EM_panels_deviceOverview_span}>
+                                        <p className={styles.EM_panels_deviceOverview_key}>Screen Pixels</p>
+                                        <p className={styles.EM_panels_deviceOverview_value}>{mockupSelectedDevice.screenPixels}</p>
+                                    </span>
+                                </div>
                             </div>
+
+
                         </div>
 
-
-                    </div>
+                        {
+                            hideMockup.isMockupHide && (
+                                <div className={styles.EditorMockup_hidden}>
+                                    <p>Unhide Mockup</p>
+                                    <p className={styles.EditorMockup_commandText}>{ os === 'mac' ? '(Cmd + Shift + M)' : '(Ctrl + Shift + M)'}</p>
+                                </div>
+                            )
+                        }
                     </>
                 )
             }
@@ -490,7 +506,9 @@ const MockLabEditor = () => {
             {
                 editorService === 'Frame' && (
                     <>
-                    <div className={styles.EditorFrame}>
+                    <div className={styles.EditorFrame} style={{
+                        filter: `${ hideBackground.isBackgroundHide ? 'blur(2px)' : 'none' }`,
+                    }}>
 
                         {/* Layout Tool */}
                         <div className={styles.EF_layouts}>
@@ -842,6 +860,15 @@ const MockLabEditor = () => {
                         </div>
 
                     </div>
+
+                    {
+                        hideBackground.isBackgroundHide && (
+                            <div className={styles.EditorFrame_hidden}>
+                                <p>Unhide Background</p>
+                                <p className={styles.EditorFrame_commandText}>{ os === 'mac' ? '(Cmd + Shift + B)' : '(Ctrl + Shift + B)'}</p>
+                            </div>
+                        )
+                    }
                     </>
                 )
             }

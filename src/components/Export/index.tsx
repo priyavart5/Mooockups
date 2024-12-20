@@ -1,5 +1,3 @@
-'use client';
-
 import { useState } from 'react';
 import { Files, Settings2 } from 'lucide-react';
 import styles from './styles.module.scss';
@@ -8,9 +6,14 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import * as htmlToImage from 'html-to-image';
 import { Toaster, toast } from 'react-hot-toast';
+import { detectOS } from '../../utils/osDetection';
+import useShortcut from '../../hooks/useShortcut';
+import { Tooltip } from 'react-tippy';
+import 'react-tippy/dist/tippy.css';
 
 const Export = ({ canvasRef }: { canvasRef: React.RefObject<HTMLDivElement> }) => {
 
+  const os = detectOS();
   const { frameLayout } = useSelector((state: RootState) => state.mockLab);
 
   // *****************
@@ -59,6 +62,7 @@ const Export = ({ canvasRef }: { canvasRef: React.RefObject<HTMLDivElement> }) =
 
   const currentDimensions = calculateDimensions(getMultiplier(selectedSize));
 
+  // Handle Export
   const handleExport = async () => {
     setDisableExportActions(true);
     if (!canvasRef.current) {
@@ -150,6 +154,7 @@ const Export = ({ canvasRef }: { canvasRef: React.RefObject<HTMLDivElement> }) =
     }
   };
 
+  // Handle Copy
   const handleCopy = async () => {
     setDisableExportActions(true);
     if (!canvasRef.current) {
@@ -233,6 +238,10 @@ const Export = ({ canvasRef }: { canvasRef: React.RefObject<HTMLDivElement> }) =
       );
     }
   };
+
+  // Register shortcuts
+  useShortcut(os, ['Meta', 'e'], handleExport);
+  useShortcut(os, ['Meta', 'c'], handleCopy);
   
 
   return (
@@ -281,15 +290,25 @@ const Export = ({ canvasRef }: { canvasRef: React.RefObject<HTMLDivElement> }) =
         </div>
 
         <div className={styles.export}>
-          <button onClick={handleExport} disabled={disableExportActions} className={styles.export_button}>
-            Export
-          </button>
+          {/* @ts-expect-error is necessary */}
+          <Tooltip
+            title={os === 'mac' ? '(Cmd + E)' : '(Ctrl + E)'}
+            position="top"
+            trigger="mouseenter"
+            size="small"
+            animation="fade"
+            className={styles.export_button_tooltip}
+          >
+            <button onClick={handleExport} disabled={disableExportActions} className={styles.export_button}>
+              Export <span></span>
+            </button>
+          </Tooltip>
           <Icon
             icon={Files}
             color="#EFEFEF"
             size={20}
             strokeWidth={1}
-            tipTitle="Copy Mockup"
+            tipTitle={os === 'mac' ? 'Copy Mockup (Cmd + C)' : 'Copy Mockup (Ctrl + C)'}
             tipPosition="top"
             onClick={!disableExportActions ? handleCopy : undefined}
           />
