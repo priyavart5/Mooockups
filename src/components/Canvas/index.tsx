@@ -4,19 +4,22 @@ import Image from 'next/image';
 import { RootState } from '../../redux/store';
 import styles from './styles.module.scss';
 import {setMockupRotation, setMockupScale} from '../../redux/slices/mockLabSlice';
-import { Spline, MoveDiagonal2 } from 'lucide-react';
+import { setFile } from '../../redux/slices/importSlice';
+import { Spline, MoveDiagonal2, ImageUp } from 'lucide-react';
 import { Tooltip } from 'react-tippy';
 import 'react-tippy/dist/tippy.css';
+import {Toaster, toast} from 'react-hot-toast';
 
 const Canvas = forwardRef<HTMLDivElement>((_, ref) => {
 
-  // const [imageLoaded, setImageLoaded] = useState(false);
-  const [isDragging, setIsDragging] = useState(false);
-  const [dragType, setDragType] = useState("");
+  const [isDragging, setIsDragging] = useState<boolean>(false);
+  const [dragType, setDragType] = useState<any>("");
+  const [isDraggingImage, setIsDraggingImage] = useState<boolean>(false);
 
   const dispatch = useDispatch();
 
   const {
+    mockupSelectedDevice,
     mockupLayoutSource,
     mockupScale,
     mockupRotation,
@@ -75,28 +78,96 @@ const Canvas = forwardRef<HTMLDivElement>((_, ref) => {
     };
   }, [isDragging, mockupScale.scale, mockupRotation.rotation, handleMouseMove]);
 
-  // useEffect(() => {
-  //   const img = new window.Image();
-  //   img.src = frameBackground.backgroundSrc;
-  
-  //   img.onload = () => {
-  //     setImageLoaded(true);
-  //   };
-  
-  //   img.onerror = () => {
-  //     console.error("Failed to load background image.");
-  //     setImageLoaded(false);
-  //   };
-  // }, [frameBackground.backgroundSrc]);
+  const handleDrop = (e: any) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDraggingImage(false);
+
+    const image = e.dataTransfer.files?.[0];
+    if (image) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+          const img = new window.Image();
+          img.onload = () => {
+          const width = img.width;
+          const height = img.height;
+
+          dispatch(setFile({
+              file: reader.result as string,
+              fileName: image.name,
+              width,
+              height,
+          }));
+          };
+          img.src = reader.result as string;
+      };
+
+      if (image) {
+        reader.readAsDataURL(image);
+      }else {
+        toast.error('Please upload a valid image file.',
+          {
+            style: {
+              borderRadius: '100px',
+              background: '#2a2a2a',
+              color: '#FF5959',
+            },
+          }
+        );
+      }
+    }
+  };
+
+  const handleFileChange = (e: any) => {
+    const file = e.target.files?.[0];
+    if (file && file.type.startsWith('image/')) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+          const img = new window.Image();
+          img.onload = () => {
+          const width = img.width;
+          const height = img.height;
+
+          dispatch(setFile({
+              file: reader.result as string,
+              fileName: file.name,
+              width,
+              height,
+          }));
+          };
+          img.src = reader.result as string;
+      };
+
+      if (file) {
+        reader.readAsDataURL(file);
+      }else {
+        toast.error('Please upload a valid image file.',
+          {
+            style: {
+              borderRadius: '100px',
+              background: '#2a2a2a',
+              color: '#FF5959',
+            },
+          }
+        );
+      }
+    }
+  };
 
 
 
   return (
-    <>
+    <>1
+    <Toaster position="top-center"/>
     <div className={styles.canvas}>
       <div className={styles.canvasSafeArea} >
         <div className={styles.previewframe} style={{aspectRatio: frameLayout.aspectRatio}}>
-          <div className={styles.frameContent} ref={ref} >
+          <div 
+            className={styles.frameContent} 
+            style={{
+              backgroundColor: !frameTransparent.transparent ? (!hideBackground.isBackgroundHide ? '#121212' : 'transparent') : 'transparent'
+            }} 
+            ref={ref} >
             {
               !hideBackground.isBackgroundHide && (
                 <div className={styles.canvasBackGround}>
@@ -153,8 +224,9 @@ const Canvas = forwardRef<HTMLDivElement>((_, ref) => {
                       scale(${mockupScale.scale / 3})
                       translate(${mockupPosition.position_X + 12}px, ${mockupPosition.position_Y + 12}px)
                       rotate(${mockupRotation.rotation}deg)`,
-                      filter: "blur(16px)",
+                      filter: "blur(10px)",
                       opacity: `${mockupShadow.shadowOpacity}`,
+                      aspectRatio: 738.24/508.8 
                     }}
                   ></div>
 
@@ -167,6 +239,7 @@ const Canvas = forwardRef<HTMLDivElement>((_, ref) => {
                             scale(${mockupScale.scale / 3})
                             translate(${mockupPosition.position_X}px, ${mockupPosition.position_Y}px)
                             rotate(${mockupRotation.rotation}deg)`,
+                            aspectRatio: 738.24/508.8 
                         }}
                       >
                         {
@@ -212,16 +285,55 @@ const Canvas = forwardRef<HTMLDivElement>((_, ref) => {
                         )}
 
                         <Image
+                          unoptimized
                           crossOrigin='anonymous'
                           loading='eager'
                           src={mockupLayoutSource.layoutSrc}
                           alt="Device Shade"
-                          width={500}
-                          height={320}
-                          className={styles.layoutimage}
-                          unoptimized
+                          fill
                         />
                       </div>
+                  )}
+
+                  {/* Device Import */}
+                  {!file  && (
+                    <div
+                      className={styles.canvasDevice_screen}
+                      style={{
+                        transform:` 
+                          scale(${mockupScale.scale / 3})
+                          translate(${mockupPosition.position_X}px, ${mockupPosition.position_Y}px)
+                          rotate(${mockupRotation.rotation}deg)`,
+                          aspectRatio: 2266/1488,
+                          zIndex: 7
+                      }}
+                    >
+                        <div
+                          className={`${styles.canvasDevice_screenImport} ${
+                            isDraggingImage ? styles.dragActive : ''
+                          }`}
+                          onDragOver={(e:any) => {
+                            e.preventDefault();
+                            setIsDraggingImage(true);
+                          }}
+                          onDragLeave={() => setIsDraggingImage(false)}
+                          onDrop={handleDrop}
+                        >
+                          <input
+                            type="file"
+                            accept="image/*"
+                            style={{ display: 'none' }}
+                            id="imageUploadInput"
+                            onChange={handleFileChange}
+                            className={styles.canvasDevice_uploadImageInput}
+                          />
+                          <label htmlFor="imageUploadInput" className={styles.canvasDevice_uploadImageLabel} style={{ cursor: 'pointer' }}>
+                            <ImageUp color="#EFEFEF" size={24} strokeWidth={1.5} style={{ marginBottom: '10px' }} />
+                            <p>{isDraggingImage ? 'Drop the image here...' : 'Drag & Drop Image'}</p>
+                            <p>{mockupSelectedDevice.screenPixels}</p>
+                          </label>
+                        </div>
+                    </div>
                   )}
 
                   {/* Device Screen */}
@@ -233,9 +345,20 @@ const Canvas = forwardRef<HTMLDivElement>((_, ref) => {
                           scale(${mockupScale.scale / 3})
                           translate(${mockupPosition.position_X}px, ${mockupPosition.position_Y}px)
                           rotate(${mockupRotation.rotation}deg)`,
+                          aspectRatio: 2266/1488,
+                          zIndex: 3,
+                          maxHeight: '87%',
                       }}
                     >
-                      <Image unoptimized crossOrigin='anonymous' loading='eager' src={file} alt="Screen Image" style={{ borderRadius: '10px' }} width={452} height={278} />
+                        <Image
+                          unoptimized 
+                          crossOrigin='anonymous' 
+                          loading='eager' 
+                          src={file} 
+                          alt="Screen Image" 
+                          fill 
+                          className={styles.canvasDevice_screenImage}
+                        />
                     </div>
                   )}
                 </div>

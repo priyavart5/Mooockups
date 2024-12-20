@@ -56,6 +56,28 @@
     }
 }
 
+.EditorMockup_hidden{
+    position: absolute;
+    width: 100%;
+    height: 90%;
+    top: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+
+    p{
+        font: 400 clamp(16px, 1.5vw, 16px) var(--inter);
+        color: #fff;
+        z-index: 4;
+    }
+
+    .EditorMockup_commandText{
+        font-size: 12px;
+    }
+}
+
 .EM_devices{
     width: 100%;
     height: auto;
@@ -317,6 +339,28 @@
     -ms-overflow-style: none;
     &::-webkit-scrollbar {
         display: none;
+    }
+}
+
+.EditorFrame_hidden{
+    position: absolute;
+    width: 100%;
+    height: 90%;
+    top: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+
+    p{
+        font: 400 clamp(16px, 1.5vw, 16px) var(--inter);
+        color: #fff;
+        z-index: 4;
+    }
+
+    .EditorFrame_commandText{
+        font-size: 12px;
     }
 }
 

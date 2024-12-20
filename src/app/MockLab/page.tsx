@@ -1,12 +1,13 @@
 'use client'
 
+import dynamic from 'next/dynamic';
 import {useRef} from 'react';
 import styles from  './styles.module.scss';
 
 import Canvas from '../../components/Canvas';
-import Docks from '../../components/Docks';
+const Docks = dynamic(() => import('../../components/Docks'), { ssr: false });
 import Import from '../../components/Import';
-import Export from '../../components/Export';
+const Export = dynamic(() => import('../../components/Export'), { ssr: false });
 import EditorBox from '../../components/MockLab EditorBox';
 
 

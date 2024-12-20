@@ -30,15 +30,12 @@ const previewSlice = createSlice({
   initialState,
   reducers: {
     setPreview: (state, action: PayloadAction<boolean>) => {
-      console.log(action.payload)
       state.preview.isPreview = action.payload;
     },
     setHideMockup: (state, action: PayloadAction<boolean>) => {
-      console.log('hide mockup' , action.payload)
       state.hideMockup.isMockupHide = action.payload;
     },
     setHideBackground: (state, action: PayloadAction<boolean>) => {
-      console.log('hide bg' , action.payload)
       state.hideBackground.isBackgroundHide = action.payload;
     },
   },
