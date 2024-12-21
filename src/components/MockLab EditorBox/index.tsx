@@ -31,7 +31,6 @@ import {
     setFrameNoise,
     setFrameBlur,
 } from '../../redux/slices/mockLabSlice';
-import { detectOS } from '@/utils/osDetection';
 
 
 type DeviceCategory = "Phone" | "Tablet";
@@ -63,8 +62,6 @@ interface Device {
 
 
 const MockLabEditor = () => {
-
-    const os = detectOS();
     
     // Redux Dispatch
     const dispatch = useDispatch();
@@ -494,7 +491,7 @@ const MockLabEditor = () => {
                             hideMockup.isMockupHide && (
                                 <div className={styles.EditorMockup_hidden}>
                                     <p>Unhide Mockup</p>
-                                    <p className={styles.EditorMockup_commandText}>{ os === 'mac' ? '(Cmd + Shift + M)' : '(Ctrl + Shift + M)'}</p>
+                                    <p className={styles.EditorMockup_commandText}>(Ctrl + Shift + M)</p>
                                 </div>
                             )
                         }
@@ -865,7 +862,7 @@ const MockLabEditor = () => {
                         hideBackground.isBackgroundHide && (
                             <div className={styles.EditorFrame_hidden}>
                                 <p>Unhide Background</p>
-                                <p className={styles.EditorFrame_commandText}>{ os === 'mac' ? '(Cmd + Shift + B)' : '(Ctrl + Shift + B)'}</p>
+                                <p className={styles.EditorFrame_commandText}>(Ctrl + Shift + B)</p>
                             </div>
                         )
                     }
