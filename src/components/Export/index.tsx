@@ -293,7 +293,7 @@ const Export = ({ canvasRef }: { canvasRef: React.RefObject<HTMLDivElement> }) =
         <div className={styles.export}>
           {/* @ts-expect-error is necessary */}
           <Tooltip
-            title='Ctrl + E'
+            title='Export Mockup (Ctrl + E)'
             position="top"
             trigger="mouseenter"
             size="small"

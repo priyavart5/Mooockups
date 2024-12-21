@@ -81,7 +81,7 @@ const Docks: React.FC = () => {
               color="#EFEFEF"
               size={20}
               strokeWidth={1}
-              tipTitle='Ctrl + Shift + Z'
+              tipTitle='Redo (Ctrl + Shift + Z)'
               tipPosition="right"
               onClick={handleRedo}
             />
