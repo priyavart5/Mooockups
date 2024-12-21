@@ -194,7 +194,7 @@ const initialState: MockLabState = {
     frameTransparent : { transparent: false},
     frameBackground: { 
         backgroundType: 'gradient', 
-        backgroundSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Gradient/Canvas+Image/Spectral20Light20-2050.webp',
+        backgroundSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Gradient/Canvas+Image/Apple20GIOS1820-2012.webp',
         backgroundScale: 0,
         backgroundOpacity: 1,
     },

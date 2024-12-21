@@ -175,6 +175,11 @@ export const mockLabFrame = {
     ],
     gradient : [
         {
+            name: 'Apple GIOS18 - 12',
+            featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Gradient/Featured+Image/Apple+GIOS18+-+12.jpg',
+            canvasSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Gradient/Canvas+Image/Apple20GIOS1820-2012.webp'
+        },
+        {
             name: 'Galactic Ring - 16',
             featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Gradient/Featured+Image/Galactic+Ring+-+16+1.jpg',
             canvasSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Gradient/Canvas+Image/Galactic20Ring20-2016.webp'
@@ -183,11 +188,6 @@ export const mockLabFrame = {
             name: 'Spectral Dark - 50',
             featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Gradient/Featured+Image/Spectral%2520Dark%2520-%252050+2.jpg',
             canvasSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Gradient/Canvas+Image/Spectral20Dark20-2050.webp'
-        },
-        {
-            name: 'Apple GIOS18 - 12',
-            featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Gradient/Featured+Image/Apple+GIOS18+-+12.jpg',
-            canvasSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Gradient/Canvas+Image/Apple20GIOS1820-2012.webp'
         },
         {
             name: 'Spectral Light - 50',
