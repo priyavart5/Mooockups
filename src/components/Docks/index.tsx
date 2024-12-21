@@ -24,11 +24,12 @@ const Docks: React.FC = () => {
   const handlePreview = () => dispatch(setPreview(!preview.isPreview));
 
   // Register shortcuts
-  useShortcut(os, ['Meta', 'Shift', 'm'], handleHideMockup);
-  useShortcut(os, ['Meta', 'Shift', 'b'], handleHideBackground);
-  useShortcut(os, ['Meta', 'z'], handleUndo);
-  useShortcut(os, ['Meta', 'Shift', 'z'], handleRedo);
-  useShortcut(os, ['Meta', 'p'], handlePreview);
+  useShortcut(os, [os === 'mac' ? 'Meta' : 'Control', 'Shift', 'M'], handleHideMockup);
+  useShortcut(os, [os === 'mac' ? 'Meta' : 'Control', 'Shift', 'B'], handleHideBackground);
+  useShortcut(os, [os === 'mac' ? 'Meta' : 'Control', 'z'], handleUndo);
+  useShortcut(os, [os === 'mac' ? 'Meta' : 'Control', 'Shift', 'Z'], handleRedo);
+  useShortcut(os, [os === 'mac' ? 'Meta' : 'Control', 'p'], handlePreview);
+
   
 
   return (
@@ -53,11 +54,7 @@ const Docks: React.FC = () => {
               color="#EFEFEF"
               size={20}
               strokeWidth={1}
-              tipTitle={
-                os === 'mac' 
-                  ? !hideMockup.isMockupHide ? 'Hide Mockup (Cmd + Shift + M)' : 'Unhide Mockup (Cmd + Shift + M)'
-                  : !hideMockup.isMockupHide ? 'Hide Mockup (Ctrl + Shift + M)' : 'Unhide Mockup (Ctrl + Shift +M)'
-              }
+              tipTitle={ !hideMockup.isMockupHide ? 'Hide Mockup (Ctrl + Shift + M)' : 'Unhide Mockup (Ctrl + Shift + M)'}
               tipPosition="right"
               onClick={handleHideMockup}
             />
@@ -66,11 +63,7 @@ const Docks: React.FC = () => {
               color="#EFEFEF"
               size={20}
               strokeWidth={1}
-              tipTitle={
-                os === 'mac' 
-                  ? !hideBackground.isBackgroundHide ? 'Hide Background (Cmd + Shift + B)' : 'Unhide Background (Cmd + Shift + B)'
-                  : !hideBackground.isBackgroundHide ? 'Hide Background (Ctrl + Shift + B)' : 'Unhide Background (Ctrl + Shift + B)'
-              }
+              tipTitle={ !hideBackground.isBackgroundHide ? 'Hide Background (Ctrl + Shift + B)' : 'Unhide Background (Ctrl + Shift + B)'}
               tipPosition="right"
               onClick={handleHideBackground}
             />
@@ -79,7 +72,7 @@ const Docks: React.FC = () => {
               color="#EFEFEF"
               size={20}
               strokeWidth={1}
-              tipTitle={os === 'mac' ? 'Undo (Cmd + Z)' : 'Undo (Ctrl + Z)'}
+              tipTitle='Undo (Ctrl + Z)'
               tipPosition="right"
               onClick={handleUndo}
             />
@@ -88,7 +81,7 @@ const Docks: React.FC = () => {
               color="#EFEFEF"
               size={20}
               strokeWidth={1}
-              tipTitle={os === 'mac' ? 'Redo (Cmd + Shift + Z)' : 'Redo (Ctrl + Shift + Z)'}
+              tipTitle='Ctrl + Shift + Z'
               tipPosition="right"
               onClick={handleRedo}
             />
@@ -99,11 +92,7 @@ const Docks: React.FC = () => {
           color="#EFEFEF"
           size={20}
           strokeWidth={1}
-          tipTitle={
-            os === 'mac' 
-              ? !preview.isPreview ? 'Preview (Cmd + P)' : 'Unview (Cmd + P)'
-              : !preview.isPreview ? 'Preview (Ctrl + P)' : 'Unview (Ctrl + P)'
-          }
+          tipTitle={ !preview.isPreview ? 'Preview (Ctrl + P)' : 'Unview (Ctrl + P)'}
           tipPosition="right"
           onClick={handlePreview}
         />

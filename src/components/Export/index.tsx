@@ -240,8 +240,9 @@ const Export = ({ canvasRef }: { canvasRef: React.RefObject<HTMLDivElement> }) =
   };
 
   // Register shortcuts
-  useShortcut(os, ['Meta', 'e'], handleExport);
-  useShortcut(os, ['Meta', 'c'], handleCopy);
+
+  useShortcut(os, [os === 'mac' ? 'Meta' : 'Control', 'e'], handleExport);
+  useShortcut(os, [os === 'mac' ? 'Meta' : 'Control', 'c'], handleCopy);
   
 
   return (
@@ -292,7 +293,7 @@ const Export = ({ canvasRef }: { canvasRef: React.RefObject<HTMLDivElement> }) =
         <div className={styles.export}>
           {/* @ts-expect-error is necessary */}
           <Tooltip
-            title={os === 'mac' ? '(Cmd + E)' : '(Ctrl + E)'}
+            title='Ctrl + E'
             position="top"
             trigger="mouseenter"
             size="small"
@@ -308,7 +309,7 @@ const Export = ({ canvasRef }: { canvasRef: React.RefObject<HTMLDivElement> }) =
             color="#EFEFEF"
             size={20}
             strokeWidth={1}
-            tipTitle={os === 'mac' ? 'Copy Mockup (Cmd + C)' : 'Copy Mockup (Ctrl + C)'}
+            tipTitle='Copy Mockup (Ctrl + C)'
             tipPosition="top"
             onClick={!disableExportActions ? handleCopy : undefined}
           />
