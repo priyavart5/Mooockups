@@ -217,18 +217,22 @@ const Canvas = forwardRef<HTMLDivElement>((_, ref) => {
                 <div className={styles.canvasDevice}>
                   
                   {/* Device Shadow */}
-                  <div
-                    className={styles.shadowLayer}
-                    style={{
-                      transform: `
-                      scale(${mockupScale.scale / 3})
-                      translate(${mockupPosition.position_X + 12}px, ${mockupPosition.position_Y + 12}px)
-                      rotate(${mockupRotation.rotation}deg)`,
-                      filter: "blur(10px)",
-                      opacity: `${mockupShadow.shadowOpacity}`,
-                      aspectRatio: 738.24/508.8 
-                    }}
-                  ></div>
+                  {
+                    mockupSelectedDevice.showDeviceShadow && (
+                      <div
+                        className={styles.shadowLayer}
+                        style={{
+                          transform: `
+                          scale(${mockupScale.scale / 3})
+                          translate(${mockupPosition.position_X + 12}px, ${mockupPosition.position_Y + 12}px)
+                          rotate(${mockupRotation.rotation}deg)`,
+                          filter: "blur(10px)",
+                          opacity: `${mockupShadow.shadowOpacity}`,
+                          aspectRatio: mockupSelectedDevice.deviceAspectRatio
+                        }}
+                      ></div>
+                    )
+                  }
 
                   {/* Device Layout */}
                   {mockupLayoutSource.layoutSrc && (
@@ -239,7 +243,7 @@ const Canvas = forwardRef<HTMLDivElement>((_, ref) => {
                             scale(${mockupScale.scale / 3})
                             translate(${mockupPosition.position_X}px, ${mockupPosition.position_Y}px)
                             rotate(${mockupRotation.rotation}deg)`,
-                            aspectRatio: 738.24/508.8 
+                            aspectRatio: mockupSelectedDevice.deviceAspectRatio
                         }}
                       >
                         {
@@ -298,13 +302,13 @@ const Canvas = forwardRef<HTMLDivElement>((_, ref) => {
                   {/* Device Import */}
                   {!file  && (
                     <div
-                      className={styles.canvasDevice_screen}
+                      className={styles.canvasDevice_screenImportComponent}
                       style={{
                         transform:` 
                           scale(${mockupScale.scale / 3})
-                          translate(${mockupPosition.position_X}px, ${mockupPosition.position_Y}px)
-                          rotate(${mockupRotation.rotation}deg)`,
-                          aspectRatio: 2266/1488,
+                          translate(${mockupPosition.position_X}px, ${mockupPosition.position_Y}px)`,
+                          // rotate(${mockupRotation.rotation}deg)`,
+                          aspectRatio: mockupSelectedDevice.screenPixelsWidth / mockupSelectedDevice.screenPixelsHeight,
                           zIndex: 7
                       }}
                     >
@@ -330,7 +334,7 @@ const Canvas = forwardRef<HTMLDivElement>((_, ref) => {
                           <label htmlFor="imageUploadInput" className={styles.canvasDevice_uploadImageLabel} style={{ cursor: 'pointer' }}>
                             <ImageUp color="#EFEFEF" size={24} strokeWidth={1.5} style={{ marginBottom: '10px' }} />
                             <p>{isDraggingImage ? 'Drop the image here...' : 'Drag & Drop Image'}</p>
-                            <p>{mockupSelectedDevice.screenPixels}</p>
+                            <p>{mockupSelectedDevice.screenPixelsWidth} X {mockupSelectedDevice.screenPixelsHeight}</p>
                           </label>
                         </div>
                     </div>
@@ -345,9 +349,8 @@ const Canvas = forwardRef<HTMLDivElement>((_, ref) => {
                           scale(${mockupScale.scale / 3})
                           translate(${mockupPosition.position_X}px, ${mockupPosition.position_Y}px)
                           rotate(${mockupRotation.rotation}deg)`,
-                          aspectRatio: 2266/1488,
+                          aspectRatio: mockupSelectedDevice.screenPixelsWidth / mockupSelectedDevice.screenPixelsHeight,
                           zIndex: 3,
-                          maxHeight: '87%',
                       }}
                     >
                         <Image

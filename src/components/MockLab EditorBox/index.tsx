@@ -33,7 +33,7 @@ import {
 } from '../../redux/slices/mockLabSlice';
 
 
-type DeviceCategory = "Phone" | "Tablet";
+type DeviceCategory = "Phone" | "Tablet" | "Laptop";
 
 type FrameLayoutCategory = "Default" | "Instagram" | "Twitter" | "Dribbble" | "Youtube" | "Pinterest";
 
@@ -54,10 +54,13 @@ interface Layout {
 interface Device {
     brand: string;
     model: string;
-    screenPixels: string;
+    screenPixelsWidth: number;
+    screenPixelsHeight: number;
+    deviceAspectRatio: number;
     image: string;
     shade: Shade[];
     layout: Layout[];
+    showDeviceShadow: boolean;
 }
 
 
@@ -222,6 +225,7 @@ const MockLabEditor = () => {
     const categoryRefs: Record<DeviceCategory, React.RefObject<HTMLDivElement>> = {
         Phone: useRef<HTMLDivElement>(null),
         Tablet: useRef<HTMLDivElement>(null),
+        Laptop: useRef<HTMLDivElement>(null),
     };
 
     const scrollToCategory = (category: DeviceCategory) => {
@@ -237,7 +241,13 @@ const MockLabEditor = () => {
             <div
                 key={index}
                 className={styles.EM_devices_category_device}
-                onClick={() => dispatch(setMockupSelectedDevice(device))}
+                onClick={
+                    () => {
+                        dispatch(setMockupSelectedDevice(device));
+                        setSelectedShadeIndex(0);
+                        dispatch(setMockupLayoutSource(device.shade[0].layoutSrc));
+                    }
+                }
             >
                 <Image
                     src={device.image}
@@ -318,8 +328,7 @@ const MockLabEditor = () => {
                                                 src={mockupSelectedDevice.image}
                                                 alt={mockupSelectedDevice.model}
                                                 className={styles.EM_devices_selected_image}
-                                                width={28}
-                                                height={36}
+                                                fill
                                                 loading="lazy"
                                             />
                                             <div className={styles.EM_devices_selected_specification}>
@@ -394,24 +403,29 @@ const MockLabEditor = () => {
                                                 // loading="lazy"
                                                 priority
                                             />
+                                            <p className={styles.EM_panels_shade_name}>{shade.name}</p>
                                         </div>
                                     ))}
                                 </div>
                             </div>
 
                             {/* Shadow Tool */}
-                            <div className={styles.EM_panels}>
-                                <p>Shadow</p>
-                                <div>
-                                    <InputSlider 
-                                        min={0}
-                                        max={1}
-                                        step={0.1}
-                                        value={mockupShadow.shadowOpacity}
-                                        onValueChange={(opacity) => dispatch(setMockupShadowOpacity(opacity))}
-                                    />
-                                </div>
-                            </div>
+                            {
+                                mockupSelectedDevice.showDeviceShadow && (
+                                    <div className={styles.EM_panels}>
+                                        <p>Shadow</p>
+                                        <div>
+                                            <InputSlider 
+                                                min={0}
+                                                max={1}
+                                                step={0.1}
+                                                value={mockupShadow.shadowOpacity}
+                                                onValueChange={(opacity) => dispatch(setMockupShadowOpacity(opacity))}
+                                            />
+                                        </div>
+                                    </div>
+                                )
+                            }
 
                             {/* Scale Tool */}
                             <div className={styles.EM_panels}>
@@ -479,7 +493,7 @@ const MockLabEditor = () => {
                                     </span>
                                     <span className={styles.EM_panels_deviceOverview_span}>
                                         <p className={styles.EM_panels_deviceOverview_key}>Screen Pixels</p>
-                                        <p className={styles.EM_panels_deviceOverview_value}>{mockupSelectedDevice.screenPixels}</p>
+                                        <p className={styles.EM_panels_deviceOverview_value}>{`${mockupSelectedDevice.screenPixelsWidth} x ${mockupSelectedDevice.screenPixelsHeight}`}</p>
                                     </span>
                                 </div>
                             </div>
