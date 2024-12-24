@@ -23,7 +23,10 @@ interface MockupSelectedLayoutState {
 interface MockupDeviceState{
     brand: string;
     model: string;
-    screenPixels: string;
+    screenPixelsWidth: number;
+    screenPixelsHeight: number;
+    showDeviceShadow: boolean;
+    deviceAspectRatio: number;
     image: string;
     shade: Shade[];
     layout: MockupSelectedLayoutState[];
@@ -110,62 +113,46 @@ interface MockLabState {
 
 const defaultDevice = {
     brand : 'Apple',
-    model : 'iPad Mini',
-    screenPixels : '1488 x 2266',
-    image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Space+Grey/space-grey.webp',
+    model : 'Macbook Air M3',
+    screenPixelsWidth : 2560,
+    screenPixelsHeight : 1664,
+    deviceAspectRatio : 16/10,
+    showDeviceShadow : false,
+    screenStyle : {
+        paddingTop: '',
+        paddingRight: '',
+        paddingBottom: '',
+        paddingLeft: '',
+    },
+    image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Midnight/midnight.webp',
     shade : [
         {
-            name: 'Blue',
-            shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Blue/blue.webp',
-            layoutSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Blue/blue.png'
-        },
-        {
-            name: 'Purple',
-            shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Purple/purple.webp',
-            layoutSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Purple/purple.png'
-        },
-        {
-            name: 'Space Grey',
-            shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Space+Grey/space-grey.webp',
-            layoutSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Space+Grey/space-grey.png'
+            name: 'Midnight',
+            shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Midnight/midnight.webp',
+            layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Midnight/midnight.png'
         },
         {
             name: 'Starlight',
-            shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Starlight/starlight.webp',
-            layoutSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Starlight/starlight.png'
+            shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Starlight/starlight.webp',
+            layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Starlight/starlight.png'
+        },
+        {
+            name: 'Space Grey',
+            shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Space+Grey/space-grey.webp',
+            layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Space+Grey/space-grey.png'
+        },
+        {
+            name: 'Silver',
+            shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Silver/silver.webp',
+            layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Silver/silver.png'
         },
     ],
-    layout : [
-        {
-            name: "Center Layout",
-            x: 100,
-            y: 200,
-            width: 500,
-            height: 700,
-            rotation: 90,
-        },
-        {
-            name: "Top Left Layout",
-            x: 0,
-            y: 0,
-            width: 500,
-            height: 700,
-            rotation: 180,
-        },
-        {
-            name: 'bottom-left',
-            x: 0,
-            y: 100,
-            width: 500,
-            height: 700,
-            rotation: 230,
-        },
-    ]
+    layout : []
 };
 
 const initialState: MockLabState = {
     mockupSelectedDevice: defaultDevice,
-    mockupLayoutSource: { layoutSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Blue/blue.png' },
+    mockupLayoutSource: { layoutSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Midnight/midnight.png' },
     mockupSelectedLayout: { 
         name: "Center layout",
         x: 100,

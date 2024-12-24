@@ -98,7 +98,12 @@
         cursor: pointer;
         
         .EM_devices_selected_image{
+            position: relative !important;
+            inset: unset !important;
+            max-width: 40px;
+            max-width: auto;
             border-radius: vars.$border-radius-sm;
+            object-fit: contain;
         }
 
         .EM_devices_selected_specification{
@@ -251,6 +256,11 @@
             border-radius: vars.$border-radius-lg;
             cursor: pointer;
             background-color: vars.$primary-grey;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
             
             .EM_panels_shade_image {
                 object-fit: cover;
@@ -258,6 +268,11 @@
                 width: 100%;
                 height:auto;
                 border-radius: vars.$border-radius-lg;
+            }
+
+            .EM_panels_shade_name{
+                text-align: center;
+                font: 500 10px var(--inter);
             }
         }
     

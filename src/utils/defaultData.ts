@@ -303,7 +303,9 @@ export const mockLabMockup = {
         iPhone16Pro : {
             brand : 'Apple',
             model : 'iPhone 16 Pro',
-            screenPixels : '1206 x 2622',
+            screenPixelsWidth : 1206,
+            screenPixelsHeight : 2622,
+            showDeviceShadow : true,
             image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Apple+iPhone+16+Pro/Shade/Featured+Image/Natural+Titanium.webp',
             shade : [
                 {
@@ -332,7 +334,9 @@ export const mockLabMockup = {
         iPhone15Pro : {
             brand : 'Apple',
             model : 'iPhone 15 Pro',
-            screenPixels : '1206 x 2622',
+            screenPixelsWidth : 1206,
+            screenPixelsHeight : 2622,
+            showDeviceShadow : true,
             image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Apple+iPhone+16+Pro/Shade/Featured+Image/White+Titanium.webp',
             shade : [
                 {
@@ -361,7 +365,9 @@ export const mockLabMockup = {
         GalaxyS24Ultra : {
             brand : 'Samsung',
             model : 'Galaxy S24 Ultra',
-            screenPixels : '3120 x 1440',
+            screenPixelsWidth : 3120,
+            screenPixelsHeight : 1440,
+            showDeviceShadow : true,
             image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Samsung+Galaxy+S24+Ultra/Shade/Featured+Image/Titanium+Violet.webp',
             shade : [
                 {
@@ -392,18 +398,43 @@ export const mockLabMockup = {
         iPadPro11 : {
             brand : 'Apple',
             model : 'iPad Pro 11"',
-            screenPixels : '1668 x 2388',
-            image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Pro+11%22/Shade/Featured+Image/Space+Black.webp',
+            screenPixelsWidth : 1668,
+            screenPixelsHeight : 2388,
+            deviceAspectRatio : 4/3,
+            showDeviceShadow : true,
+            image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Pro+11%22/Space+Black/space-black.webp',
             shade : [
                 {
                     name: 'Space Black',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Pro+11%22/Shade/Featured+Image/Space+Black.webp',
-                    layoutSrc : ''
+                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Pro+11%22/Space+Black/space-black.webp',
+                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Pro+11%22/Space+Black/space-black.png'
                 },
                 {
                     name: 'Silver',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Pro+11%22/Shade/Featured+Image/Silver.webp',
-                    layoutSrc : ''
+                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Pro+11%22/Silver/silver.webp',
+                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Pro+11%22/Silver/silver.png'
+                },
+            ],
+            layout : []
+        },
+        iPadPro13 : {
+            brand : 'Apple',
+            model : 'iPad Pro 13"',
+            screenPixelsWidth : 2048,
+            screenPixelsHeight : 2372,
+            deviceAspectRatio : 4/3,
+            showDeviceShadow : true,
+            image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Pro+11%22/Space+Black/space-black-13.webp',
+            shade : [
+                {
+                    name: 'Space Black',
+                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Pro+11%22/Space+Black/space-black-13.webp',
+                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Pro+11%22/Space+Black/space-black.png'
+                },
+                {
+                    name: 'Silver',
+                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Pro+11%22/Silver/silver-13.webp',
+                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Pro+11%22/Silver/silver.png'
                 },
             ],
             layout : []
@@ -411,13 +442,16 @@ export const mockLabMockup = {
         iPadMini : {
             brand : 'Apple',
             model : 'iPad Mini',
-            screenPixels : '1488 x 2266',
+            screenPixelsWidth : 1488,
+            screenPixelsHeight : 2266,
+            deviceAspectRatio : 3/2,
+            showDeviceShadow : true,
             image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Space+Grey/space-grey.webp',
             shade : [
                 {
-                    name: 'Blue',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Blue/blue.webp',
-                    layoutSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Blue/blue.png'
+                    name: 'Pink',
+                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Pink/pink.webp',
+                    layoutSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Pink/pink.png'
                 },
                 {
                     name: 'Purple',
@@ -461,6 +495,163 @@ export const mockLabMockup = {
                     rotation: 270,
                 },
             ]
+        },
+    },
+    laptop : {
+        macbookPro16 : {
+            brand : 'Apple',
+            model : 'Macbook Pro 16"',
+            screenPixelsWidth : 3456,
+            screenPixelsHeight : 2234,
+            deviceAspectRatio : 16/10,
+            showDeviceShadow : false,
+            screenStyle : {
+                paddingTop: '',
+                paddingRight: '',
+                paddingBottom: '',
+                paddingLeft: '',
+            },
+            image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Pro+16/Silver/silver.webp',
+            shade : [
+                {
+                    name: 'Silver',
+                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Pro+16/Silver/silver.webp',
+                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Pro+16/Silver/silver.png'
+                },
+                // {
+                //     name: 'Space Black',
+                //     shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Pro+11%22/Shade/Featured+Image/Space+Black.webp',
+                //     layoutSrc : ''
+                // },
+            ],
+            layout : []
+        },
+        macbookPro14 : {
+            brand : 'Apple',
+            model : 'Macbook Pro 14"',
+            screenPixelsWidth : 3024,
+            screenPixelsHeight : 1964,
+            deviceAspectRatio : 16/10,
+            showDeviceShadow : false,
+            screenStyle : {
+                paddingTop: '',
+                paddingRight: '',
+                paddingBottom: '',
+                paddingLeft: '',
+            },
+            image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Pro+16/Silver/silver.webp',
+            shade : [
+                {
+                    name: 'Silver',
+                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Pro+16/Silver/silver.webp',
+                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Pro+16/Silver/silver.png'
+                },
+                // {
+                //     name: 'Space Black',
+                //     shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Pro+11%22/Shade/Featured+Image/Space+Black.webp',
+                //     layoutSrc : ''
+                // },
+            ],
+            layout : []
+        },
+        macbookPro13 : {
+            brand : 'Apple',
+            model : 'Macbook Pro 13"',
+            screenPixelsWidth : 2560,
+            screenPixelsHeight : 1600,
+            deviceAspectRatio : 16/10,
+            showDeviceShadow : false,
+            screenStyle : {
+                paddingTop: '',
+                paddingRight: '',
+                paddingBottom: '',
+                paddingLeft: '',
+            },
+            image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Pro+13/Space+Grey/space-grey.webp',
+            shade : [
+                {
+                    name: 'Space Grey',
+                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Pro+13/Space+Grey/space-grey.webp',
+                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Pro+13/Space+Grey/space-grey.png'
+                },
+                {
+                    name: 'Silver',
+                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Pro+13/silver.webp',
+                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Pro+13/silver.png'
+                },
+            ],
+            layout : []
+        },
+        macbookAirM3 : {
+            brand : 'Apple',
+            model : 'Macbook Air M3',
+            screenPixelsWidth : 2560,
+            screenPixelsHeight : 1664,
+            deviceAspectRatio : 16/10,
+            showDeviceShadow : false,
+            screenStyle : {
+                paddingTop: '',
+                paddingRight: '',
+                paddingBottom: '',
+                paddingLeft: '',
+            },
+            image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Midnight/midnight.webp',
+            shade : [
+                {
+                    name: 'Midnight',
+                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Midnight/midnight.webp',
+                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Midnight/midnight.png'
+                },
+                {
+                    name: 'Starlight',
+                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Starlight/starlight.webp',
+                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Starlight/starlight.png'
+                },
+                {
+                    name: 'Space Grey',
+                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Space+Grey/space-grey.webp',
+                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Space+Grey/space-grey.png'
+                },
+                {
+                    name: 'Silver',
+                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Silver/silver.webp',
+                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Silver/silver.png'
+                },
+            ],
+            layout : []
+        },
+        macbookAirM1 : {
+            brand : 'Apple',
+            model : 'Macbook Air M1',
+            screenPixelsWidth : 2560,
+            screenPixelsHeight : 1600,
+            deviceAspectRatio : 16/10,
+            showDeviceShadow : false,
+            screenStyle : {
+                paddingTop: '',
+                paddingRight: '',
+                paddingBottom: '',
+                paddingLeft: '',
+            },
+            image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M1/Space+Grey/space-grey.webp',
+            shade : [
+                {
+                    name: 'Space Grey',
+                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M1/Space+Grey/space-grey.webp',
+                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M1/Space+Grey/space-grey.png'
+                },
+                {
+                    name: 'Silver',
+                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M1/Silver/silver.webp',
+                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M1/Silver/silver.png'
+                },
+                {
+                    name: 'Gold',
+                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M1/Gold/gold.webp',
+                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M1/Gold/gold.png'
+                },
+            ],
+            layout : []
         },
     }
 } as const;
