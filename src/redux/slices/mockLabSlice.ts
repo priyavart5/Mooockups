@@ -27,6 +27,7 @@ interface MockupDeviceState{
     screenPixelsHeight: number;
     showDeviceShadow: boolean;
     deviceAspectRatio: number;
+    screenStyle: any;
     image: string;
     shade: Shade[];
     layout: MockupSelectedLayoutState[];
@@ -119,10 +120,7 @@ const defaultDevice = {
     deviceAspectRatio : 16/10,
     showDeviceShadow : false,
     screenStyle : {
-        paddingTop: '',
-        paddingRight: '',
-        paddingBottom: '',
-        paddingLeft: '',
+        padding: '1.8% 10% 6.8%',
     },
     image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Midnight/midnight.webp',
     shade : [
@@ -181,7 +179,7 @@ const initialState: MockLabState = {
     frameTransparent : { transparent: false},
     frameBackground: { 
         backgroundType: 'gradient', 
-        backgroundSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Gradient/Canvas+Image/Apple20GIOS1820-2012.webp',
+        backgroundSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Initial+BackGround+Image.jpg',
         backgroundScale: 0,
         backgroundOpacity: 1,
     },
