@@ -402,6 +402,9 @@ export const mockLabMockup = {
             screenPixelsHeight : 2388,
             deviceAspectRatio : 4/3,
             showDeviceShadow : true,
+            screenStyle : {
+                padding: '3.9% 3.6% 3.6%',
+            },
             image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Pro+11%22/Space+Black/space-black.webp',
             shade : [
                 {
@@ -424,6 +427,9 @@ export const mockLabMockup = {
             screenPixelsHeight : 2372,
             deviceAspectRatio : 4/3,
             showDeviceShadow : true,
+            screenStyle : {
+                padding: '3.9% 3.6% 3.6%',
+            },
             image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Pro+11%22/Space+Black/space-black-13.webp',
             shade : [
                 {
@@ -446,6 +452,9 @@ export const mockLabMockup = {
             screenPixelsHeight : 2266,
             deviceAspectRatio : 3/2,
             showDeviceShadow : true,
+            screenStyle : {
+                padding: '4.2% 4.2% 4.2%',
+            },
             image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Space+Grey/space-grey.webp',
             shade : [
                 {
@@ -506,10 +515,7 @@ export const mockLabMockup = {
             deviceAspectRatio : 16/10,
             showDeviceShadow : false,
             screenStyle : {
-                paddingTop: '',
-                paddingRight: '',
-                paddingBottom: '',
-                paddingLeft: '',
+                padding: '1.2% 10% 6.8%',
             },
             image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Pro+16/Silver/silver.webp',
             shade : [
@@ -534,16 +540,13 @@ export const mockLabMockup = {
             deviceAspectRatio : 16/10,
             showDeviceShadow : false,
             screenStyle : {
-                paddingTop: '',
-                paddingRight: '',
-                paddingBottom: '',
-                paddingLeft: '',
+                padding: '1.2% 10% 6.8%',
             },
-            image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Pro+16/Silver/silver.webp',
+            image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Pro+16/Silver/macbookPro14.webp',
             shade : [
                 {
                     name: 'Silver',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Pro+16/Silver/silver.webp',
+                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Pro+16/Silver/macbookPro14.webp',
                     layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Pro+16/Silver/silver.png'
                 },
                 // {
@@ -562,10 +565,7 @@ export const mockLabMockup = {
             deviceAspectRatio : 16/10,
             showDeviceShadow : false,
             screenStyle : {
-                paddingTop: '',
-                paddingRight: '',
-                paddingBottom: '',
-                paddingLeft: '',
+                padding: '4.4% 11.6% 7.2%',
             },
             image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Pro+13/Space+Grey/space-grey.webp',
             shade : [
@@ -590,10 +590,7 @@ export const mockLabMockup = {
             deviceAspectRatio : 16/10,
             showDeviceShadow : false,
             screenStyle : {
-                paddingTop: '',
-                paddingRight: '',
-                paddingBottom: '',
-                paddingLeft: '',
+                padding: '1.8% 10% 6.8%',
             },
             image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Midnight/midnight.webp',
             shade : [
@@ -628,10 +625,7 @@ export const mockLabMockup = {
             deviceAspectRatio : 16/10,
             showDeviceShadow : false,
             screenStyle : {
-                paddingTop: '',
-                paddingRight: '',
-                paddingBottom: '',
-                paddingLeft: '',
+                padding: '4% 11.2% 5.6%',
             },
             image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M1/Space+Grey/space-grey.webp',
             shade : [
@@ -649,6 +643,98 @@ export const mockLabMockup = {
                     name: 'Gold',
                     shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M1/Gold/gold.webp',
                     layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M1/Gold/gold.png'
+                },
+            ],
+            layout : []
+        },
+    },
+    desktop : {
+        iMac24 : {
+            brand : 'Apple',
+            model : 'iMac',
+            screenPixelsWidth : 4480,
+            screenPixelsHeight : 2520,
+            deviceAspectRatio : 1187/1000,
+            showDeviceShadow : false,
+            screenStyle : {
+                padding: '3.8% 3.8% 29%',
+            },
+            image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/iMac+24/Purple/purple.webp',
+            shade : [
+                {
+                    name: 'Purple',
+                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/iMac+24/Purple/purple.webp',
+                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/iMac+24/Purple/purple.png'
+                },
+                {
+                    name: 'Blue',
+                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/iMac+24/Blue/blue.webp',
+                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/iMac+24/Blue/blue.png'
+                },
+                {
+                    name: 'Green',
+                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/iMac+24/Green/green.webp',
+                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/iMac+24/Green/green.png'
+                },
+                {
+                    name: 'Pink',
+                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/iMac+24/Pink/pink.webp',
+                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/iMac+24/Pink/pink.png'
+                },
+                {
+                    name: 'Orange',
+                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/iMac+24/Orange/orange.webp',
+                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/iMac+24/Orange/orange.png'
+                },
+                {
+                    name: 'Yellow',
+                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/iMac+24/Yellow/yellow.webp',
+                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/iMac+24/Yellow/yellow.png'
+                },
+                {
+                    name: 'Silver',
+                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/iMac+24/Silver/silver.webp',
+                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/iMac+24/Silver/silver.png'
+                },
+            ],
+            layout : []
+        },
+        proDisplayXDR : {
+            brand : 'Apple',
+            model : 'Pro Display XDR',
+            screenPixelsWidth : 6016,
+            screenPixelsHeight : 3384,
+            deviceAspectRatio : 4096/3090,
+            showDeviceShadow : false,
+            screenStyle : {
+                padding: '2% 2% 18.8%',
+            },
+            image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/Pro+Display+XDR/pro-display-xdr.webp',
+            shade : [
+                {
+                    name: 'Silver',
+                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/Pro+Display+XDR/pro-display-xdr.webp',
+                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/Pro+Display+XDR/pro-display-xdr.png'
+                },
+            ],
+            layout : []
+        },
+        studioDisplay : {
+            brand : 'Apple',
+            model : 'Studio Display',
+            screenPixelsWidth : 5120,
+            screenPixelsHeight : 2880,
+            deviceAspectRatio : 1338/1028,
+            showDeviceShadow : false,
+            screenStyle : {
+                padding: '2% 2% 20.6%',
+            },
+            image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/Studio+Display/studio-display.webp',
+            shade : [
+                {
+                    name: 'Silver',
+                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/Studio+Display/studio-display.webp',
+                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/Studio+Display/studio-display.png'
                 },
             ],
             layout : []

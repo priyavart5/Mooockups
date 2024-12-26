@@ -33,7 +33,7 @@ import {
 } from '../../redux/slices/mockLabSlice';
 
 
-type DeviceCategory = "Phone" | "Tablet" | "Laptop";
+type DeviceCategory = "Phone" | "Tablet" | "Laptop" | "Desktop";
 
 type FrameLayoutCategory = "Default" | "Instagram" | "Twitter" | "Dribbble" | "Youtube" | "Pinterest";
 
@@ -57,6 +57,7 @@ interface Device {
     screenPixelsWidth: number;
     screenPixelsHeight: number;
     deviceAspectRatio: number;
+    screenStyle: any;
     image: string;
     shade: Shade[];
     layout: Layout[];
@@ -93,7 +94,7 @@ const MockLabEditor = () => {
     const [visibleBGImportImage, setVisibleBGImportImage] = useState<boolean>(false);
     const [bgImportImageName, setBgImportImageName] = useState<string>('Import image');
     const [showAllGradient, setShowAllGradient] = useState<boolean>(false);
-    const [selectedGradientImageIndex, setSelectedGradientImageIndex] = useState<number | null>(0);
+    const [selectedGradientImageIndex, setSelectedGradientImageIndex] = useState<number | null>(null);
     const [showAllShadow, setShowAllShadow] = useState<boolean>(false);
     const [selectedShadowImageIndex, setSelectedShadowImageIndex] = useState<number | null>(null);
     const [visibleUnsplash, setVisibleUnsplash] = useState<boolean>(false);
@@ -226,6 +227,7 @@ const MockLabEditor = () => {
         Phone: useRef<HTMLDivElement>(null),
         Tablet: useRef<HTMLDivElement>(null),
         Laptop: useRef<HTMLDivElement>(null),
+        Desktop: useRef<HTMLDivElement>(null),
     };
 
     const scrollToCategory = (category: DeviceCategory) => {

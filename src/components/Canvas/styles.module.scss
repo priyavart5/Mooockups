@@ -70,7 +70,6 @@
         justify-content:center;
         inset: 0;
         margin: 10%;
-        // overflow: hidden;
       
 
         .canvasDevice_layout{
@@ -82,16 +81,13 @@
         }
 
         .canvasDevice_screen {
-          padding: 1.3% 6.2% 4.8% 6.2%;
-          max-width: 100%;
+          position: absolute;
+          inset: 0;
           max-height: 100%;
-
+          margin: auto;
+          
           .canvasDevice_screenImage {
-            position: relative !important;
-            inset: unset !important;
-            max-width: 100% !important;
-            max-height: 100% !important;
-            object-fit: fill;
+            padding: 2% 2% 20.6%;
           }
         }
       

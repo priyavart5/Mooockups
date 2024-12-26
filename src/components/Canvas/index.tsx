@@ -157,7 +157,7 @@ const Canvas = forwardRef<HTMLDivElement>((_, ref) => {
 
 
   return (
-    <>1
+    <>
     <Toaster position="top-center"/>
     <div className={styles.canvas}>
       <div className={styles.canvasSafeArea} >
@@ -243,7 +243,7 @@ const Canvas = forwardRef<HTMLDivElement>((_, ref) => {
                             scale(${mockupScale.scale / 3})
                             translate(${mockupPosition.position_X}px, ${mockupPosition.position_Y}px)
                             rotate(${mockupRotation.rotation}deg)`,
-                            aspectRatio: mockupSelectedDevice.deviceAspectRatio
+                            aspectRatio: mockupSelectedDevice.deviceAspectRatio,
                         }}
                       >
                         {
@@ -349,7 +349,7 @@ const Canvas = forwardRef<HTMLDivElement>((_, ref) => {
                           scale(${mockupScale.scale / 3})
                           translate(${mockupPosition.position_X}px, ${mockupPosition.position_Y}px)
                           rotate(${mockupRotation.rotation}deg)`,
-                          aspectRatio: mockupSelectedDevice.screenPixelsWidth / mockupSelectedDevice.screenPixelsHeight,
+                          aspectRatio: mockupSelectedDevice.deviceAspectRatio,
                           zIndex: 3,
                       }}
                     >
@@ -360,7 +360,10 @@ const Canvas = forwardRef<HTMLDivElement>((_, ref) => {
                           src={file} 
                           alt="Screen Image" 
                           fill 
-                          className={styles.canvasDevice_screenImage}
+                          // className={styles.canvasDevice_screenImage}
+                          style={{
+                            padding: `${mockupSelectedDevice.screenStyle.padding}`,
+                          }}
                         />
                     </div>
                   )}
