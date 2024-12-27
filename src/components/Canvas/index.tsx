@@ -36,8 +36,27 @@ const Canvas = forwardRef<HTMLDivElement>((_, ref) => {
     frameBlur,
   } = useSelector((state: RootState) => state.mockLab);
 
+  console.log(frameLayout);
+
   const { file } = useSelector((state: RootState) => state.import);
   const { preview, hideMockup, hideBackground } = useSelector((state: RootState) => state.dock);
+  const [borderRadius, setBorderRadius] = useState<number>(0);
+
+  useEffect(() => {
+    if (
+      (mockupSelectedDevice.model === 'iPhone 16' || 
+       mockupSelectedDevice.model === 'iPhone 16 Plus' || 
+       mockupSelectedDevice.model === 'iPhone 16 Pro' || 
+       mockupSelectedDevice.model === 'iPhone 16 Pro Max') &&
+      frameLayout.type === 'Twitter' &&
+      frameLayout.name === 'Cover'
+    ) {
+      setBorderRadius(12);
+    } else {
+      setBorderRadius(mockupSelectedDevice.screenStyle?.borderRadius);
+    }
+  }, [mockupSelectedDevice, frameLayout]);
+  
 
   const handleMouseDown = (e: any, type: string) => {
     e.preventDefault();
@@ -363,6 +382,7 @@ const Canvas = forwardRef<HTMLDivElement>((_, ref) => {
                           // className={styles.canvasDevice_screenImage}
                           style={{
                             padding: `${mockupSelectedDevice.screenStyle.padding}`,
+                            borderRadius: `${borderRadius}px`,
                           }}
                         />
                     </div>
