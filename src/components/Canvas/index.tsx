@@ -36,8 +36,6 @@ const Canvas = forwardRef<HTMLDivElement>((_, ref) => {
     frameBlur,
   } = useSelector((state: RootState) => state.mockLab);
 
-  console.log(frameLayout);
-
   const { file } = useSelector((state: RootState) => state.import);
   const { preview, hideMockup, hideBackground } = useSelector((state: RootState) => state.dock);
   const [borderRadius, setBorderRadius] = useState<number>(0);
@@ -341,6 +339,9 @@ const Canvas = forwardRef<HTMLDivElement>((_, ref) => {
                           }}
                           onDragLeave={() => setIsDraggingImage(false)}
                           onDrop={handleDrop}
+                          style={{
+                            padding: `${mockupSelectedDevice.screenStyle.padding}`,
+                          }}
                         >
                           <input
                             type="file"

@@ -40,3 +40,27 @@
     justify-content: space-between;
     gap: 14px;
 }
+
+.mockLab_mobileMessage {
+    background-image: url('https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Global/background_homepage_re.png');
+    max-width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    flex-direction: column;
+    background-position: center;
+    background-repeat:no-repeat;
+    background-size: cover;
+    gap: 8px;
+    
+    p{  
+        position: absolute;
+        bottom: 0;
+        text-align: center;
+        padding: 20px;
+        font: 400 14px 'Inter';
+        color: vars.$secondary-grey;
+        line-height: 1.6;
+    }
+}
