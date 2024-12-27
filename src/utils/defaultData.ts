@@ -300,95 +300,177 @@ export const mockLabFrame = {
 
 export const mockLabMockup = {
     phone : {
+        iPhone16 : {
+            brand : 'Apple',
+            model : 'iPhone 16',
+            screenPixelsWidth : 1179,
+            screenPixelsHeight : 2556,
+            deviceAspectRatio : 1359/2736,
+            showDeviceShadow : true,
+            screenStyle : {
+                padding: '6.2% 6.6% 6.2%',
+                borderRadius: '36',
+            },
+            image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/black-f.webp',
+            shade : [
+                {
+                    name: 'Black',
+                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/black-f.webp',
+                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/black.webp'
+                },
+                {
+                    name: 'White',
+                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/white-f.webp',
+                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/white.webp'
+                },
+                {
+                    name: 'Pink',
+                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/pink-f.webp',
+                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/pink.webp'
+                },
+                {
+                    name: 'Teal',
+                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/teal-f.webp',
+                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/teal.webp'
+                },
+                {
+                    name: 'Ultramarine',
+                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/ultramarine-f.webp',
+                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/ultramarine.webp'
+                },
+            ],
+            layout : []
+        },
+        iPhone16Plus : {
+            brand : 'Apple',
+            model : 'iPhone 16 Plus',
+            screenPixelsWidth : 1290,
+            screenPixelsHeight : 2796,
+            deviceAspectRatio : 1470/2970,
+            showDeviceShadow : true,
+            screenStyle : {
+                padding: '6.2% 6.6% 6.2%',
+                borderRadius: '36',
+            },
+            image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/teal-f.webp',
+            shade : [
+                {
+                    name: 'Teal',
+                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/teal-f.webp',
+                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/teal.webp'
+                },
+                {
+                    name: 'Black',
+                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/black-f.webp',
+                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/black.webp'
+                },
+                {
+                    name: 'White',
+                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/white-f.webp',
+                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/white.webp'
+                },
+                {
+                    name: 'Pink',
+                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/pink-f.webp',
+                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/pink.webp'
+                },
+                {
+                    name: 'Ultramarine',
+                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/ultramarine-f.webp',
+                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/ultramarine.webp'
+                },
+            ],
+            layout : []
+        },
         iPhone16Pro : {
             brand : 'Apple',
             model : 'iPhone 16 Pro',
             screenPixelsWidth : 1206,
             screenPixelsHeight : 2622,
+            deviceAspectRatio : 1350/2760,
             showDeviceShadow : true,
-            image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Apple+iPhone+16+Pro/Shade/Featured+Image/Natural+Titanium.webp',
+            screenStyle : {
+                padding: '5.2% 5.2% 5.2%',
+                borderRadius: '36',
+            },
+            image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iPhone+16+Pro+-+Max/natural.webp',
             shade : [
                 {
-                    name: 'Desert Titanium',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Apple+iPhone+16+Pro/Shade/Featured+Image/Desert+Titanium.webp',
-                    layoutSrc : ''
-                },
-                {
                     name: 'Natural Titanium',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Apple+iPhone+16+Pro/Shade/Featured+Image/Natural+Titanium.webp',
-                    layoutSrc : ''
-                },
-                {
-                    name: 'White Titanium',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Apple+iPhone+16+Pro/Shade/Featured+Image/White+Titanium.webp',
-                    layoutSrc : ''
+                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iPhone+16+Pro+-+Max/natural.webp',
+                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iPhone+16+Pro+-+Max/natural-titanium.webp'
                 },
                 {
                     name: 'Black Titanium',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Apple+iPhone+16+Pro/Shade/Featured+Image/Black+Titanium.webp',
-                    layoutSrc : ''
+                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iPhone+16+Pro+-+Max/black.webp',
+                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iPhone+16+Pro+-+Max/black-titanium.webp'
+                },
+                {
+                    name: 'White Titanium',
+                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iPhone+16+Pro+-+Max/white.webp',
+                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iPhone+16+Pro+-+Max/white-titanium.webp'
                 },
             ],
             layout : []
         },
-        iPhone15Pro : {
+        iPhone16ProMax : {
             brand : 'Apple',
-            model : 'iPhone 15 Pro',
-            screenPixelsWidth : 1206,
-            screenPixelsHeight : 2622,
+            model : 'iPhone 16 Pro Max',
+            screenPixelsWidth : 1320,
+            screenPixelsHeight : 2868,
+            deviceAspectRatio : 1470/3000,
             showDeviceShadow : true,
-            image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Apple+iPhone+16+Pro/Shade/Featured+Image/White+Titanium.webp',
+            screenStyle : {
+                padding: '5.2% 5.2% 5.2%',
+                borderRadius: '36',
+            },
+            image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iPhone+16+Pro+-+Max/black.webp',
             shade : [
                 {
-                    name: 'Desert Titanium',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Apple+iPhone+16+Pro/Shade/Featured+Image/Desert+Titanium.webp',
-                    layoutSrc : ''
+                    name: 'Black Titanium',
+                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iPhone+16+Pro+-+Max/black.webp',
+                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iPhone+16+Pro+-+Max/black-titanium.webp'
                 },
                 {
                     name: 'Natural Titanium',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Apple+iPhone+16+Pro/Shade/Featured+Image/Natural+Titanium.webp',
-                    layoutSrc : ''
+                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iPhone+16+Pro+-+Max/natural.webp',
+                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iPhone+16+Pro+-+Max/natural-titanium.webp'
                 },
                 {
                     name: 'White Titanium',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Apple+iPhone+16+Pro/Shade/Featured+Image/White+Titanium.webp',
-                    layoutSrc : ''
-                },
-                {
-                    name: 'Black Titanium',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Apple+iPhone+16+Pro/Shade/Featured+Image/Black+Titanium.webp',
-                    layoutSrc : ''
+                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iPhone+16+Pro+-+Max/white.webp',
+                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iPhone+16+Pro+-+Max/white-titanium.webp'
                 },
             ],
             layout : []
         },
-        GalaxyS24Ultra : {
-            brand : 'Samsung',
-            model : 'Galaxy S24 Ultra',
-            screenPixelsWidth : 3120,
-            screenPixelsHeight : 1440,
+        pixel8 : {
+            brand : 'Google',
+            model : 'Pixel 8',
+            screenPixelsWidth : 1080,
+            screenPixelsHeight : 2400,
+            deviceAspectRatio : 540/1100,
             showDeviceShadow : true,
-            image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Samsung+Galaxy+S24+Ultra/Shade/Featured+Image/Titanium+Violet.webp',
+            screenStyle : {
+                padding: '4.6% 3.2% 4.6%',
+                borderRadius: 0
+            },
+            image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Pixel+8/hazel.webp',
             shade : [
                 {
-                    name: 'Titanium Gray',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Samsung+Galaxy+S24+Ultra/Shade/Featured+Image/Titanium+Gray.webp',
-                    layoutSrc : ''
+                    name: 'Hazel',
+                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Pixel+8/hazel.webp',
+                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Pixel+8/hazel.png'
                 },
                 {
-                    name: 'Titanium Black',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Samsung+Galaxy+S24+Ultra/Shade/Featured+Image/Titanium+Black.webp',
-                    canvasSrc : ''
+                    name: 'Obsidian',
+                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Pixel+8/obsidian.webp',
+                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Pixel+8/obsidian.png'
                 },
                 {
-                    name: 'Titanium Violet',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Samsung+Galaxy+S24+Ultra/Shade/Featured+Image/Titanium+Violet.webp',
-                    layoutSrc : ''
-                },
-                {
-                    name: 'Titanium Yellow',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Samsung+Galaxy+S24+Ultra/Shade/Featured+Image/Titanium+Yellow.webp',
-                    layoutSrc : ''
+                    name: 'Rose',
+                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Pixel+8/rose.webp',
+                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Pixel+8/rose.png'
                 },
             ],
             layout : []
