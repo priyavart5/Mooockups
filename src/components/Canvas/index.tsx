@@ -14,7 +14,7 @@ const Canvas = forwardRef<HTMLDivElement>((_, ref) => {
 
   const [isDragging, setIsDragging] = useState<boolean>(false);
   const [dragType, setDragType] = useState<any>("");
-  const [isDraggingImage, setIsDraggingImage] = useState<boolean>(false);
+  const [isDraggingFile, setIsDraggingFile] = useState<boolean>(false);
 
   const dispatch = useDispatch();
 
@@ -36,7 +36,7 @@ const Canvas = forwardRef<HTMLDivElement>((_, ref) => {
     frameBlur,
   } = useSelector((state: RootState) => state.mockLab);
 
-  const { file } = useSelector((state: RootState) => state.import);
+  const { file, type } = useSelector((state: RootState) => state.import);
   const { preview, hideMockup, hideBackground } = useSelector((state: RootState) => state.dock);
   const [borderRadius, setBorderRadius] = useState<number>(0);
 
@@ -98,79 +98,123 @@ const Canvas = forwardRef<HTMLDivElement>((_, ref) => {
   const handleDrop = (e: any) => {
     e.preventDefault();
     e.stopPropagation();
-    setIsDraggingImage(false);
+    setIsDraggingFile(false);
 
-    const image = e.dataTransfer.files?.[0];
-    if (image) {
+    const droppedFile = e.dataTransfer.files?.[0];
+    if (droppedFile) {
+      const fileType = droppedFile.type.split('/')[0];
       const reader = new FileReader();
-      reader.onloadend = () => {
+
+      if (fileType === 'image') {
+        reader.onloadend = () => {
           const img = new window.Image();
           img.onload = () => {
-          const width = img.width;
-          const height = img.height;
+            const width = img.width;
+            const height = img.height;
 
-          dispatch(setFile({
-              file: reader.result as string,
-              fileName: image.name,
-              width,
-              height,
-          }));
+            dispatch(
+              setFile({
+                file: reader.result as string,
+                fileName: droppedFile.name,
+                width,
+                height,
+                type: 'image',
+              })
+            );
           };
           img.src = reader.result as string;
-      };
+        };
+        reader.readAsDataURL(droppedFile);
+      } else if (fileType === 'video') {
+        const video = document.createElement('video');
+        video.preload = 'metadata';
+        video.src = URL.createObjectURL(droppedFile);
 
-      if (image) {
-        reader.readAsDataURL(image);
-      }else {
-        toast.error('Please upload a valid image file.',
-          {
-            style: {
-              borderRadius: '100px',
-              background: '#2a2a2a',
-              color: '#FF5959',
-            },
-          }
-        );
+        video.onloadedmetadata = () => {
+          const width = video.videoWidth;
+          const height = video.videoHeight;
+          const duration = video.duration;
+
+          reader.onloadend = () => {
+            dispatch(
+              setFile({
+                file: reader.result as string,
+                fileName: droppedFile.name,
+                width,
+                height,
+                duration,
+                type: 'video',
+              })
+            );
+          };
+          reader.readAsDataURL(droppedFile);
+        };
+      } else {
+        toast.error('Unsupported file type. Please upload an image or video.', {
+          style: {
+            borderRadius: '100px',
+            background: '#2a2a2a',
+            color: '#FF5959',
+          },
+        });
       }
     }
   };
 
-  const handleFileChange = (e: any) => {
-    const file = e.target.files?.[0];
-    if (file && file.type.startsWith('image/')) {
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = e.target.files?.[0];
+    if (selectedFile) {
+      const fileType = selectedFile.type.split('/')[0];
       const reader = new FileReader();
-      reader.onloadend = () => {
+
+      if (fileType === 'image') {
+        reader.onloadend = () => {
           const img = new window.Image();
           img.onload = () => {
-          const width = img.width;
-          const height = img.height;
+            const width = img.width;
+            const height = img.height;
 
-          dispatch(setFile({
-              file: reader.result as string,
-              fileName: file.name,
-              width,
-              height,
-          }));
+            dispatch(
+              setFile({
+                file: reader.result as string,
+                fileName: selectedFile.name,
+                width,
+                height,
+                type: 'image',
+              })
+            );
           };
           img.src = reader.result as string;
-      };
+        };
+        reader.readAsDataURL(selectedFile);
+      } else if (fileType === 'video') {
+        const video = document.createElement('video');
+        video.preload = 'metadata';
+        video.src = URL.createObjectURL(selectedFile);
 
-      if (file) {
-        reader.readAsDataURL(file);
-      }else {
-        toast.error('Please upload a valid image file.',
-          {
-            style: {
-              borderRadius: '100px',
-              background: '#2a2a2a',
-              color: '#FF5959',
-            },
-          }
-        );
+        video.onloadedmetadata = () => {
+          window.URL.revokeObjectURL(video.src);
+          const width = video.videoWidth;
+          const height = video.videoHeight;
+          const duration = video.duration;
+
+          reader.onloadend = () => {
+            dispatch(
+              setFile({
+                file: reader.result as string,
+                fileName: selectedFile.name,
+                width,
+                height,
+                duration,
+                type: 'video',
+              })
+            );
+          };
+          reader.readAsDataURL(selectedFile);
+        };
       }
     }
   };
-
 
 
   return (
@@ -331,13 +375,13 @@ const Canvas = forwardRef<HTMLDivElement>((_, ref) => {
                     >
                         <div
                           className={`${styles.canvasDevice_screenImport} ${
-                            isDraggingImage ? styles.dragActive : ''
+                            isDraggingFile ? styles.dragActive : ''
                           }`}
                           onDragOver={(e:any) => {
                             e.preventDefault();
-                            setIsDraggingImage(true);
+                            setIsDraggingFile(true);
                           }}
-                          onDragLeave={() => setIsDraggingImage(false)}
+                          onDragLeave={() => setIsDraggingFile(false)}
                           onDrop={handleDrop}
                           style={{
                             padding: `${mockupSelectedDevice.screenStyle.padding}`,
@@ -345,7 +389,7 @@ const Canvas = forwardRef<HTMLDivElement>((_, ref) => {
                         >
                           <input
                             type="file"
-                            accept="image/*"
+                            accept="image/*, video/*"
                             style={{ display: 'none' }}
                             id="imageUploadInput"
                             onChange={handleFileChange}
@@ -353,7 +397,7 @@ const Canvas = forwardRef<HTMLDivElement>((_, ref) => {
                           />
                           <label htmlFor="imageUploadInput" className={styles.canvasDevice_uploadImageLabel} style={{ cursor: 'pointer' }}>
                             <ImageUp color="#EFEFEF" size={24} strokeWidth={1.5} style={{ marginBottom: '10px' }} />
-                            <p>{isDraggingImage ? 'Drop the image here...' : 'Drag & Drop Image'}</p>
+                            <p>{isDraggingFile ? 'Drop the File here...' : 'Drag & Drop File'}</p>
                             <p>{mockupSelectedDevice.screenPixelsWidth} X {mockupSelectedDevice.screenPixelsHeight}</p>
                           </label>
                         </div>
@@ -361,7 +405,7 @@ const Canvas = forwardRef<HTMLDivElement>((_, ref) => {
                   )}
 
                   {/* Device Screen */}
-                  {file  && (
+                  {/* {file  && (
                     <div
                       className={styles.canvasDevice_screen}
                       style={{
@@ -386,6 +430,53 @@ const Canvas = forwardRef<HTMLDivElement>((_, ref) => {
                             borderRadius: `${borderRadius}px`,
                           }}
                         />
+                    </div>
+                  )} */}
+
+                  {file && (
+                    <div
+                    className={styles.canvasDevice_screen}
+                    style={{
+                      transform:` 
+                        scale(${mockupScale.scale / 3})
+                        translate(${mockupPosition.position_X}px, ${mockupPosition.position_Y}px)
+                        rotate(${mockupRotation.rotation}deg)`,
+                        aspectRatio: mockupSelectedDevice.deviceAspectRatio,
+                        zIndex: 3,
+                    }}
+                    >
+                      {type === 'image' ? (
+                        <Image
+                          unoptimized
+                          crossOrigin="anonymous"
+                          loading="eager"
+                          src={file}
+                          alt="Imported Content"
+                          fill
+                          style={{
+                            padding: `${mockupSelectedDevice.screenStyle.padding}`,
+                            borderRadius: `${borderRadius}px`,
+                          }}
+                        />
+                      ) : (
+                        <video  
+                          key={file}
+                          preload="none" 
+                          autoPlay
+                          loop
+                          playsInline
+                          style={{
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'cover',
+                            borderRadius: `${borderRadius}px`,
+                            padding: `${mockupSelectedDevice.screenStyle.padding}`,
+                          }}
+                        >
+                          <source src={file} type="video/mp4" />
+                          Your browser does not support the video tag.
+                        </video>
+                      )}
                     </div>
                   )}
                 </div>

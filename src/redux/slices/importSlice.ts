@@ -1,5 +1,3 @@
-// src/redux/slices/importSlice.ts
-
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface ImportState {
@@ -7,6 +5,8 @@ interface ImportState {
   fileName: string;
   width: number | null;
   height: number | null;
+  type: 'image' | 'video' | null;
+  duration: number | null;
 }
 
 const initialState: ImportState = {
@@ -14,13 +14,14 @@ const initialState: ImportState = {
   fileName: 'Import file',
   width: null,
   height: null,
+  type: null,
+  duration: null,
 };
 
 const importSlice = createSlice({
   name: 'import',
   initialState,
   reducers: {
-    // Set file details in the Redux state
     setFile: (
       state,
       action: PayloadAction<{
@@ -28,20 +29,25 @@ const importSlice = createSlice({
         fileName: string;
         width: number;
         height: number;
+        type: 'image' | 'video';
+        duration?: number;
       }>
     ) => {
-      const { file, fileName, width, height } = action.payload;
+      const { file, fileName, width, height, type, duration } = action.payload;
       state.file = file;
       state.fileName = fileName;
       state.width = width;
       state.height = height;
+      state.type = type;
+      state.duration = type === 'video' ? duration ?? null : null;
     },
-    // Clear file from Redux state
     clearFile: (state) => {
       state.file = null;
       state.fileName = 'Import file';
       state.width = null;
       state.height = null;
+      state.type = null;
+      state.duration = null;
     },
   },
 });

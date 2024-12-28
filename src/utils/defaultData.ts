@@ -486,6 +486,7 @@ export const mockLabMockup = {
             showDeviceShadow : true,
             screenStyle : {
                 padding: '3.9% 3.6% 3.6%',
+                borderRadius: '0',
             },
             image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Pro+11%22/Space+Black/space-black.webp',
             shade : [
@@ -511,6 +512,7 @@ export const mockLabMockup = {
             showDeviceShadow : true,
             screenStyle : {
                 padding: '3.9% 3.6% 3.6%',
+                borderRadius: '0',
             },
             image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Pro+11%22/Space+Black/space-black-13.webp',
             shade : [
@@ -536,6 +538,7 @@ export const mockLabMockup = {
             showDeviceShadow : true,
             screenStyle : {
                 padding: '4.2% 4.2% 4.2%',
+                borderRadius: '0',
             },
             image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Space+Grey/space-grey.webp',
             shade : [
@@ -598,6 +601,7 @@ export const mockLabMockup = {
             showDeviceShadow : false,
             screenStyle : {
                 padding: '1.2% 10% 6.8%',
+                borderRadius: '0',
             },
             image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Pro+16/Silver/silver.webp',
             shade : [
@@ -623,6 +627,7 @@ export const mockLabMockup = {
             showDeviceShadow : false,
             screenStyle : {
                 padding: '1.2% 10% 6.8%',
+                borderRadius: '0',
             },
             image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Pro+16/Silver/macbookPro14.webp',
             shade : [
@@ -648,6 +653,7 @@ export const mockLabMockup = {
             showDeviceShadow : false,
             screenStyle : {
                 padding: '4.4% 11.6% 7.2%',
+                borderRadius: '0',
             },
             image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Pro+13/Space+Grey/space-grey.webp',
             shade : [
@@ -673,6 +679,7 @@ export const mockLabMockup = {
             showDeviceShadow : false,
             screenStyle : {
                 padding: '1.8% 10% 6.8%',
+                borderRadius: '0',
             },
             image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Midnight/midnight.webp',
             shade : [
@@ -708,6 +715,7 @@ export const mockLabMockup = {
             showDeviceShadow : false,
             screenStyle : {
                 padding: '4% 11.2% 5.6%',
+                borderRadius: '0',
             },
             image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M1/Space+Grey/space-grey.webp',
             shade : [
@@ -740,6 +748,7 @@ export const mockLabMockup = {
             showDeviceShadow : false,
             screenStyle : {
                 padding: '3.8% 3.8% 29%',
+                borderRadius: '0',
             },
             image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/iMac+24/Purple/purple.webp',
             shade : [
@@ -790,6 +799,7 @@ export const mockLabMockup = {
             showDeviceShadow : false,
             screenStyle : {
                 padding: '2% 2% 18.8%',
+                borderRadius: '0',
             },
             image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/Pro+Display+XDR/pro-display-xdr.webp',
             shade : [
@@ -810,6 +820,7 @@ export const mockLabMockup = {
             showDeviceShadow : false,
             screenStyle : {
                 padding: '2% 2% 20.6%',
+                borderRadius: '0',
             },
             image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/Studio+Display/studio-display.webp',
             shade : [
