@@ -12,22 +12,13 @@ import { Tooltip } from 'react-tippy';
 import 'react-tippy/dist/tippy.css';
 
 const Export = ({ canvasRef }: { canvasRef: React.RefObject<HTMLDivElement> }) => {
-
   const os = detectOS();
   const { frameLayout } = useSelector((state: RootState) => state.mockLab);
-
-  // *****************
-  // States - Start
-  // *****************
 
   const [exportSetting, setExportSetting] = useState<boolean>(false);
   const [selectedFormat, setSelectedFormat] = useState<string>('PNG');
   const [selectedSize, setSelectedSize] = useState<string>('3x');
   const [disableExportActions, setDisableExportActions] = useState<boolean>(false);
-
-  // *****************
-  // States - End
-  // *****************
 
   const roundToEven = (value: number) => (value % 2 === 0 ? value : value + 1);
 
@@ -50,46 +41,20 @@ const Export = ({ canvasRef }: { canvasRef: React.RefObject<HTMLDivElement> }) =
 
   const calculateDimensions = (multiplier: number) => {
     return {
-      width: roundToEven(
-        Math.round((frameLayout.width ?? 0) * multiplier)
-      ),
-      height: roundToEven(
-        Math.round((frameLayout.height ?? 0) * multiplier)
-      ),
+      width: roundToEven(Math.round((frameLayout.width ?? 0) * multiplier)),
+      height: roundToEven(Math.round((frameLayout.height ?? 0) * multiplier)),
     };
   };
-  
 
   const currentDimensions = calculateDimensions(getMultiplier(selectedSize));
 
-  // Handle Export
-  const handleExport = async () => {
-    setDisableExportActions(true);
-    if (!canvasRef.current) {
-      setDisableExportActions(false);
-      toast.error('Failed to Export Image. Please try again.',
-        {
-          style: {
-            borderRadius: '100px',
-            background: '#2a2a2a',
-            color: '#FF5959',
-          },
-        }
-      );
-      return;
-    }
-  
-    const loadingToast = toast.loading('Preparing...',
-      {
-        style: {
-          borderRadius: '100px',
-          background: '#2a2a2a',
-          color: '#efefef',
-        },
-      }
-    );
-    try {
-      let dataUrl: string | Blob | null = null;
+  const generateImage = async (maxAttempts: number, minDataLength: number) => {
+    if (!canvasRef.current) throw new Error('Canvas not found.');
+
+    let dataUrl: string | Blob | null = null;
+    let attempt = 0;
+
+    while (attempt < maxAttempts) {
       if (selectedFormat === 'PNG') {
         dataUrl = await htmlToImage.toPng(canvasRef.current, {
           pixelRatio: getMultiplier(selectedSize),
@@ -102,144 +67,90 @@ const Export = ({ canvasRef }: { canvasRef: React.RefObject<HTMLDivElement> }) =
           pixelRatio: getMultiplier(selectedSize),
           cacheBust: true,
           canvasWidth: frameLayout.width,
-          canvasHeight: frameLayout.height
+          canvasHeight: frameLayout.height,
         });
       } else if (selectedFormat === 'WEBP') {
         dataUrl = await htmlToImage.toBlob(canvasRef.current, {
           pixelRatio: getMultiplier(selectedSize),
           cacheBust: true,
           canvasWidth: frameLayout.width,
-          canvasHeight: frameLayout.height
+          canvasHeight: frameLayout.height,
         });
       }
-  
+
+      const isValidData = dataUrl && (typeof dataUrl === 'string' ? dataUrl.length : dataUrl.size) > minDataLength;
+      if (isValidData) return dataUrl;
+
+      attempt++;
+    }
+
+    throw new Error('Failed to generate a valid image after multiple attempts.');
+  };
+
+  const handleExport = async () => {
+    setDisableExportActions(true);
+    const loadingToast = toast.loading('Preparing...', {
+      style: { borderRadius: '100px', background: '#2a2a2a', color: '#efefef' },
+    });
+
+    try {
+      const dataUrl = await generateImage(10, 2000000);
       if (dataUrl) {
         const url = typeof dataUrl === 'string' ? dataUrl : URL.createObjectURL(dataUrl);
-        if (url) {
-          const link = document.createElement('a');
-          link.href = url;
-          link.download = `mockup.${selectedFormat.toLowerCase()}`;
-          link.click();
-          URL.revokeObjectURL(url);
-          setDisableExportActions(false);
-          toast.success('Ready to Export Image',
-            {
-              id: loadingToast,
-              style: {
-                borderRadius: '100px',
-                background: '#2a2a2a',
-                color: '#00D547',
-              },
-            }
-          );
-        } else {
-          throw new Error('Failed to generate download URL');
-        }
-      } else {
-        throw new Error('Failed to generate image');
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `mockup.${selectedFormat.toLowerCase()}`;
+        link.click();
+        if (typeof dataUrl !== 'string') URL.revokeObjectURL(url);
+
+        toast.success('Image exported successfully!', {
+          id: loadingToast,
+          style: { borderRadius: '100px', background: '#2a2a2a', color: '#00D547' },
+        });
       }
     } catch (error) {
       console.error('Failed to export canvas:', error);
+      toast.error('Failed to Export Image. Please try again.', {
+        id: loadingToast,
+        style: { borderRadius: '100px', background: '#2a2a2a', color: '#FF5959' },
+      });
+    } finally {
       setDisableExportActions(false);
-      toast.error('Failed to Export Image. Please try again.',
-        {
-          id: loadingToast,
-          style: {
-            borderRadius: '100px',
-            background: '#2a2a2a',
-            color: '#FF5959',
-          },
-        }
-      );
     }
   };
 
-  // Handle Copy
   const handleCopy = async () => {
     setDisableExportActions(true);
-    if (!canvasRef.current) {
-      setDisableExportActions(false);
-      toast.error('Failed to Copy Image. Please try again.',
-        {
-          style: {
-            borderRadius: '100px',
-            background: '#2a2a2a',
-            color: '#FF5959',
-          },
-        }
-      );
-      return;
-    }
-  
-    const loadingToast = toast.loading('Copying...',
-      {
-        style: {
-          borderRadius: '100px',
-          background: '#2a2a2a',
-          color: '#efefef',
-        },
-      }
-    );
+    const loadingToast = toast.loading('Copying...', {
+      style: { borderRadius: '100px', background: '#2a2a2a', color: '#efefef' },
+    });
+
     try {
-      let dataUrl: string | Blob | null = null;
-      if (selectedFormat === 'PNG') {
-        dataUrl = await htmlToImage.toPng(canvasRef.current, {
-          pixelRatio: getMultiplier(selectedSize),
-          cacheBust: true,
-          canvasWidth: frameLayout.width,
-          canvasHeight: frameLayout.height,
-        });
-      } else if (selectedFormat === 'JPG') {
-        dataUrl = await htmlToImage.toJpeg(canvasRef.current, {
-          pixelRatio: getMultiplier(selectedSize),
-          cacheBust: true,
-          canvasWidth: frameLayout.width,
-          canvasHeight: frameLayout.height,
-        });
-      }
-  
+      const dataUrl = await generateImage(10, 2000000);
       if (dataUrl) {
-        const blob = await (await fetch(dataUrl)).blob();
-  
+        const blob = typeof dataUrl === 'string' ? await (await fetch(dataUrl)).blob() : dataUrl;
         if (navigator.clipboard && navigator.clipboard.write) {
-          const clipboardItem = new ClipboardItem({
-            [blob.type]: blob,
-          });
+          const clipboardItem = new ClipboardItem({ [blob.type]: blob });
           await navigator.clipboard.write([clipboardItem]);
-          setDisableExportActions(false);
-          toast.success('Image copied to clipboard!',
-            {
-              id: loadingToast,
-              style: {
-                borderRadius: '100px',
-                background: '#2a2a2a',
-                color: '#00D547',
-              },
-            }
-          );
+
+          toast.success('Image copied to clipboard!', {
+            id: loadingToast,
+            style: { borderRadius: '100px', background: '#2a2a2a', color: '#00D547' },
+          });
         } else {
           throw new Error('Clipboard API is not supported in this browser.');
         }
-      } else {
-        throw new Error('Failed to generate image');
       }
     } catch (error) {
       console.error('Failed to copy image:', error);
+      toast.error('Failed to copy image. Please try again.', {
+        id: loadingToast,
+        style: { borderRadius: '100px', background: '#2a2a2a', color: '#FF5959' },
+      });
+    } finally {
       setDisableExportActions(false);
-      toast.error('Failed to copy image. Please try again.',
-        {
-          id: loadingToast,
-          style: {
-            borderRadius: '100px',
-            background: '#2a2a2a',
-            color: '#FF5959',
-          },
-        }
-      );
     }
   };
-
-  // Register shortcuts
 
   useShortcut(os, [os === 'mac' ? 'Meta' : 'Control', 'e'], handleExport);
   useShortcut(os, [os === 'mac' ? 'Meta' : 'Control', 'c'], handleCopy);
