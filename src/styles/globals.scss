@@ -23,3 +23,15 @@ h1, h2, h3, h4, h5, h6, p{
   margin-block-start: 0em !important;
   margin-block-end: 0em !important;
 }
+
+/* Hide spin buttons for WebKit browsers */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* For better cross-browser support */
+input[type="number"] {
+  -moz-appearance: textfield;
+}

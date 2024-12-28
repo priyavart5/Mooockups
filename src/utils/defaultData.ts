@@ -295,7 +295,7 @@ export const mockLabFrame = {
         '#FFC700',
         '#C4CA00',
         '#C4CA00'
-    ]
+    ],
 };
 
 export const mockLabMockup = {

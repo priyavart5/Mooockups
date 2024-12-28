@@ -256,12 +256,13 @@ const Canvas = forwardRef<HTMLDivElement>((_, ref) => {
                   
                   {/* Frame Background */}
                   {!frameTransparent.transparent && (
-                    <img
+                    <Image
                       crossOrigin='anonymous'
                       loading='eager'
                       className={styles.canvas_frameBackground}
                       alt='background'
                       src= {frameBackground.backgroundSrc}
+                      fill
                       style={{
                         backgroundColor: 'transparent',
                         opacity: frameBackground.backgroundOpacity,
