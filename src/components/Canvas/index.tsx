@@ -1,8 +1,8 @@
 import React, {useState, useEffect, forwardRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import styles from './styles.module.scss';
 import Image from 'next/image';
 import { RootState } from '../../redux/store';
-import styles from './styles.module.scss';
 import {setMockupRotation, setMockupScale} from '../../redux/slices/mockLabSlice';
 import { setFile } from '../../redux/slices/importSlice';
 import { Spline, MoveDiagonal2, ImageUp } from 'lucide-react';
@@ -256,13 +256,12 @@ const Canvas = forwardRef<HTMLDivElement>((_, ref) => {
                   
                   {/* Frame Background */}
                   {!frameTransparent.transparent && (
-                    <Image
+                    <img
                       crossOrigin='anonymous'
                       loading='eager'
                       className={styles.canvas_frameBackground}
                       alt='background'
                       src= {frameBackground.backgroundSrc}
-                      fill
                       style={{
                         backgroundColor: 'transparent',
                         opacity: frameBackground.backgroundOpacity,

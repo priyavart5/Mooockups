@@ -99,7 +99,7 @@ const Export = ({ canvasRef }: { canvasRef: React.RefObject<HTMLDivElement> }) =
         const url = typeof dataUrl === 'string' ? dataUrl : URL.createObjectURL(dataUrl);
         const link = document.createElement('a');
         link.href = url;
-        link.download = `mockup.${selectedFormat.toLowerCase()}`;
+        link.download = `mockup_by_pv.${selectedFormat.toLowerCase()}`;
         link.click();
         if (typeof dataUrl !== 'string') URL.revokeObjectURL(url);
 
