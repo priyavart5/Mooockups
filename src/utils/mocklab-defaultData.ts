@@ -62,7 +62,7 @@ export const mockLabFrame = {
         },
         {
             type: 'Instagram',
-            typeImage: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Layout/instagram.webp',
+            typeImage: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Frame/Layout/instagram.webp',
             typeLayouts : [
                 {
                     name: 'Post',
@@ -86,7 +86,7 @@ export const mockLabFrame = {
         },
         {
             type: 'Twitter',
-            typeImage: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Layout/twitter.webp',
+            typeImage: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Frame/Layout/twitter.webp',
             typeLayouts : [
                 {
                     name: 'Tweet',
@@ -104,7 +104,7 @@ export const mockLabFrame = {
         },
         {
             type: 'Dribbble',
-            typeImage: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Layout/dribbble.webp',
+            typeImage: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Frame/Layout/dribbble.webp',
             typeLayouts : [
                 {
                     name: 'Shot',
@@ -116,7 +116,7 @@ export const mockLabFrame = {
         },
         {
             type: 'Youtube',
-            typeImage: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Layout/youtube.webp',
+            typeImage: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Frame/Layout/youtube.webp',
             typeLayouts : [
                 {
                     name: 'Banner',
@@ -140,7 +140,7 @@ export const mockLabFrame = {
         },
         {
             type: 'Pinterest',
-            typeImage: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Layout/pinterest.webp',
+            typeImage: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Frame/Layout/pinterest.webp',
             typeLayouts : [
                 {
                     name: 'Long',
@@ -176,110 +176,110 @@ export const mockLabFrame = {
     gradient : [
         {
             name: 'Apple GIOS18 - 12',
-            featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Gradient/Featured+Image/Apple+GIOS18+-+12.jpg',
-            canvasSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Gradient/Canvas+Image/Apple20GIOS1820-2012.webp'
+            featuredSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Frame/Gradient/Featured+Image/Apple+GIOS18+-+12.jpg',
+            canvasSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Frame/Gradient/Canvas+Image/Apple20GIOS1820-2012.webp'
         },
         {
             name: 'Galactic Ring - 16',
-            featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Gradient/Featured+Image/Galactic+Ring+-+16+1.jpg',
-            canvasSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Gradient/Canvas+Image/Galactic20Ring20-2016.webp'
+            featuredSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Frame/Gradient/Featured+Image/Galactic+Ring+-+16+1.jpg',
+            canvasSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Frame/Gradient/Canvas+Image/Galactic20Ring20-2016.webp'
         },
         {
             name: 'Spectral Dark - 50',
-            featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Gradient/Featured+Image/Spectral%2520Dark%2520-%252050+2.jpg',
-            canvasSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Gradient/Canvas+Image/Spectral20Dark20-2050.webp'
+            featuredSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Frame/Gradient/Featured+Image/Spectral%2520Dark%2520-%252050+2.jpg',
+            canvasSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Frame/Gradient/Canvas+Image/Spectral20Dark20-2050.webp'
         },
         {
             name: 'Spectral Light - 50',
-            featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Gradient/Featured+Image/Spectral+Light+-+50+1.jpg',
-            canvasSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Gradient/Canvas+Image/Spectral20Light20-2050.webp'
+            featuredSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Frame/Gradient/Featured+Image/Spectral+Light+-+50+1.jpg',
+            canvasSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Frame/Gradient/Canvas+Image/Spectral20Light20-2050.webp'
         },
         {
             name: 'Fuchsia - 18',
-            featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Gradient/Featured+Image/Fuchsia+-+18+1.jpg',
-            canvasSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Gradient/Canvas+Image/Fuchsia20-20185.webp'
+            featuredSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Frame/Gradient/Featured+Image/Fuchsia+-+18+1.jpg',
+            canvasSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Frame/Gradient/Canvas+Image/Fuchsia20-20185.webp'
         },
         {
             name: 'Chaotic Gradients - 100',
-            featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Gradient/Featured+Image/Chaotic%2520Gradients%2520-%2520100+2.jpg',
+            featuredSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Frame/Gradient/Featured+Image/Chaotic%2520Gradients%2520-%2520100+2.jpg',
             canvasSrc: ''
         },
         {
             name: 'Chaotic Gradients - 50',
-            featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Gradient/Featured+Image/Chaotic+Gradients+-+50+1.jpg',
+            featuredSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Frame/Gradient/Featured+Image/Chaotic+Gradients+-+50+1.jpg',
             canvasSrc: ''
         },
         {
             name: 'Chaotic Gradients - 71',
-            featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Gradient/Featured+Image/Chaotic+Gradients+-+71+1.jpg',
+            featuredSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Frame/Gradient/Featured+Image/Chaotic+Gradients+-+71+1.jpg',
             canvasSrc: ''
         },
         {
             name: 'Darkmist - 60',
-            featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Gradient/Featured+Image/Darkmist+-+60+1.jpg',
+            featuredSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Frame/Gradient/Featured+Image/Darkmist+-+60+1.jpg',
             canvasSrc: ''
         },
         {
             name: 'Darkshell - 12',
-            featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Gradient/Featured+Image/Darkshell+-+12+1.jpg',
+            featuredSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Frame/Gradient/Featured+Image/Darkshell+-+12+1.jpg',
             canvasSrc: ''
         },
         {
             name: 'Fractal Maze - 60',
-            featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Gradient/Featured+Image/Fractal+Maze+60+1.jpg',
+            featuredSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Frame/Gradient/Featured+Image/Fractal+Maze+60+1.jpg',
             canvasSrc: ''
         },
         {
             name: 'Hero Gradient 34',
-            featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Gradient/Featured+Image/Hero%2520Gradient%2520-%252034+2.jpg',
+            featuredSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Frame/Gradient/Featured+Image/Hero%2520Gradient%2520-%252034+2.jpg',
             canvasSrc: ''
         },
         {
             name: 'Japaneasy - 01',
-            featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Gradient/Featured+Image/Japaneasy+-+01+1.jpg',
+            featuredSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Frame/Gradient/Featured+Image/Japaneasy+-+01+1.jpg',
             canvasSrc: ''
         },
         {
             name: 'Shockwave 15',
-            featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Gradient/Featured+Image/Shockwave+15+1.jpg',
+            featuredSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Frame/Gradient/Featured+Image/Shockwave+15+1.jpg',
             canvasSrc: ''
         },
     ],
     shadow : [
         {
             name: 'Shadow 01',
-            featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Shadow/Featured+Image/image-1.jpg',
-            canvasSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Shadow/Canvas+Image/029.png'
+            featuredSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Frame/Shadow/Featured+Image/image-1.jpg',
+            canvasSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Frame/Shadow/Canvas+Image/029.png'
         },
         {
             name: 'Shadow 02',
-            featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Shadow/Featured+Image/image-2.jpg',
+            featuredSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Frame/Shadow/Featured+Image/image-2.jpg',
             canvasSrc: ''
         },
         {
             name: 'Shadow 03',
-            featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Shadow/Featured+Image/image.jpg',
+            featuredSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Frame/Shadow/Featured+Image/image.jpg',
             canvasSrc: ''
         },
         {
             name: 'Shadow 04',
-            featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Shadow/Featured+Image/image+9.jpg',
-            canvasSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Shadow/Canvas+Image/011.png'
+            featuredSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Frame/Shadow/Featured+Image/image+9.jpg',
+            canvasSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Frame/Shadow/Canvas+Image/011.png'
         },
         {
             name: 'Shadow 05',
-            featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Shadow/Featured+Image/image+8.jpg',
+            featuredSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Frame/Shadow/Featured+Image/image+8.jpg',
             canvasSrc: ''
         },
         {
             name: 'Shadow 06',
-            featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Shadow/Featured+Image/image+11.jpg',
-            canvasSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Shadow/Canvas+Image/051.png'
+            featuredSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Frame/Shadow/Featured+Image/image+11.jpg',
+            canvasSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Frame/Shadow/Canvas+Image/051.png'
         },
         {
             name: 'Shadow 07',
-            featuredSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Shadow/Featured+Image/image+10.jpg',
-            canvasSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Shadow/Canvas+Image/049.png'
+            featuredSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Frame/Shadow/Featured+Image/image+10.jpg',
+            canvasSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Frame/Shadow/Canvas+Image/049.png'
         },
 
     ],
@@ -311,32 +311,32 @@ export const mockLabMockup = {
                 padding: '6.2% 6.6% 6.2%',
                 borderRadius: '36',
             },
-            image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/black-f.webp',
+            image : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/black-f.webp',
             shade : [
                 {
                     name: 'Black',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/black-f.webp',
-                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/black.webp'
+                    shadeSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/black-f.webp',
+                    layoutSrc : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/black.webp'
                 },
                 {
                     name: 'White',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/white-f.webp',
-                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/white.webp'
+                    shadeSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/white-f.webp',
+                    layoutSrc : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/white.webp'
                 },
                 {
                     name: 'Pink',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/pink-f.webp',
-                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/pink.webp'
+                    shadeSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/pink-f.webp',
+                    layoutSrc : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/pink.webp'
                 },
                 {
                     name: 'Teal',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/teal-f.webp',
-                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/teal.webp'
+                    shadeSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/teal-f.webp',
+                    layoutSrc : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/teal.webp'
                 },
                 {
                     name: 'Ultramarine',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/ultramarine-f.webp',
-                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/ultramarine.webp'
+                    shadeSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/ultramarine-f.webp',
+                    layoutSrc : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/ultramarine.webp'
                 },
             ],
             layout : []
@@ -352,32 +352,32 @@ export const mockLabMockup = {
                 padding: '6.2% 6.6% 6.2%',
                 borderRadius: '36',
             },
-            image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/teal-f.webp',
+            image : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/teal-f.webp',
             shade : [
                 {
                     name: 'Teal',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/teal-f.webp',
-                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/teal.webp'
+                    shadeSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/teal-f.webp',
+                    layoutSrc : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/teal.webp'
                 },
                 {
                     name: 'Black',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/black-f.webp',
-                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/black.webp'
+                    shadeSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/black-f.webp',
+                    layoutSrc : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/black.webp'
                 },
                 {
                     name: 'White',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/white-f.webp',
-                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/white.webp'
+                    shadeSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/white-f.webp',
+                    layoutSrc : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/white.webp'
                 },
                 {
                     name: 'Pink',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/pink-f.webp',
-                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/pink.webp'
+                    shadeSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/pink-f.webp',
+                    layoutSrc : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/pink.webp'
                 },
                 {
                     name: 'Ultramarine',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/ultramarine-f.webp',
-                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/ultramarine.webp'
+                    shadeSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/ultramarine-f.webp',
+                    layoutSrc : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iphone16/ultramarine.webp'
                 },
             ],
             layout : []
@@ -393,22 +393,22 @@ export const mockLabMockup = {
                 padding: '5.2% 5.2% 5.2%',
                 borderRadius: '36',
             },
-            image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iPhone+16+Pro+-+Max/natural.webp',
+            image : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iPhone+16+Pro+-+Max/natural.webp',
             shade : [
                 {
                     name: 'Natural Titanium',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iPhone+16+Pro+-+Max/natural.webp',
-                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iPhone+16+Pro+-+Max/natural-titanium.webp'
+                    shadeSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iPhone+16+Pro+-+Max/natural.webp',
+                    layoutSrc : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iPhone+16+Pro+-+Max/natural-titanium.webp'
                 },
                 {
                     name: 'Black Titanium',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iPhone+16+Pro+-+Max/black.webp',
-                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iPhone+16+Pro+-+Max/black-titanium.webp'
+                    shadeSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iPhone+16+Pro+-+Max/black.webp',
+                    layoutSrc : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iPhone+16+Pro+-+Max/black-titanium.webp'
                 },
                 {
                     name: 'White Titanium',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iPhone+16+Pro+-+Max/white.webp',
-                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iPhone+16+Pro+-+Max/white-titanium.webp'
+                    shadeSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iPhone+16+Pro+-+Max/white.webp',
+                    layoutSrc : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iPhone+16+Pro+-+Max/white-titanium.webp'
                 },
             ],
             layout : []
@@ -424,22 +424,22 @@ export const mockLabMockup = {
                 padding: '5.2% 5.2% 5.2%',
                 borderRadius: '36',
             },
-            image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iPhone+16+Pro+-+Max/black.webp',
+            image : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iPhone+16+Pro+-+Max/black.webp',
             shade : [
                 {
                     name: 'Black Titanium',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iPhone+16+Pro+-+Max/black.webp',
-                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iPhone+16+Pro+-+Max/black-titanium.webp'
+                    shadeSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iPhone+16+Pro+-+Max/black.webp',
+                    layoutSrc : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iPhone+16+Pro+-+Max/black-titanium.webp'
                 },
                 {
                     name: 'Natural Titanium',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iPhone+16+Pro+-+Max/natural.webp',
-                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iPhone+16+Pro+-+Max/natural-titanium.webp'
+                    shadeSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iPhone+16+Pro+-+Max/natural.webp',
+                    layoutSrc : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iPhone+16+Pro+-+Max/natural-titanium.webp'
                 },
                 {
                     name: 'White Titanium',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iPhone+16+Pro+-+Max/white.webp',
-                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iPhone+16+Pro+-+Max/white-titanium.webp'
+                    shadeSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iPhone+16+Pro+-+Max/white.webp',
+                    layoutSrc : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/iPhone+16+Pro+-+Max/white-titanium.webp'
                 },
             ],
             layout : []
@@ -455,22 +455,22 @@ export const mockLabMockup = {
                 padding: '4.6% 3.2% 4.6%',
                 borderRadius: 0
             },
-            image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Pixel+8/hazel.webp',
+            image : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Pixel+8/hazel.webp',
             shade : [
                 {
                     name: 'Hazel',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Pixel+8/hazel.webp',
-                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Pixel+8/hazel.png'
+                    shadeSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Pixel+8/hazel.webp',
+                    layoutSrc : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Pixel+8/hazel.png'
                 },
                 {
                     name: 'Obsidian',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Pixel+8/obsidian.webp',
-                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Pixel+8/obsidian.png'
+                    shadeSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Pixel+8/obsidian.webp',
+                    layoutSrc : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Pixel+8/obsidian.png'
                 },
                 {
                     name: 'Rose',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Pixel+8/rose.webp',
-                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Pixel+8/rose.png'
+                    shadeSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Pixel+8/rose.webp',
+                    layoutSrc : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Phone/Pixel+8/rose.png'
                 },
             ],
             layout : []
@@ -488,17 +488,17 @@ export const mockLabMockup = {
                 padding: '3.9% 3.6% 3.6%',
                 borderRadius: '0',
             },
-            image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Pro+11%22/Space+Black/space-black.webp',
+            image : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Pro+11%22/Space+Black/space-black.webp',
             shade : [
                 {
                     name: 'Space Black',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Pro+11%22/Space+Black/space-black.webp',
-                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Pro+11%22/Space+Black/space-black.png'
+                    shadeSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Pro+11%22/Space+Black/space-black.webp',
+                    layoutSrc : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Pro+11%22/Space+Black/space-black.png'
                 },
                 {
                     name: 'Silver',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Pro+11%22/Silver/silver.webp',
-                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Pro+11%22/Silver/silver.png'
+                    shadeSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Pro+11%22/Silver/silver.webp',
+                    layoutSrc : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Pro+11%22/Silver/silver.png'
                 },
             ],
             layout : []
@@ -514,17 +514,17 @@ export const mockLabMockup = {
                 padding: '3.9% 3.6% 3.6%',
                 borderRadius: '0',
             },
-            image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Pro+11%22/Space+Black/space-black-13.webp',
+            image : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Pro+11%22/Space+Black/space-black-13.webp',
             shade : [
                 {
                     name: 'Space Black',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Pro+11%22/Space+Black/space-black-13.webp',
-                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Pro+11%22/Space+Black/space-black.png'
+                    shadeSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Pro+11%22/Space+Black/space-black-13.webp',
+                    layoutSrc : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Pro+11%22/Space+Black/space-black.png'
                 },
                 {
                     name: 'Silver',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Pro+11%22/Silver/silver-13.webp',
-                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Pro+11%22/Silver/silver.png'
+                    shadeSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Pro+11%22/Silver/silver-13.webp',
+                    layoutSrc : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Pro+11%22/Silver/silver.png'
                 },
             ],
             layout : []
@@ -540,27 +540,27 @@ export const mockLabMockup = {
                 padding: '4.2% 4.2% 4.2%',
                 borderRadius: '0',
             },
-            image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Space+Grey/space-grey.webp',
+            image : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Space+Grey/space-grey.webp',
             shade : [
                 {
                     name: 'Pink',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Pink/pink.webp',
-                    layoutSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Pink/pink.png'
+                    shadeSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Pink/pink.webp',
+                    layoutSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Pink/pink.png'
                 },
                 {
                     name: 'Purple',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Purple/purple.webp',
-                    layoutSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Purple/purple.png'
+                    shadeSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Purple/purple.webp',
+                    layoutSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Purple/purple.png'
                 },
                 {
                     name: 'Space Grey',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Space+Grey/space-grey.webp',
-                    layoutSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Space+Grey/space-grey.png'
+                    shadeSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Space+Grey/space-grey.webp',
+                    layoutSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Space+Grey/space-grey.png'
                 },
                 {
                     name: 'Starlight',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Starlight/starlight.webp',
-                    layoutSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Starlight/starlight.png'
+                    shadeSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Starlight/starlight.webp',
+                    layoutSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Mini/Starlight/starlight.png'
                 },
             ],
             layout : [
@@ -603,16 +603,16 @@ export const mockLabMockup = {
                 padding: '1.2% 10% 6.8%',
                 borderRadius: '0',
             },
-            image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Pro+16/Silver/silver.webp',
+            image : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Pro+16/Silver/silver.webp',
             shade : [
                 {
                     name: 'Silver',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Pro+16/Silver/silver.webp',
-                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Pro+16/Silver/silver.png'
+                    shadeSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Pro+16/Silver/silver.webp',
+                    layoutSrc : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Pro+16/Silver/silver.png'
                 },
                 // {
                 //     name: 'Space Black',
-                //     shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Pro+11%22/Shade/Featured+Image/Space+Black.webp',
+                //     shadeSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Pro+11%22/Shade/Featured+Image/Space+Black.webp',
                 //     layoutSrc : ''
                 // },
             ],
@@ -629,16 +629,16 @@ export const mockLabMockup = {
                 padding: '1.2% 10% 6.8%',
                 borderRadius: '0',
             },
-            image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Pro+16/Silver/macbookPro14.webp',
+            image : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Pro+16/Silver/macbookPro14.webp',
             shade : [
                 {
                     name: 'Silver',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Pro+16/Silver/macbookPro14.webp',
-                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Pro+16/Silver/silver.png'
+                    shadeSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Pro+16/Silver/macbookPro14.webp',
+                    layoutSrc : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Pro+16/Silver/silver.png'
                 },
                 // {
                 //     name: 'Space Black',
-                //     shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Pro+11%22/Shade/Featured+Image/Space+Black.webp',
+                //     shadeSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Tablet/iPad+Pro+11%22/Shade/Featured+Image/Space+Black.webp',
                 //     layoutSrc : ''
                 // },
             ],
@@ -655,17 +655,17 @@ export const mockLabMockup = {
                 padding: '4.4% 11.6% 7.2%',
                 borderRadius: '0',
             },
-            image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Pro+13/Space+Grey/space-grey.webp',
+            image : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Pro+13/Space+Grey/space-grey.webp',
             shade : [
                 {
                     name: 'Space Grey',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Pro+13/Space+Grey/space-grey.webp',
-                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Pro+13/Space+Grey/space-grey.png'
+                    shadeSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Pro+13/Space+Grey/space-grey.webp',
+                    layoutSrc : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Pro+13/Space+Grey/space-grey.png'
                 },
                 {
                     name: 'Silver',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Pro+13/silver.webp',
-                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Pro+13/silver.png'
+                    shadeSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Pro+13/silver.webp',
+                    layoutSrc : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Pro+13/silver.png'
                 },
             ],
             layout : []
@@ -681,27 +681,27 @@ export const mockLabMockup = {
                 padding: '1.8% 10% 6.8%',
                 borderRadius: '0',
             },
-            image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Midnight/midnight.webp',
+            image : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Midnight/midnight.webp',
             shade : [
                 {
                     name: 'Midnight',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Midnight/midnight.webp',
-                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Midnight/midnight.png'
+                    shadeSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Midnight/midnight.webp',
+                    layoutSrc : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Midnight/midnight.png'
                 },
                 {
                     name: 'Starlight',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Starlight/starlight.webp',
-                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Starlight/starlight.png'
+                    shadeSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Starlight/starlight.webp',
+                    layoutSrc : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Starlight/starlight.png'
                 },
                 {
                     name: 'Space Grey',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Space+Grey/space-grey.webp',
-                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Space+Grey/space-grey.png'
+                    shadeSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Space+Grey/space-grey.webp',
+                    layoutSrc : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Space+Grey/space-grey.png'
                 },
                 {
                     name: 'Silver',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Silver/silver.webp',
-                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Silver/silver.png'
+                    shadeSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Silver/silver.webp',
+                    layoutSrc : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Silver/silver.png'
                 },
             ],
             layout : []
@@ -717,22 +717,22 @@ export const mockLabMockup = {
                 padding: '4% 11.2% 5.6%',
                 borderRadius: '0',
             },
-            image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M1/Space+Grey/space-grey.webp',
+            image : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M1/Space+Grey/space-grey.webp',
             shade : [
                 {
                     name: 'Space Grey',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M1/Space+Grey/space-grey.webp',
-                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M1/Space+Grey/space-grey.png'
+                    shadeSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M1/Space+Grey/space-grey.webp',
+                    layoutSrc : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M1/Space+Grey/space-grey.png'
                 },
                 {
                     name: 'Silver',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M1/Silver/silver.webp',
-                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M1/Silver/silver.png'
+                    shadeSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M1/Silver/silver.webp',
+                    layoutSrc : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M1/Silver/silver.png'
                 },
                 {
                     name: 'Gold',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M1/Gold/gold.webp',
-                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M1/Gold/gold.png'
+                    shadeSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M1/Gold/gold.webp',
+                    layoutSrc : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M1/Gold/gold.png'
                 },
             ],
             layout : []
@@ -750,42 +750,42 @@ export const mockLabMockup = {
                 padding: '3.8% 3.8% 29%',
                 borderRadius: '0',
             },
-            image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/iMac+24/Purple/purple.webp',
+            image : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/iMac+24/Purple/purple.webp',
             shade : [
                 {
                     name: 'Purple',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/iMac+24/Purple/purple.webp',
-                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/iMac+24/Purple/purple.png'
+                    shadeSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/iMac+24/Purple/purple.webp',
+                    layoutSrc : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/iMac+24/Purple/purple.png'
                 },
                 {
                     name: 'Blue',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/iMac+24/Blue/blue.webp',
-                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/iMac+24/Blue/blue.png'
+                    shadeSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/iMac+24/Blue/blue.webp',
+                    layoutSrc : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/iMac+24/Blue/blue.png'
                 },
                 {
                     name: 'Green',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/iMac+24/Green/green.webp',
-                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/iMac+24/Green/green.png'
+                    shadeSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/iMac+24/Green/green.webp',
+                    layoutSrc : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/iMac+24/Green/green.png'
                 },
                 {
                     name: 'Pink',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/iMac+24/Pink/pink.webp',
-                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/iMac+24/Pink/pink.png'
+                    shadeSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/iMac+24/Pink/pink.webp',
+                    layoutSrc : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/iMac+24/Pink/pink.png'
                 },
                 {
                     name: 'Orange',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/iMac+24/Orange/orange.webp',
-                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/iMac+24/Orange/orange.png'
+                    shadeSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/iMac+24/Orange/orange.webp',
+                    layoutSrc : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/iMac+24/Orange/orange.png'
                 },
                 {
                     name: 'Yellow',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/iMac+24/Yellow/yellow.webp',
-                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/iMac+24/Yellow/yellow.png'
+                    shadeSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/iMac+24/Yellow/yellow.webp',
+                    layoutSrc : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/iMac+24/Yellow/yellow.png'
                 },
                 {
                     name: 'Silver',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/iMac+24/Silver/silver.webp',
-                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/iMac+24/Silver/silver.png'
+                    shadeSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/iMac+24/Silver/silver.webp',
+                    layoutSrc : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/iMac+24/Silver/silver.png'
                 },
             ],
             layout : []
@@ -801,12 +801,12 @@ export const mockLabMockup = {
                 padding: '2% 2% 18.8%',
                 borderRadius: '0',
             },
-            image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/Pro+Display+XDR/pro-display-xdr.webp',
+            image : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/Pro+Display+XDR/pro-display-xdr.webp',
             shade : [
                 {
                     name: 'Silver',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/Pro+Display+XDR/pro-display-xdr.webp',
-                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/Pro+Display+XDR/pro-display-xdr.png'
+                    shadeSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/Pro+Display+XDR/pro-display-xdr.webp',
+                    layoutSrc : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/Pro+Display+XDR/pro-display-xdr.png'
                 },
             ],
             layout : []
@@ -822,12 +822,12 @@ export const mockLabMockup = {
                 padding: '2% 2% 20.6%',
                 borderRadius: '0',
             },
-            image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/Studio+Display/studio-display.webp',
+            image : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/Studio+Display/studio-display.webp',
             shade : [
                 {
                     name: 'Silver',
-                    shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/Studio+Display/studio-display.webp',
-                    layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/Studio+Display/studio-display.png'
+                    shadeSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/Studio+Display/studio-display.webp',
+                    layoutSrc : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Desktop/Studio+Display/studio-display.png'
                 },
             ],
             layout : []
@@ -838,14 +838,14 @@ export const mockLabMockup = {
 export const shadow = [
     {
         name: 'Light Shadow',
-        featuredSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Shadow/lightShadow.webp'
+        featuredSrc : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Shadow/lightShadow.webp'
     },
     {
         name: 'Medium Shadow',
-        featuredSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Shadow/mediumShadow.webp'
+        featuredSrc : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Shadow/mediumShadow.webp'
     },
     {
         name: 'Dark Shadow',
-        featuredSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Shadow/darkShadow.webp'
+        featuredSrc : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Shadow/darkShadow.webp'
     },
 ];

@@ -122,27 +122,27 @@ const defaultDevice = {
     screenStyle : {
         padding: '1.8% 10% 6.8%',
     },
-    image : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Midnight/midnight.webp',
+    image : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Midnight/midnight.webp',
     shade : [
         {
             name: 'Midnight',
-            shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Midnight/midnight.webp',
-            layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Midnight/midnight.png'
+            shadeSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Midnight/midnight.webp',
+            layoutSrc : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Midnight/midnight.png'
         },
         {
             name: 'Starlight',
-            shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Starlight/starlight.webp',
-            layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Starlight/starlight.png'
+            shadeSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Starlight/starlight.webp',
+            layoutSrc : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Starlight/starlight.png'
         },
         {
             name: 'Space Grey',
-            shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Space+Grey/space-grey.webp',
-            layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Space+Grey/space-grey.png'
+            shadeSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Space+Grey/space-grey.webp',
+            layoutSrc : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Space+Grey/space-grey.png'
         },
         {
             name: 'Silver',
-            shadeSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Silver/silver.webp',
-            layoutSrc : 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Silver/silver.png'
+            shadeSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Silver/silver.webp',
+            layoutSrc : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Silver/silver.png'
         },
     ],
     layout : []
@@ -150,7 +150,7 @@ const defaultDevice = {
 
 const initialState: MockLabState = {
     mockupSelectedDevice: defaultDevice,
-    mockupLayoutSource: { layoutSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Midnight/midnight.png' },
+    mockupLayoutSource: { layoutSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Mockup/Laptop/Macbook+Air+M3/Midnight/midnight.png' },
     mockupSelectedLayout: { 
         name: "Center layout",
         x: 100,
@@ -179,7 +179,7 @@ const initialState: MockLabState = {
     frameTransparent : { transparent: false},
     frameBackground: { 
         backgroundType: 'gradient', 
-        backgroundSrc: 'https://mockup-by-pv.s3.ap-south-1.amazonaws.com/MockLab/Frame/Initial+BackGround+Image.jpg',
+        backgroundSrc: 'https://mooockups.s3.ap-south-1.amazonaws.com/MockLab/Frame/Initial+BackGround+Image.jpg',
         backgroundScale: 0,
         backgroundOpacity: 1,
     },
