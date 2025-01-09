@@ -3,8 +3,8 @@ import React from "react";
 import styles from "./styles.module.scss";
 
 import { Minus, Search, X, Ellipsis } from "lucide-react";
-import { mockLabFrame } from "../../utils/defaultData";
-import { usePhotoFetch } from "../../hooks/usePhotoFetch";
+import { mockLabFrame } from "../../../utils/mocklab-defaultData";
+import { usePhotoFetch } from "../../../hooks/usePhotoFetch";
 import Image from "next/image";
 
 import { useDispatch } from 'react-redux';
@@ -14,7 +14,7 @@ import {
   setFrameBackgroundSrc,
   setFrameBackgroundScale,
   setFrameBackgroundOpacity,
-} from '../../redux/slices/mockLabSlice';
+} from '../../../redux/mockLab-slices/mockLabSlice';
 
 interface BackgroundIntegrationProps {
   onClose: () => void;

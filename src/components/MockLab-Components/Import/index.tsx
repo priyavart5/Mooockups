@@ -4,8 +4,8 @@ import { ImageUp, Replace, Minus } from 'lucide-react';
 import styles from './styles.module.scss';
 import Icon from '../Icon';
 import { useDispatch, useSelector } from 'react-redux';
-import { setFile, clearFile } from '../../redux/slices/importSlice';
-import { RootState } from '../../redux/store';
+import { setFile, clearFile } from '../../../redux/mockLab-slices/importSlice';
+import { RootState } from '../../../redux/store';
 import { toast, Toaster } from 'react-hot-toast';
 
 const Import = () => {

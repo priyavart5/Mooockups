@@ -3,11 +3,11 @@ import { Files, Settings2 } from 'lucide-react';
 import styles from './styles.module.scss';
 import Icon from '../Icon';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../redux/store';
+import { RootState } from '../../../redux/store';
 import * as htmlToImage from 'html-to-image';
 import { Toaster, toast } from 'react-hot-toast';
-import { detectOS } from '../../utils/osDetection';
-import useShortcut from '../../hooks/useShortcut';
+import { detectOS } from '../../../utils/osDetection';
+import useShortcut from '../../../hooks/useShortcut';
 import { Tooltip } from 'react-tippy';
 import 'react-tippy/dist/tippy.css';
 

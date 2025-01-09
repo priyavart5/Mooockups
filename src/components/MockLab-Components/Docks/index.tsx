@@ -2,10 +2,10 @@
 
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setPreview, setHideMockup, setHideBackground } from '../../redux/slices/dockSlice';
-import { RootState } from '../../redux/store';
-import { detectOS } from '../../utils/osDetection';
-import useShortcut from '../../hooks/useShortcut';
+import { setPreview, setHideMockup, setHideBackground } from '../../../redux/mockLab-slices/dockSlice';
+import { RootState } from '../../../redux/store';
+import { detectOS } from '../../../utils/osDetection';
+import useShortcut from '../../../hooks/useShortcut';
 import styles from './styles.module.scss';
 import Icon from '../Icon';
 import { ChevronLeft, Maximize2, EqualNot, SquareDashed } from 'lucide-react';
