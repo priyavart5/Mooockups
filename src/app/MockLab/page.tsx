@@ -4,11 +4,11 @@ import dynamic from 'next/dynamic';
 import { useRef, useState, useEffect } from 'react';
 import styles from './styles.module.scss';
 
-import Canvas from '../../components/Canvas';
-const Docks = dynamic(() => import('../../components/Docks'), { ssr: false });
-import Import from '../../components/Import';
-const Export = dynamic(() => import('../../components/Export'), { ssr: false });
-import EditorBox from '../../components/MockLab EditorBox';
+import Canvas from '../../components/MockLab-Components/Canvas';
+const Docks = dynamic(() => import('../../components/MockLab-Components/Docks'), { ssr: false });
+import Import from '../../components/MockLab-Components/Import';
+const Export = dynamic(() => import('../../components/MockLab-Components/Export'), { ssr: false });
+import EditorBox from '../../components/MockLab-Components/MockLab EditorBox';
 
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';

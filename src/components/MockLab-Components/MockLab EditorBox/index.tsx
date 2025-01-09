@@ -4,7 +4,7 @@ import React, { useState, useRef } from 'react';
 import Image from 'next/image';
 import styles from './styles.module.scss';
 import { GalleryHorizontalEnd, Frame, Ellipsis, ChevronDown, ChevronUp, ImageUp, X, PencilRuler, Replace } from 'lucide-react';
-import { mockLabFrame, mockLabMockup } from '../../utils/defaultData';
+import { mockLabFrame, mockLabMockup } from '../../../utils/mocklab-defaultData';
 import Slider from '../Slider';
 import InputSlider from '../InputSlider';
 import Icon from '../Icon';
@@ -30,7 +30,7 @@ import {
     setFrameShadowScale,
     setFrameNoise,
     setFrameBlur,
-} from '../../redux/slices/mockLabSlice';
+} from '../../../redux/mockLab-slices/mockLabSlice';
 
 
 type DeviceCategory = "Phone" | "Tablet" | "Laptop" | "Desktop";
