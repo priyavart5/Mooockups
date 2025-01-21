@@ -9,7 +9,7 @@ import { RootState } from '../../../redux/store';
 import { toast, Toaster } from 'react-hot-toast';
 
 const Import = () => {
-    const { file, fileName } = useSelector((state: RootState) => state.import);
+    const { file, fileName } = useSelector((state: RootState) => state.import.present);
     const dispatch = useDispatch();
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {

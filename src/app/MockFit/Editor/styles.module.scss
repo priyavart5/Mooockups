@@ -1,0 +1,75 @@
+@use '@/styles/variables' as vars;
+
+
+.mockFit{
+    max-width: 100vw;
+    height: 100vh;
+    background-color: vars.$primary-dark ;
+    padding: 20px;
+    display: flex;
+    align-items: stretch;
+    gap: 20px;
+}
+
+.mockFit_dock{
+    width: auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.mockFit_canvas{
+    position: relative;
+    // width: 100%;
+    // height: 100%;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    // border-radius: vars.$border-radius-xl;
+    // border: 1px solid vars.$primary-grey;
+}
+
+.mockFit_toolBox{
+    min-width: 20vw;
+    max-width: 20vw;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 14px;
+
+    .mockFit_toolBox_import_editor{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+    }
+}
+
+.mockFit_mobileMessage {
+    background-image: url('https://mooockups.s3.ap-south-1.amazonaws.com/mockFit/Global/background_homepage_re.png');
+    max-width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    flex-direction: column;
+    background-position: center;
+    background-repeat:no-repeat;
+    background-size: cover;
+    gap: 8px;
+    
+    p{  
+        position: absolute;
+        bottom: 0;
+        text-align: center;
+        padding: 20px;
+        font: 400 14px 'Inter';
+        color: vars.$secondary-grey;
+        line-height: 1.6;
+    }
+}

@@ -1,0 +1,69 @@
+@use '../../../styles/variables' as vars;
+
+.sliderContainer {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    justify-content: space-between;
+    height: 32px;
+    overflow: hidden;
+  
+    p{
+        display: flex;
+        align-items: center;
+        pointer-events: none;
+        color: vars.$off-white;
+        font: 400 clamp(12px, 1.5vw, 12px) var(--inter);
+        z-index: 1;
+        width: 32%;
+    }
+
+    .slider {
+        -webkit-appearance: none;
+        width: 60%;
+        height: 100%;
+        padding: 0 5px;
+        border-radius: 5px;
+        outline: none;
+        background: transparent;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        background-color: vars.$primary-grey;
+        border-radius: vars.$border-radius-lg;
+        overflow: hidden;
+      
+        &::-webkit-slider-thumb {
+            -webkit-appearance: none; 
+            appearance: none;
+            width: 2.2px;
+            height: 24px;
+            background: vars.$secondary-grey;
+            border-radius: vars.$border-radius-lg;
+            cursor: pointer;
+        }
+      
+        &::-moz-range-thumb {
+            width: 2.5px;
+            height: 24px;
+            background: vars.$secondary-grey;
+            border-radius: vars.$border-radius-lg;
+            cursor: pointer;
+        }
+      
+        &::-ms-thumb {
+            width: 2.5px;
+            height: 24px;
+            background: vars.$secondary-grey;
+            border-radius: vars.$border-radius-md;
+            cursor: pointer;
+        }
+    
+    }
+      
+  
+    .value {
+        color: #b3b3b3;
+        font: 400 14px var(--inter);
+        flex-shrink: 0;
+    }
+}

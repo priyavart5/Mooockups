@@ -13,7 +13,7 @@ import 'react-tippy/dist/tippy.css';
 
 const Export = ({ canvasRef }: { canvasRef: React.RefObject<HTMLDivElement> }) => {
   const os = detectOS();
-  const { frameLayout } = useSelector((state: RootState) => state.mockLab);
+  const { frameLayout } = useSelector((state: RootState) => state.mockLab.present);
 
   const [exportSetting, setExportSetting] = useState<boolean>(false);
   const [selectedFormat, setSelectedFormat] = useState<string>('PNG');

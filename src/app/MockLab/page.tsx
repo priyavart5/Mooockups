@@ -15,7 +15,7 @@ import { RootState } from '../../redux/store';
 
 const MockLab = () => {
   const canvasRef = useRef<HTMLDivElement | null>(null);
-  const { preview } = useSelector((state: RootState) => state.dock);
+  const { preview } = useSelector((state: RootState) => state.dock.present);
   const [isMobile, setIsMobile] = useState(false);
 
   // Check screen width

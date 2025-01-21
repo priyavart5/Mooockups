@@ -19,7 +19,6 @@ import {
 interface BackgroundIntegrationProps {
   onClose: () => void;
   source: string;
-  // onSetVisibleClearBackground: (visible: boolean) => void;
   onSetVisibleEffect: (visible: boolean) => void;
 }
 
@@ -61,7 +60,6 @@ const BackGroundIntegrations: React.FC<BackgroundIntegrationProps> = ({ onClose,
     dispatch(setFrameTransparent(false));
     dispatch(setFrameBackgroundType(source));
     dispatch(setFrameBackgroundSrc(imageUrl));
-    // onSetVisibleClearBackground(true);
     onSetVisibleEffect(true);
     dispatch(setFrameBackgroundScale(0));
     dispatch(setFrameBackgroundOpacity(1));
@@ -99,7 +97,6 @@ const BackGroundIntegrations: React.FC<BackgroundIntegrationProps> = ({ onClose,
         </div>
       </div>
 
-      {/* Display error messages */}
       {error && <div className={styles.BGI_errorMessage}>{error}</div>}
 
       {!isSearching && (
