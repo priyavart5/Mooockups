@@ -82,9 +82,9 @@ const MockLabEditor = () => {
         mockupShadow,
         frameNoise,
         frameBlur
-    } = useSelector((state: any) => state.mockLab);
+    } = useSelector((state: any) => state.mockLab.present);
 
-    const { hideMockup, hideBackground } = useSelector((state: any) => state.dock);
+    const { hideMockup, hideBackground } = useSelector((state: any) => state.dock.present);
     
     // *******************
     // Frame ToolBox
@@ -297,7 +297,7 @@ const MockLabEditor = () => {
 
     return (
         <>
-        <div className={styles.EditorBox}>
+        <div className={styles.MockLab_EditorBox}>
             <div className={styles.EditorServices}>
                 <button className={`${styles.EditorServicesCTA} ${
                         editorService === 'Mockup' ? styles.active_service : ''

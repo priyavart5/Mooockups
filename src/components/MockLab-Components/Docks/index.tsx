@@ -4,30 +4,31 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setPreview, setHideMockup, setHideBackground } from '../../../redux/mockLab-slices/dockSlice';
 import { RootState } from '../../../redux/store';
+import { undo, redo } from '@/redux/undoRedo';
 import { detectOS } from '../../../utils/osDetection';
 import useShortcut from '../../../hooks/useShortcut';
 import styles from './styles.module.scss';
 import Icon from '../Icon';
-import { ChevronLeft, Maximize2, EqualNot, SquareDashed } from 'lucide-react';
+import { ChevronLeft, Maximize2, EqualNot, SquareDashed, Undo2, Redo2 } from 'lucide-react';
 import Link from 'next/link';
 
 const Docks: React.FC = () => {
   const os = detectOS();
   const dispatch = useDispatch();
-  const { preview, hideMockup, hideBackground } = useSelector((state: RootState) => state.dock);
+  const { preview, hideMockup, hideBackground } = useSelector((state: RootState) => state.dock.present);
 
   // Shortcut actions
   const handleHideMockup = () => dispatch(setHideMockup(!hideMockup.isMockupHide));
   const handleHideBackground = () => dispatch(setHideBackground(!hideBackground.isBackgroundHide));
-  // const handleUndo = () => console.log('Undo action triggered');
-  // const handleRedo = () => console.log('Redo action triggered');
+  const handleUndo = () => dispatch(undo());
+    const handleRedo = () => dispatch(redo());
   const handlePreview = () => dispatch(setPreview(!preview.isPreview));
 
   // Register shortcuts
   useShortcut(os, [os === 'mac' ? 'Meta' : 'Control', 'Shift', 'M'], handleHideMockup);
   useShortcut(os, [os === 'mac' ? 'Meta' : 'Control', 'Shift', 'B'], handleHideBackground);
-  // useShortcut(os, [os === 'mac' ? 'Meta' : 'Control', 'z'], handleUndo);
-  // useShortcut(os, [os === 'mac' ? 'Meta' : 'Control', 'Shift', 'Z'], handleRedo);
+  useShortcut(os, [os === 'mac' ? 'Meta' : 'Control', 'z'], handleUndo);
+  useShortcut(os, [os === 'mac' ? 'Meta' : 'Control', 'Shift', 'Z'], handleRedo);
   useShortcut(os, [os === 'mac' ? 'Meta' : 'Control', 'p'], handlePreview);
 
   
@@ -67,7 +68,7 @@ const Docks: React.FC = () => {
               tipPosition="right"
               onClick={handleHideBackground}
             />
-            {/* <Icon
+            <Icon
               icon={Undo2}
               color="#EFEFEF"
               size={20}
@@ -84,7 +85,7 @@ const Docks: React.FC = () => {
               tipTitle='Redo (Ctrl + Shift + Z)'
               tipPosition="right"
               onClick={handleRedo}
-            /> */}
+            />
           </>
         )}
         <Icon

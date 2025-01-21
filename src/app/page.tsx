@@ -2,11 +2,13 @@
 
 import { useState, useEffect } from 'react';
 import styles from '../styles/HomeStyles.module.scss';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 
 
 const Homepage = () => {
+
+  const router = useRouter();
 
   const [currentImage, setCurrentImage] = useState(1);
 
@@ -36,7 +38,10 @@ const Homepage = () => {
         </span>
       </h1>
       <p className={styles.description}>Explore our revolutionary mockup editor!</p>
-      <Link href="/MockLab" ><button className={styles.button} >MockLab</button></Link>
+      <div style={{ display: 'flex', gap: '20px'}}>
+        {/* <button onClick={() => router.push('/MockFit')} className={styles.button} >MockFit</button> */}
+        <button onClick={() => router.push('/MockLab')} className={styles.button} >MockLab</button>
+      </div>
     </main>
   );
 };

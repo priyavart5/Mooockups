@@ -25,7 +25,7 @@ const Canvas = forwardRef<HTMLDivElement>((_, ref) => {
     mockupRotation,
     mockupPosition,
     mockupShadow
-  } = useSelector((state: RootState) => state.mockLab);
+  } = useSelector((state: RootState) => state.mockLab.present);
 
   const {
     frameLayout,
@@ -34,10 +34,10 @@ const Canvas = forwardRef<HTMLDivElement>((_, ref) => {
     frameShadow,
     frameNoise,
     frameBlur,
-  } = useSelector((state: RootState) => state.mockLab);
+  } = useSelector((state: RootState) => state.mockLab.present);
 
-  const { file, type } = useSelector((state: RootState) => state.import);
-  const { preview, hideMockup, hideBackground } = useSelector((state: RootState) => state.dock);
+  const { file, type } = useSelector((state: RootState) => state.import.present);
+  const { preview, hideMockup, hideBackground } = useSelector((state: RootState) => state.dock.present);
   const [borderRadius, setBorderRadius] = useState<number>(0);
 
   useEffect(() => {

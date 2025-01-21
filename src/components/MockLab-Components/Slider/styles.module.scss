@@ -20,6 +20,7 @@
         -webkit-appearance: none;
         width: 100%;
         height: 100%;
+        padding: 0 5px;
         border-radius: 5px;
         outline: none;
         background: transparent;
@@ -36,7 +37,6 @@
             background: vars.$secondary-grey;
             border-radius: vars.$border-radius-lg;
             cursor: pointer;
-            margin-left: 5px;
         }
       
         &::-moz-range-thumb {

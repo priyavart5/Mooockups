@@ -1,0 +1,58 @@
+
+.MockFit_Canvas{
+    overflow: hidden;
+    width: auto;
+    height: auto;
+
+    .SelectedMockup{
+        width: 100% !important;
+        height: 100% !important;
+        object-fit:contain;
+        z-index: 2;
+    }
+
+    // .importedImageContainer{
+    //     position: absolute;
+    //     top: 240px;
+    //     left: 420px;
+    //     width: 200px;
+    //     height: 100px;
+    //     position: absolute;
+    //     transform: perspective(1000px) rotateX(20deg) rotateY(-7deg);
+    //     transform-origin: center;
+    //     z-index: 3;
+
+    //     .importedImage{
+    //         width: 100%;
+    //         height: 100%;
+    //         object-fit:cover;
+    //         z-index: 1;
+    //     }
+    // }
+
+    .importedImageContainer {
+        position: absolute;
+        top: 240;
+        left: 420;
+        width: 200px;
+        height: 100px;
+        z-index: 3;
+      
+        .importedImage {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          clip-path: polygon(
+            5% 1%, /* top-left */
+            96% -5%, /* top-right */
+            90% 90%, /* bottom-right */
+            10% 90%  /* bottom-left */
+          );
+        }
+      }
+      
+      
+    
+}
+
