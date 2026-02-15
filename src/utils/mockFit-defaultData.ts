@@ -15,11 +15,12 @@ const mockFit = {
         Laptop : [
             {
                 mockupName : 'Macbook Pro M3',
+                // mockupSrc : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockFit/mooockupImage.png'
                 mockupSrc : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockFit/mockup.png'
             },
             {
-                mockupName : 'Macbook Air M2',
-                mockupSrc : ''
+                mockupName : 'Table Macbook Pro M4',
+                mockupSrc : 'https://mooockups.s3.ap-south-1.amazonaws.com/MockFit/u7b8zdzzjmxijyea1zan.png'
             },
         ],
         Tablet : [

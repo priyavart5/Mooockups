@@ -126,7 +126,7 @@ const MockFitEditorBox = () => {
                             </div>
                         </>
                     )
-                }
+                } 
 
                 {/* Effects ToolBox */}
                 {

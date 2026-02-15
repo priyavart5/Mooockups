@@ -18,7 +18,6 @@ const MockLab = () => {
   const { preview } = useSelector((state: RootState) => state.dock.present);
   const [isMobile, setIsMobile] = useState(false);
 
-  // Check screen width
   useEffect(() => {
     const checkScreenWidth = () => {
       setIsMobile(window.innerWidth < 768);
