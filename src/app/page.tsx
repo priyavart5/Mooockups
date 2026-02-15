@@ -24,9 +24,8 @@ const Homepage = () => {
   return (
     <main className={styles.homepage}>
       <h1 className={styles.heading}>
-        Transform Your Concepts<br />
+        Let's Make Something New<br />
         <span className={styles.headingWrapper}>
-          Into{' '}
           <Image
             src={`/hp_0${currentImage}.avif`}
             alt={'heading_image'}
@@ -34,12 +33,12 @@ const Homepage = () => {
             width={100}
             height={40}
           />
-          Visuals
+          Mooockups
         </span>
       </h1>
       <p className={styles.description}>Explore our revolutionary mockup editor!</p>
       <div style={{ display: 'flex', gap: '20px'}}>
-        {/* <button onClick={() => router.push('/MockFit')} className={styles.button} >MockFit</button> */}
+        <button onClick={() => router.push('/MockFit')} className={styles.button} >MockFit</button>
         <button onClick={() => router.push('/MockLab')} className={styles.button} >MockLab</button>
       </div>
     </main>

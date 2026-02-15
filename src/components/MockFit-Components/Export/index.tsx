@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { Files, Settings2 } from 'lucide-react';
 import styles from './styles.module.scss';
 import Icon from '../Icon';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../redux/store';
+// import { useSelector } from 'react-redux';
+// import { RootState } from '../../../redux/store';
 import * as htmlToImage from 'html-to-image';
 import { Toaster, toast } from 'react-hot-toast';
 import { detectOS } from '../../../utils/osDetection';
@@ -13,14 +13,14 @@ import 'react-tippy/dist/tippy.css';
 
 const Export = ({ canvasRef }: { canvasRef: React.RefObject<HTMLDivElement> }) => {
   const os = detectOS();
-  const { frameLayout } = useSelector((state: RootState) => state.mockLab.present);
+  // const { selectedMockup } = useSelector((state: RootState) => state.mockFit.present);
 
   const [exportSetting, setExportSetting] = useState<boolean>(false);
   const [selectedFormat, setSelectedFormat] = useState<string>('PNG');
-  const [selectedSize, setSelectedSize] = useState<string>('3x');
+  const [selectedSize, setSelectedSize] = useState<string>('1x');
   const [disableExportActions, setDisableExportActions] = useState<boolean>(false);
 
-  const roundToEven = (value: number) => (value % 2 === 0 ? value : value + 1);
+  // const roundToEven = (value: number) => (value % 2 === 0 ? value : value + 1);
 
   const getMultiplier = (size: string) => {
     switch (size) {
@@ -39,14 +39,14 @@ const Export = ({ canvasRef }: { canvasRef: React.RefObject<HTMLDivElement> }) =
     }
   };
 
-  const calculateDimensions = (multiplier: number) => {
-    return {
-      width: roundToEven(Math.round((frameLayout.width ?? 0) * multiplier)),
-      height: roundToEven(Math.round((frameLayout.height ?? 0) * multiplier)),
-    };
-  };
+  // const calculateDimensions = (multiplier: number) => {
+  //   return {
+  //     width: roundToEven(Math.round((frameLayout.width ?? 0) * multiplier)),
+  //     height: roundToEven(Math.round((frameLayout.height ?? 0) * multiplier)),
+  //   };
+  // };
 
-  const currentDimensions = calculateDimensions(getMultiplier(selectedSize));
+  // const currentDimensions = calculateDimensions(getMultiplier(selectedSize));
 
   const generateImage = async (maxAttempts: number, minDataLength: number) => {
     if (!canvasRef.current) throw new Error('Canvas not found.');
@@ -59,22 +59,22 @@ const Export = ({ canvasRef }: { canvasRef: React.RefObject<HTMLDivElement> }) =
         dataUrl = await htmlToImage.toPng(canvasRef.current, {
           pixelRatio: getMultiplier(selectedSize),
           cacheBust: true,
-          canvasWidth: frameLayout.width,
-          canvasHeight: frameLayout.height,
+          canvasWidth: 2000,
+          canvasHeight: 3000,
         });
       } else if (selectedFormat === 'JPG') {
         dataUrl = await htmlToImage.toJpeg(canvasRef.current, {
           pixelRatio: getMultiplier(selectedSize),
           cacheBust: true,
-          canvasWidth: frameLayout.width,
-          canvasHeight: frameLayout.height,
+          canvasWidth: 2000,
+          canvasHeight: 3000,
         });
       } else if (selectedFormat === 'WEBP') {
         dataUrl = await htmlToImage.toBlob(canvasRef.current, {
           pixelRatio: getMultiplier(selectedSize),
           cacheBust: true,
-          canvasWidth: frameLayout.width,
-          canvasHeight: frameLayout.height,
+          canvasWidth: 2000,
+          canvasHeight: 3000,
         });
       }
 
@@ -195,7 +195,7 @@ const Export = ({ canvasRef }: { canvasRef: React.RefObject<HTMLDivElement> }) =
             <div className={styles.export_overview}>
               <p className={styles.export_overview_resolution}>Image Resolution</p>
               <p className={styles.export_overview_size}>
-                {currentDimensions.width} x {currentDimensions.height}
+                {/* {currentDimensions.width} x {currentDimensions.height} */}
               </p>
             </div>
           </div>

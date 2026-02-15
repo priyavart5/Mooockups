@@ -1,7 +1,8 @@
-const dotenv = require('dotenv');
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const { config } = require('dotenv');
 
 if (process.env.NODE_ENV !== 'production') {
-  dotenv.config({ path: '.env.local' });
+  config({ path: '.env.local' });
 } else {
-  dotenv.config({ path: '.env.production' });
+  config({ path: '.env.production' });
 }

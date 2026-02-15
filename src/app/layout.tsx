@@ -25,7 +25,7 @@ export default function RootLayout({
         <meta name="description" content={metadata.description} />
         <link rel="icon" href={metadata.icons.favicon.src} />
       </head>
-      <body>
+      <body suppressHydrationWarning>
         <Provider store={store}>
           {children}
           <SpeedInsights />
